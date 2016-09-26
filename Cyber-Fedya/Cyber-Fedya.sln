@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyber-Fedya", "Cyber-Fedya.csproj", "{5D264AE2-F773-47FA-B045-96EBE5D0F6F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpML.Recurrent", "..\SharpML-Recurrent-master\src\SharpML.Recurrent\SharpML.Recurrent.csproj", "{07F1480B-7CB3-4C18-BA5F-14A40456F4FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyber-Fedya-Api", "Cyber-Fedya-Api\Cyber-Fedya-Api.csproj", "{9FAB7916-C61A-4A7D-8DD4-C9041629C26C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D264AE2-F773-47FA-B045-96EBE5D0F6F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D264AE2-F773-47FA-B045-96EBE5D0F6F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D264AE2-F773-47FA-B045-96EBE5D0F6F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D264AE2-F773-47FA-B045-96EBE5D0F6F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07F1480B-7CB3-4C18-BA5F-14A40456F4FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07F1480B-7CB3-4C18-BA5F-14A40456F4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07F1480B-7CB3-4C18-BA5F-14A40456F4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07F1480B-7CB3-4C18-BA5F-14A40456F4FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FAB7916-C61A-4A7D-8DD4-C9041629C26C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FAB7916-C61A-4A7D-8DD4-C9041629C26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FAB7916-C61A-4A7D-8DD4-C9041629C26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FAB7916-C61A-4A7D-8DD4-C9041629C26C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
