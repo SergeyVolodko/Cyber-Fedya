@@ -47,9 +47,6 @@
     <Compile Include="Verb.cs" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\SharpML-Recurrent-master\src\SharpML.Recurrent\SharpML.Recurrent.csproj">
       <Project>{07f1480b-7cb3-4c18-ba5f-14a40456f4ff}</Project>
       <Name>SharpML.Recurrent</Name>
