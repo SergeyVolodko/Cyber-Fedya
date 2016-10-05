@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "Microsoft.NETCore.App": {
-      "version": "1.0.0",
+      "version": "1.0.0-*",
       "type": "platform"
     },
     "Microsoft.AspNetCore.Mvc": "1.0.0",
@@ -28,6 +28,11 @@
         "portable-net45+win8"
       ]
     }
+  },
+
+  "runtimes": {
+    "win10-x64": {},
+    "ubuntu.14.04-x64": {}
   },
 
   "buildOptions": {
