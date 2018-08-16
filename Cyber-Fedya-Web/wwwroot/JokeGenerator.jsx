@@ -11,16 +11,16 @@
         return (
             <div>
                 <h3>Лэтc гоу - поехали!</h3>
-                <textarea class="form-control" rows="6" id="joke"></textarea>
+                <textarea class="form-control generated-joke-text" id="joke"></textarea>
                 <div class="row">
-                    <div class="col-xs-1">
-                        <button type="button" class="btn btn-secondary btn-lg">l</button>
+                    <div class="col-xs-2">
+                        <button type="button" class="btn btn-secondary btn-lg generator-button"><i class="fa fa-backward"/></button>
                     </div>
-                    <div class="col-xs-10">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">Ещё!</button>
+                    <div class="col-xs-8">
+                        <button type="button" class="btn btn-primary btn-lg generator-button">Ещё!</button>
                     </div>
-                    <div class="col-xs-1">
-                        <button type="button" class="btn btn-success btn-lg">^^</button>
+                    <div class="col-xs-2">
+                        <button type="button" class="btn btn-success btn-lg generator-button"><i class="fa fa-save"></i></button>
                     </div>
                 </div>
             </div>
