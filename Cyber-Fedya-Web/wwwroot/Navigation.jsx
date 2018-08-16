@@ -24,7 +24,7 @@
 
                 <div class="tab-content">
                     <div id="generator" class="tab-pane fade in active">
-                        <h3>Лэты гоу - поехали!</h3>
+                        <JokeGenerator />
                     </div>
                     <div id="schemas" class="tab-pane fade">
                         <h3>Схемы шуток</h3>
