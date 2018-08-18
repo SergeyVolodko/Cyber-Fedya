@@ -5,6 +5,8 @@
     }
 };
 
+var apiService = new ApiService({ baseUrl: "http://localhost:40384/api/" });
+
 class App extends React.Component{
 
     constructor() {

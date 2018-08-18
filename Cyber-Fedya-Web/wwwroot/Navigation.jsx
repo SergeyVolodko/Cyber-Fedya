@@ -18,7 +18,7 @@
                 <ul class="nav nav-pills">
                     <li class="active"><a data-toggle="pill" href="#generator"><h1>Поехали!</h1></a></li>
                     <li><a data-toggle="pill" href="#schemas"><h1>Схемы</h1></a></li>
-                    <li><a data-toggle="pill" href="#dictinary"><h1>Словарь</h1></a></li>
+                    <li><a data-toggle="pill" href="#vocabulary"><h1>Словарь</h1></a></li>
                     <li><a data-toggle="pill" href="#history"><h1>Архив</h1></a></li>
                 </ul>
 
@@ -29,8 +29,8 @@
                     <div id="schemas" class="tab-pane fade">
                         <Schemas />
                     </div>
-                    <div id="dictinary" class="tab-pane fade">
-                        <Dictinaries />
+                    <div id="vocabulary" class="tab-pane fade">
+                        <Vocabulary />
                     </div>
                     <div id="history" class="tab-pane fade">
                         <FavoriteJokes />

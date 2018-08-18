@@ -16,6 +16,7 @@ namespace Cyber_Fedya_Web
 			services.AddMemoryCache();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			services.AddReact();
+			services.AddMvc();
 
 			return services.BuildServiceProvider();
 		}
@@ -41,6 +42,7 @@ namespace Cyber_Fedya_Web
 			});
 
 			app.UseStaticFiles();
+			app.UseMvc();
 		}
 	}
 }

@@ -6,42 +6,48 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cyber_Fedya_Web
 {
-	[Route("fedya")]
+	[Route("api")]
 	public class FedyaController : Controller
 	{
 		[HttpGet]
-		[Route("words")]
-		public WordsDto GetWords()
+		[Route("vocabulary")]
+		public WordsDto GetVocabulary()
 		{
-			return new WordsDto();
+			return new WordsDto
+			{
+				Adjctives = new List<string>{"Кожанный"},
+				Names = new List<string>{"Олег"},
+				Verbs = new List<string>{"Съел"},
+				Nouns = new List<string> { "Ферзь" }
+			};
 		}
 
-		[HttpPost]
-		[Route("words")]
-		public HttpResponseMessage AddWord(NewWordDto dto)
-		{
-			return new HttpResponseMessage(HttpStatusCode.BadRequest);
-		}
+		//[HttpPost]
+		//[Route("vocabulary")]
+		//public HttpResponseMessage AddWord(NewWordDto dto)
+		//{
+		//	return new HttpResponseMessage(HttpStatusCode.BadRequest);
+		//}
 
-		[HttpGet]
-		[Route("schemas")]
-		public IList<SchemaDto> GetSchemas()
-		{
-			return new List<SchemaDto>();
-		}
+		//[HttpGet]
+		//[Route("schemas")]
+		//public IList<SchemaDto> GetSchemas()
+		//{
+		//	return new List<SchemaDto>();
+		//}
 
-		[HttpPost]
-		[Route("words")]
-		public HttpResponseMessage CreateScheme(SchemaDto dto)
-		{
-			return new HttpResponseMessage(HttpStatusCode.BadRequest);
-		}
+		//[HttpPost]
+		//[Route("schemas")]
+		//public HttpResponseMessage CreateScheme(SchemaDto dto)
+		//{
+		//	return new HttpResponseMessage(HttpStatusCode.BadRequest);
+		//}
 
-		[HttpPost]
-		[Route("sentenses")]
-		public HttpResponseMessage CreateScheme(string sentence)
-		{
-			return new HttpResponseMessage(HttpStatusCode.BadRequest);
-		}
+		//[HttpPost]
+		//[Route("sentenses")]
+		//public HttpResponseMessage CreateScheme(string sentence)
+		//{
+		//	return new HttpResponseMessage(HttpStatusCode.BadRequest);
+		//}
 	}
 }

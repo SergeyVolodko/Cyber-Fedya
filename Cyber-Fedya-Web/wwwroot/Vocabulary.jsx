@@ -1,7 +1,7 @@
-﻿class Dictinaries extends React.Component{
+﻿class Vocabulary extends React.Component{
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             selectedProvince: ""
         };
@@ -21,5 +21,10 @@
                 </div>
             </div>
         );
+    }
+
+
+    componentDidMount() {
+        var v = apiService.getVocabulary();
     }
 }
