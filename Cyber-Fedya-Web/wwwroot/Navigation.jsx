@@ -27,10 +27,10 @@
                         <JokeGenerator />
                     </div>
                     <div id="schemas" class="tab-pane fade">
-                        <h3>Схемы шуток</h3>
+                        <Schemas />
                     </div>
                     <div id="dictinary" class="tab-pane fade">
-                        <h3>Федин словарный запас</h3>
+                        <Dictinaries />
                     </div>
                     <div id="history" class="tab-pane fade">
                         <FavoriteJokes />
