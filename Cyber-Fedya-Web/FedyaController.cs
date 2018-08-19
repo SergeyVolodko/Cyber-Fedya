@@ -15,8 +15,8 @@ namespace Cyber_Fedya_Web
 		{
 			return new WordsDto
 			{
-				Adjctives = new List<string>{"Кожанный"},
-				Names = new List<string>{"Олег"},
+				Adjctives = new List<string>{"Кожанный", "Зелёный"},
+				Names = new List<string>{"Олег", "Дмитрий Маликов"},
 				Verbs = new List<string>{"Съел"},
 				Nouns = new List<string> { "Ферзь" }
 			};

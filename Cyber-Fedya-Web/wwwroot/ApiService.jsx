@@ -1,6 +1,7 @@
 ﻿class ApiService extends React.Component
 {
 	self: null
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -19,7 +20,7 @@
     getRequest(url) {
         var response = $.ajax({
             type: "GET",
-            url: url,
+            url: self.state.baseUrl + url,
             async: false
             //(error) => {
             //self.setState({
@@ -38,6 +39,6 @@
 
 
     getVocabulary() {
-        return self.getRequest(self.state.baseUrl + "vocabulary");
+        return self.getRequest("vocabulary");
     }
 }
