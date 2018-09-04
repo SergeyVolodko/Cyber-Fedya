@@ -5,6 +5,14 @@
     }
 };
 
+var wordTypes = [
+    "<Существительное>",
+    "<Персонаж>",
+    "<Прилагательное>",
+    "<Глагол>",
+    "<Место>"
+];
+
 var apiService = new ApiService({ baseUrl: "http://localhost:40384/api/" });
 
 class App extends React.Component{

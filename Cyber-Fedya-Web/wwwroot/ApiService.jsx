@@ -1,6 +1,6 @@
 ﻿class ApiService extends React.Component
 {
-	self: null
+	//self: null
 
 	constructor(props) {
 		super(props);
@@ -9,18 +9,15 @@
 			error: null,
 			isLoaded: false
 		};
-
-	    self = this;
 	}
 
 	componentDidMount() {
-		
 	}
 
     getRequest(url) {
         var response = $.ajax({
             type: "GET",
-            url: self.state.baseUrl + url,
+            url: this.state.baseUrl + url,
             async: false
             //(error) => {
             //self.setState({
@@ -30,15 +27,15 @@
 
         }).responseText;
   
-        self.setState({
+        this.setState({
             isLoaded: true
         });
 
-        return response;
+        return JSON.parse(response);
     }
 
 
     getVocabulary() {
-        return self.getRequest("vocabulary");
+        return this.getRequest("vocabulary");
     }
 }

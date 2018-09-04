@@ -2,12 +2,17 @@
 
     constructor(props) {
         super(props);
+        var vocabulary = apiService.getVocabulary();
         this.state = {
-            selectedProvince: ""
+            vocabulary: vocabulary
         };
     }
 
     render() {
+        var listItems = this.state.vocabulary.names.map((word) =>
+            <li>{word}</li>
+        );
+
         return (
             <div>
                 <h3>Федин словарный запас</h3>
@@ -22,7 +27,7 @@
 
                 <div class="tab-content">
                     <div id="charecters" class="tab-pane fade in active">
-                        <button type="button" class="btn btn-success btn-lg"><i class="fa fa-plus"></i></button>
+                        <ul>{listItems}</ul>
                     </div>
                     <div id="nouns" class="tab-pane fade">
                         <button type="button" class="btn btn-success btn-lg"><i class="fa fa-plus"></i></button>
@@ -43,6 +48,6 @@
 
 
     componentDidMount() {
-        var v = apiService.getVocabulary();
+        //this.setState({ vocabulary: apiService.getVocabulary() });
     }
 }
