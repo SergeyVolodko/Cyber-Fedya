@@ -11,7 +11,7 @@
         return (
             <div>
                 <h3>Лэтc гоу - поехали!</h3>
-                <textarea class="form-control generated-joke-text" id="joke"></textarea>
+                <textarea class="form-control generated-joke-text" id="joke" rows="10"></textarea>
                 <div class="row">
                     <div class="col-xs-2">
                         <button type="button" class="btn btn-secondary btn-lg generator-button"><i class="fa fa-backward"/></button>

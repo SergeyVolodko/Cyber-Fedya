@@ -15,8 +15,17 @@
     }
 
     schemeSelected(selectedSchemeName) {
+        var scheme = this.state.schemas.find(s => { return s.name === selectedSchemeName; });
+        if (!scheme) {
+            scheme = new {
+                "name": selectedSchemeName,
+                "words": this.state.selected_sceheme.words,
+                "id": this.state.selected_sceheme.id
+            };
+        }
+
         this.setState({
-            selected_sceheme: this.state.schemas.find(s => {return s.name === selectedSchemeName;})
+            selected_sceheme: scheme
         });
     }
 
@@ -42,45 +51,48 @@
     //onClick={this.moveUp(word)}
     //onClick={this.moveDown(word)}
 
-    //<select id="words" >
-    //    {this.state.wordTypes.map((index, item) =>
-    //    <option key={index}>{item.text}</option>
-    //    )}
-    //</select>
     //<button class="btn-success btn-block"><i class="fa fa-arrow-up"></i></button>
     //<button class="btn-success btn-block" ><i class="fa fa-arrow-down"></i></button>
 
     render() {
-
-        var schemeItems = self.state.selected_sceheme.words.map((word) =>
-            <li>
-                {word.text}
-            </li>
+        var schemeItems = self.state.selected_sceheme.words.map((word, i) =>
+            <div key={i}>
+                <div>{word.text}</div>
+                <WordInScheme  wordInJoke={word}/>
+            </div>
         );
 
         return (
             <div>
                 <h3>Схемы шуток</h3>
                 <div>
-                    <select id="schemas" >
+                    <select id="schemas-select" >
                         {this.state.schemas.map((item) =>
                             <option key={item.id}>{item.name}</option>
                         )}
                     </select>
-                    <button type="button" class="btn btn-success btn-lg"
-                            disabled={!self.state.selected_sceheme}>
-                        <i class="fa fa-save"></i>
-                    </button>
-                    <ul>{schemeItems}</ul>
+                    <div class="row">
+                        <button type="button" class="btn btn-warning btn-lg col-xs-5">
+                            <i class="fa fa-file"></i> Сохранить как новую схему
+                        </button>
+                        <div className="col-xs-2"></div>
+                        <button type="button" class="btn btn-warning btn-lg col-xs-5">
+                            <i class="fa fa-save"></i> Сохранить как обновления этой схемы
+                        </button>
+                    </div>
                 </div>
+                <div>{schemeItems}</div>
             </div>
         );
     }
 
     componentDidMount() {
-        $('select').selectize({
+        $('#schemas-select').selectize({
             sortField: 'text',
-            onChange: function (value) { self.schemeSelected(value) }
+            onChange: function (value) { self.schemeSelected(value); }
         });
+        // $('#words-select').selectize({
+        //     //onChange: function (value) { self.schemeSelected(value) }
+        // });
     }
 }

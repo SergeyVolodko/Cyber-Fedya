@@ -9,8 +9,8 @@
     }
 
     render() {
-        var listItems = this.state.vocabulary.names.map((word) =>
-            <li>{word}</li>
+        var listItems = this.state.vocabulary.names.map((word, i) =>
+            <li key={i}>{word}</li>
         );
 
         return (
@@ -45,7 +45,6 @@
             </div>
         );
     }
-
 
     componentDidMount() {
         //this.setState({ vocabulary: apiService.getVocabulary() });

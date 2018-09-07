@@ -18,7 +18,7 @@ namespace Cyber_Fedya_Web
 				Adjctives = new List<string>{"Кожанный", "Зелёный"},
 				Names = new List<string>{"Олег", "Дмитрий Маликов"},
 				Verbs = new List<string>{"есть","пить","быть","бить","брить","греть","лезть","ныть","лить","жить","крыть",},
-				Nouns = new List<string> { "Ферзь" }
+				Nouns = new List<string>{ "Ферзь" }
 			};
 		}
 

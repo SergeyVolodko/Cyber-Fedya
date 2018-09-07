@@ -2,7 +2,7 @@
 {
 	//self: null
 
-	constructor(props) {
+    constructor(props) {
 		super(props);
 		this.state = {
 			baseUrl: props.baseUrl,
@@ -26,7 +26,10 @@
             //})
 
         }).responseText;
-  
+
+        if (!this.state) {
+            this.state = {};
+        }
         this.setState({
             isLoaded: true
         });
