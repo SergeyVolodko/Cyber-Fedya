@@ -14,7 +14,8 @@
         self = this;
     }
 
-    schemeSelected(selectedSchemeName) {
+    schemeSelected(e) {
+        var selectedSchemeName = e.params.data.text;
         var scheme = this.state.schemas.find(s => { return s.name === selectedSchemeName; });
         if (!scheme) {
             scheme = new {
@@ -51,14 +52,10 @@
     //onClick={this.moveUp(word)}
     //onClick={this.moveDown(word)}
 
-    //<button class="btn-success btn-block"><i class="fa fa-arrow-up"></i></button>
-    //<button class="btn-success btn-block" ><i class="fa fa-arrow-down"></i></button>
-
     render() {
-        var schemeItems = self.state.selected_sceheme.words.map((word, i) =>
-            <div key={i}>
-                <div>{word.text}</div>
-                <WordInScheme  wordInJoke={word}/>
+        var schemeItems = self.state.selected_sceheme.words.map((word, i) =>            
+            <div key={generateKey(i)}>
+                <WordInScheme id={i} wordInJoke={word}/>
             </div>
         );
 
@@ -79,20 +76,16 @@
                         <button type="button" class="btn btn-warning btn-lg col-xs-5">
                             <i class="fa fa-save"></i> Сохранить как обновления этой схемы
                         </button>
+                    <div>{schemeItems}</div>
                     </div>
                 </div>
-                <div>{schemeItems}</div>
             </div>
         );
     }
 
     componentDidMount() {
-        $('#schemas-select').selectize({
-            sortField: 'text',
-            onChange: function (value) { self.schemeSelected(value); }
-        });
-        // $('#words-select').selectize({
-        //     //onChange: function (value) { self.schemeSelected(value) }
-        // });
+        var schemsSelect = $('#schemas-select');
+        schemsSelect.select2();
+        schemsSelect.on('select2:select', function (value) { self.schemeSelected(value)});
     }
 }

@@ -8,6 +8,10 @@
 
 var apiService = new ApiService({ baseUrl: "http://localhost:40384/api/" });
 
+function generateKey(pre) {
+    return ""+ pre + new Date().getTime();
+}
+
 class App extends React.Component{
 
     constructor() {

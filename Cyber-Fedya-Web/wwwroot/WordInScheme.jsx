@@ -6,34 +6,31 @@ class WordInScheme extends React.Component{
         this.state = {
             wordTypes: wordTypes,
             currentWord: props.wordInJoke,
-            id: "word-" + new Date().getTime() //+ Math.random()
+            id: "word-" + props.id + new Date().getTime()
         };
-
         wordSelf = this;
     }
 
     render(){
-        // var items = self.state.wordTypes.map((word) =>
-        //     <li>
-        //         {word}
-        //     </li>
-        // );
-        //{self.currentWord.text}
-        return(<div>
+        return(
+        <div>
             <select id={wordSelf.state.id} title={wordSelf.state.currentWord.text}>
                 {wordSelf.state.wordTypes.map((wordType, index) =>
                     <option key={index}>{wordType}</option>
                 )}
-            </select> 
-            </div>);
+            </select>
+        </div>);
     }
 
+    //<button class="btn-success btn-block"><i class="fa fa-arrow-up"></i></button>
+    //<button class="btn-success btn-block" ><i class="fa fa-arrow-down"></i></button>
+
     componentDidMount() {
-        var id = wordSelf.state.id;
-        $('#' + id).select2({
+        var id = this.state.id;
+        $('#'+id).select2({
             allowClear: true,
             tags: true,
-            placeholder: wordSelf.state.currentWord.text,
+            placeholder: this.state.currentWord.text,
             createTag: function (params) {
               return {
                 id: params.term,
@@ -41,6 +38,6 @@ class WordInScheme extends React.Component{
                 newOption: true
               }
             }
-        }).val(2).trigger('change');
+        }).val("").trigger('change');
     }
 }
