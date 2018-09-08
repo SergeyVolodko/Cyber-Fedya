@@ -63,16 +63,18 @@
             <div>
                 <h3>Схемы шуток</h3>
                 <div>
-                    <select id="schemas-select" >
-                        {this.state.schemas.map((item) =>
-                            <option key={item.id}>{item.name}</option>
-                        )}
-                    </select>
+                    <div class="scheme-selector">
+                        <select id="schemas-select">
+                            {this.state.schemas.map((item) =>
+                                <option key={item.id}>{item.name}</option>
+                            )}
+                        </select>
+                    </div>
                     <div class="row">
                         <button type="button" class="btn btn-warning btn-lg col-xs-5">
                             <i class="fa fa-file"></i> Сохранить как новую схему
                         </button>
-                        <div className="col-xs-2"></div>
+                        <div class="col-xs-2"></div>
                         <button type="button" class="btn btn-warning btn-lg col-xs-5">
                             <i class="fa fa-save"></i> Сохранить как обновления этой схемы
                         </button>
@@ -85,7 +87,9 @@
 
     componentDidMount() {
         var schemsSelect = $('#schemas-select');
-        schemsSelect.select2();
+        schemsSelect.select2({
+            width: '100%'
+        });
         schemsSelect.on('select2:select', function (value) { self.schemeSelected(value)});
     }
 }

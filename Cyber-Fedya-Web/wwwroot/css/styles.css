@@ -10,3 +10,23 @@
 .stored-joke {
     font-size: 29px;
 }
+
+.scheme-selector{
+    margin: 10px;
+}
+
+.select2-selection.select2-selection {
+    min-height: 50px;
+    max-height: 50px;
+    font-size: 34px;
+    padding: 10px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    height: 50px;
+}
+.select2-results__option,
+.select2-search__field
+{
+    font-size: 30px;
+}
