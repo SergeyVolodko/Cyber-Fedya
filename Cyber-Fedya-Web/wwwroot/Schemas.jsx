@@ -78,8 +78,8 @@
                         <button type="button" class="btn btn-warning btn-lg col-xs-5">
                             <i class="fa fa-save"></i> Сохранить как обновления этой схемы
                         </button>
-                    <div>{schemeItems}</div>
                     </div>
+                    <div>{schemeItems}</div>
                 </div>
             </div>
         );
@@ -88,7 +88,9 @@
     componentDidMount() {
         var schemsSelect = $('#schemas-select');
         schemsSelect.select2({
-            width: '100%'
+            width: '100%',
+            tags: true,
+            createTag: select2CreateTag
         });
         schemsSelect.on('select2:select', function (value) { self.schemeSelected(value)});
     }

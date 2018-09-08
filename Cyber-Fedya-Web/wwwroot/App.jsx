@@ -12,6 +12,15 @@ function generateKey(pre) {
     return ""+ pre + new Date().getTime();
 }
 
+// Required to make possible entering custom text to select
+function select2CreateTag(params) {
+    return {
+      id: params.term,
+      text: params.term,
+      newOption: true
+    }
+  }
+
 class App extends React.Component{
 
     constructor() {

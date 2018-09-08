@@ -1,4 +1,8 @@
-﻿.generated-joke-text {
+﻿.tab-content{
+    margin-left: 10px;
+}
+
+.generated-joke-text {
     font-size: 50px !important;
 }
 
@@ -15,6 +19,21 @@
     margin: 10px;
 }
 
+.word-in-scheme-container{
+    padding: 10px; 
+}
+
+.word-type-selector{
+    margin: 10px;
+}
+
+.word-in-scheme-arrow-button{
+    height: 60px;
+    width: 80px;
+    border-radius: 20px;
+    margin: 5px;
+}
+
 .select2-selection.select2-selection {
     min-height: 50px;
     max-height: 50px;
@@ -29,4 +48,9 @@
 .select2-search__field
 {
     font-size: 30px;
+}
+
+/* .select2-results__options, */
+.select2-container--default .select2-results > .select2-results__options{
+    max-height: 500px;
 }
