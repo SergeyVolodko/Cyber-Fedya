@@ -34,6 +34,10 @@
     margin: 5px;
 }
 
+.btn-symbol{
+    font-size: 25px;
+}
+
 .select2-selection.select2-selection {
     min-height: 50px;
     max-height: 50px;

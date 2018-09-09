@@ -1,28 +1,35 @@
 class WordInScheme extends React.Component{
-    wordSelf = null;
     
     constructor(props){
         super();
         this.state = {
             wordTypes: wordTypes,
             currentWord: props.wordInJoke,
-            id: "word-" + props.id + new Date().getTime()
+            id: "word-" + props.id + new Date().getTime(),
+            moveDown: props.moveDown,
+            moveUp: props.moveUp
         };
-        wordSelf = this;
     }
 
     render(){
-        var wordOptions = wordSelf.state.wordTypes.map((wordType, index) =>
-            <option key={index}>{wordType}</option>);
+        var wordOptions = this.state.wordTypes.map((wordType, index) =>
+            <option key={index}>{wordType}</option>, this);
 
         return(
         <div class="word-in-scheme-container">
             <div class="word-type-selector">
-                <button class="btn-success word-in-scheme-arrow-button"><i class="fa fa-arrow-up"></i></button>
-                <select id={wordSelf.state.id} title={wordSelf.state.currentWord.text}>
+                <button class="btn word-in-scheme-arrow-button"
+                        onClick={() => this.state.moveUp(this.state.currentWord)}>
+                    <i class="fa fa-arrow-up btn-symbol"></i>
+                </button>
+                <select id={this.state.id}
+                        title={this.state.currentWord.text}>
                     {wordOptions}
                 </select>
-                <button class="btn-success word-in-scheme-arrow-button" ><i class="fa fa-arrow-down"></i></button>
+                <button class="btn word-in-scheme-arrow-button"
+                        onClick={() => this.state.moveDown(this.state.currentWord)}>
+                    <i class="fa fa-arrow-down btn-symbol"></i>
+                </button>
             </div>
         </div>);
     }

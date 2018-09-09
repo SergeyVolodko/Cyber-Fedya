@@ -38,6 +38,7 @@
         var previous_word = self.state.selected_sceheme.words[prev];
         word.orderNumber = previous_word.orderNumber;
         previous_word.orderNumber += 1;
+        self.setState({selected_sceheme: self.state.selected_sceheme});
     }
 
     moveDown(word) {
@@ -45,18 +46,24 @@
             return;
         }
         var next = word.orderNumber + 1;
-        var next_word = self.selected_sceheme.words[next];
+        var next_word = self.state.selected_sceheme.words[next];
         word.orderNumber = next_word.orderNumber;
         next_word.orderNumber -= 1;
+        self.setState({selected_sceheme: self.state.selected_sceheme});
     }
-    //onClick={this.moveUp(word)}
-    //onClick={this.moveDown(word)}
+
 
     render() {
-        var schemeItems = self.state.selected_sceheme.words.map((word, i) =>            
+        var schemeItems = this.state.selected_sceheme.words
+            .sort((a, b) => a.orderNumber > b.orderNumber)
+            .map((word, i) =>            
             <div key={generateKey(i)}>
-                <WordInScheme id={i} wordInJoke={word}/>
+                <WordInScheme id={i}
+                    wordInJoke={word}
+                    moveDown={this.moveDown}
+                    moveUp={this.moveUp}/>
             </div>
+            ,this
         );
 
         return (
@@ -67,16 +74,16 @@
                         <select id="schemas-select">
                             {this.state.schemas.map((item) =>
                                 <option key={item.id}>{item.name}</option>
-                            )}
+                            , this)}
                         </select>
                     </div>
                     <div class="row">
                         <button type="button" class="btn btn-warning btn-lg col-xs-5">
-                            <i class="fa fa-file"></i> Сохранить как новую схему
+                            <i class="fa fa-file btn-symbol"></i> Сохранить как новую схему
                         </button>
                         <div class="col-xs-2"></div>
                         <button type="button" class="btn btn-warning btn-lg col-xs-5">
-                            <i class="fa fa-save"></i> Сохранить как обновления этой схемы
+                            <i class="fa fa-save btn-symbol"></i> Сохранить как обновления этой схемы
                         </button>
                     </div>
                     <div>{schemeItems}</div>
