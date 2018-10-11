@@ -31,7 +31,7 @@
     }
 
     moveUp(word) {
-        if (word.orderNumber === 0) {
+        if (word.orderNumber === 1) {
             return;
         }
         var prev = word.orderNumber - 1;
@@ -42,7 +42,7 @@
     }
 
     moveDown(word) {
-        if (word.orderNumber === self.state.selected_sceheme.words.length - 1) {
+        if (word.orderNumber === self.state.selected_sceheme.words.length) {
             return;
         }
         var next = word.orderNumber + 1;

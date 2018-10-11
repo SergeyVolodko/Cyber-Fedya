@@ -1,8 +1,8 @@
-﻿class ApiService extends React.Component
+﻿class ApiRepository extends React.Component
 {
 	//self: null
 
-    constructor(props) {
+    ApiRepository(props) {
 		super(props);
 		this.state = {
 			baseUrl: props.baseUrl,
