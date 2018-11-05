@@ -1,18 +1,12 @@
-﻿class ApiRepository extends React.Component
-{
-	//self: null
-
-    ApiRepository(props) {
-		super(props);
-		this.state = {
-			baseUrl: props.baseUrl,
-			error: null,
-			isLoaded: false
-		};
-	}
-
-	componentDidMount() {
-	}
+﻿class ApiRepository extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            baseUrl: props.baseUrl,
+            error: null,
+            isLoaded: false
+        };
+    }
 
     getRequest(url) {
         var response = $.ajax({
@@ -35,10 +29,5 @@
         });
 
         return JSON.parse(response);
-    }
-
-
-    getVocabulary() {
-        return this.getRequest("vocabulary");
     }
 }

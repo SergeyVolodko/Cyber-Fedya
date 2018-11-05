@@ -6,7 +6,7 @@
     "<Место>"
 ];
 
-var apiService = new ApiRepository({ baseUrl: "http://localhost:40384/api/" });
+var dataService = new DataService({ apiRepository: new ApiRepository({ baseUrl: "http://localhost:40384/api/" }) });
 
 function generateKey(pre) {
     return ""+ pre + new Date().getTime();

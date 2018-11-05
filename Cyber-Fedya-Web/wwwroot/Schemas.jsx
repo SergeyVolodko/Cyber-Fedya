@@ -4,10 +4,10 @@
 
     constructor() {
         super();
-        var schemas = apiService.getRequest("schemas");
+        var schemas = dataService.getSchemas();
         this.state = {
             schemas: schemas,
-            selected_sceheme: schemas[0],
+            selected_scheme: schemas[0],
             wordTypes: wordTypes
         };
 
@@ -20,13 +20,13 @@
         if (!scheme) {
             scheme = new {
                 "name": selectedSchemeName,
-                "words": this.state.selected_sceheme.words,
-                "id": this.state.selected_sceheme.id
+                "words": this.state.selected_scheme.words,
+                "id": this.state.selected_scheme.id
             };
         }
 
         this.setState({
-            selected_sceheme: scheme
+            selected_scheme: scheme
         });
     }
 
@@ -35,28 +35,28 @@
             return;
         }
         var prev = word.orderNumber - 1;
-        var previous_word = self.state.selected_sceheme.words[prev];
+        var previous_word = self.state.selected_scheme.words[prev];
         word.orderNumber = previous_word.orderNumber;
         previous_word.orderNumber += 1;
-        self.setState({selected_sceheme: self.state.selected_sceheme});
+        self.setState({selected_scheme: self.state.selected_scheme});
     }
 
     moveDown(word) {
-        if (word.orderNumber === self.state.selected_sceheme.words.length) {
+        if (word.orderNumber === self.state.selected_scheme.words.length) {
             return;
         }
         var next = word.orderNumber + 1;
-        var next_word = self.state.selected_sceheme.words[next];
+        var next_word = self.state.selected_scheme.words[next];
         word.orderNumber = next_word.orderNumber;
         next_word.orderNumber -= 1;
-        self.setState({selected_sceheme: self.state.selected_sceheme});
+        self.setState({selected_scheme: self.state.selected_scheme});
     }
 
 
     render() {
-        var schemeItems = this.state.selected_sceheme.words
+        var schemeItems = this.state.selected_scheme.words
             .sort((a, b) => a.orderNumber > b.orderNumber)
-            .map((word, i) =>            
+            .map((word, i) =>
             <div key={generateKey(i)}>
                 <WordInScheme id={i}
                     wordInJoke={word}

@@ -2,7 +2,7 @@
 
     constructor(props) {
         super(props);
-        var vocabulary = apiService.getVocabulary();
+        var vocabulary = dataService.getVocabulary();
         this.state = {
             vocabulary: vocabulary
         };
