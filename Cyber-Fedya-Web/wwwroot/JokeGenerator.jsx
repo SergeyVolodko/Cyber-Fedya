@@ -1,29 +1,76 @@
 ﻿class JokeGenerator extends React.Component{
+    joke_generator_instance = null;
+
     constructor(props) {
         super();
         this.state = {
-            previousJoke: "",
-            notification: props.notification,
             vocabulary: props.vocabulary,
-            schemas: props.schemas
+            schemas: props.schemas,
+            selected_scheme: props.schemas[0],
+            previousJoke: "",
+            joke : ""
         };
+
+        joke_generator_instance = this;
+    }
+
+    schemeSelected(e) {
+        var selectedSchemeName = e.params.data.text;
+        var scheme = joke_generator_instance.state.schemas.find(s => { return s.name === selectedSchemeName; });
+
+        joke_generator_instance.setState({
+            selected_scheme: scheme
+        });
     }
 
     componentWillReceiveProps(nextProps) {
+        // Handle update of selected scheme
+        // Handle deletion of selected scheme
+        //this.setState({ selected_scheme: this.state.schemas[0] });
         this.forceUpdate();
+    }
+
+    generateJoke() {
+        var words = joke_generator_instance.state.selected_scheme.words;
+        var sentence = "";
+        words.forEach(function (word) {
+            sentence += mapWord(word.text, joke_generator_instance.state.vocabulary) + " ";
+        });
+        joke_generator_instance.setState({
+            previousJoke: joke_generator_instance.state.joke,
+            joke: sentence
+        });
+    }
+
+    returnPreviousJoke() {
+        joke_generator_instance.setState({
+            previousJoke: "",
+            joke: joke_generator_instance.state.previousJoke
+        });
     }
 
     render() {
         return (
             <div>
                 <h3>Лэтc гоу - поехали!</h3>
-                <textarea class="form-control generated-joke-text" id="joke" rows="10"></textarea>
+                <div class="scheme-selector">
+                    <select id="joke-generator-schemas-select">
+                        {this.state.schemas.map((item) => <option key={item.id}>{item.name}</option>, this)}
+                    </select>
+                </div>
+
+                <textarea class="form-control generated-joke-text" id="joke" rows="10" value={this.state.joke}></textarea>
                 <div class="row">
                     <div class="col-xs-2">
-                        <button type="button" class="btn btn-secondary btn-lg generator-button"><i class="fa fa-backward"/></button>
+                        <button type="button"
+                            class="btn btn-secondary btn-lg generator-button"
+                            disabled={!this.state.previousJoke}
+                            onClick={() => this.returnPreviousJoke()}><i class="fa fa-backward" /></button>
                     </div>
                     <div class="col-xs-8">
-                        <button type="button" class="btn btn-primary btn-lg generator-button">
+                        <button type="button"
+                            class="btn btn-primary btn-lg generator-button"
+                            onClick={() => this.generateJoke()}>
                             <h2>Ещё!</h2>
                         </button>
                     </div>
@@ -33,5 +80,15 @@
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        var schemsSelect = $('#joke-generator-schemas-select');
+        schemsSelect.select2({
+            width: '100%',
+            tags: true,
+            createTag: select2CreateTag
+        });
+        schemsSelect.on('select2:select', function (value) { joke_generator_instance.schemeSelected(value) });
     }
 }

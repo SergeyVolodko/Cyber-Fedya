@@ -7,6 +7,7 @@ namespace Cyber_Fedya_Web.Domain
 		public List<string> Nouns { get; set; }
 		public List<string> Verbs { get; set; }
 		public List<string> Adjctives { get; set; }
-		public List<string> Names { get; set; }
+		public List<string> Characters { get; set; }
+		public List<string> Places { get; set; }
 	}
 }

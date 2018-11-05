@@ -6,7 +6,7 @@
         super(props);
         this.state = {
             vocabulary: dataService.getVocabulary(),
-            schemas: dataService.getVocabulary()
+            schemas: dataService.getSchemas()
         };
 
         navigation_instance = this;
