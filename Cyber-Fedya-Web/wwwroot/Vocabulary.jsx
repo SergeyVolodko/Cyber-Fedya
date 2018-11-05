@@ -4,19 +4,14 @@
         super(props);
         
         this.state = {
-            vocabulary: []
+            vocabulary: props.vocabulary,
+            notifyRefresh: props.notifyRefresh
         };
-        this.refresh();
-    }
-
-    refresh() {
-        var vocabulary = dataService.getVocabulary();
-        this.state.vocabulary = vocabulary;
     }
 
     addNoun(word) {
         dataService.addToVocabulary({ type: "nouns", word: word });
-        this.refresh();
+        this.state.notifyRefresh();
         this.forceUpdate();
     }
 
@@ -61,5 +56,4 @@
             </div>
         );
     }
-
 }

@@ -1,15 +1,21 @@
 ﻿class Navigation extends React.Component {
 
+    navigation_instance = null;
+
     constructor(props) {
         super(props);
         this.state = {
+            vocabulary: dataService.getVocabulary(),
+            schemas: dataService.getVocabulary()
         };
+
+        navigation_instance = this;
     }
 
-    changeProvince(e) {
-        this.setState({
-
-            });
+    notifyRefresh() {
+        navigation_instance.setState({
+            // Can't it be implemented without setState here?
+        });
     }
 
     render() {
@@ -24,13 +30,13 @@
 
                 <div class="tab-content">
                     <div id="generator" class="tab-pane fade in active">
-                        <JokeGenerator />
+                        <JokeGenerator vocabulary={navigation_instance.state.vocabulary} schemas={navigation_instance.state.schemas}/>
                     </div>
                     <div id="schemas" class="tab-pane fade">
                         <Schemas />
                     </div>
                     <div id="vocabulary" class="tab-pane fade">
-                        <Vocabulary />
+                        <Vocabulary vocabulary={navigation_instance.state.vocabulary} notifyRefresh={navigation_instance.notifyRefresh}/>
                     </div>
                     <div id="history" class="tab-pane fade">
                         <FavoriteJokes />
@@ -38,9 +44,5 @@
                 </div>
             </div>
         );
-    }
-
-    componentDidMount() {
-       
     }
 }
