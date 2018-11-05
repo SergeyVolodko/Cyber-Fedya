@@ -1,13 +1,25 @@
 ﻿class JokeGenerator extends React.Component{
-
     constructor() {
         super();
+       
         this.state = {
-            selectedProvince: ""
+            previousJoke: "",
+            vocabulary: [],
+            schemas: []
         };
+        this.refresh();
+    }
+
+    refresh() {
+        var vocabulary = dataService.getVocabulary();
+        var schemas = dataService.getVocabulary();
+
+        this.state.vocabulary = vocabulary;
+        this.state.schemas = schemas;
     }
 
     render() {
+        this.refresh();
         return (
             <div>
                 <h3>Лэтc гоу - поехали!</h3>

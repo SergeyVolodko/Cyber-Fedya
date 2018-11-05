@@ -20,6 +20,11 @@
         return this.state.vocabulary;
     }
 
+    addToVocabulary(wordInput) {
+        // Mocked:
+        this.state.vocabulary[wordInput.type].push(wordInput.word);
+    }
+
     getSchemas() {
         if (this.state.schemas.length === 0) {
             var data = this.state.apiRepository.getRequest("schemas");

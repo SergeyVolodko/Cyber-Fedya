@@ -2,14 +2,29 @@
 
     constructor(props) {
         super(props);
-        var vocabulary = dataService.getVocabulary();
+        
         this.state = {
-            vocabulary: vocabulary
+            vocabulary: []
         };
+        this.refresh();
+    }
+
+    refresh() {
+        var vocabulary = dataService.getVocabulary();
+        this.state.vocabulary = vocabulary;
+    }
+
+    addNoun(word) {
+        dataService.addToVocabulary({ type: "nouns", word: word });
+        this.refresh();
+        this.forceUpdate();
     }
 
     render() {
-        var listItems = this.state.vocabulary.names.map((word, i) =>
+        var charecters = this.state.vocabulary.names.map((word, i) =>
+            <li key={i}>{word}</li>
+        );
+        var nouns = this.state.vocabulary.nouns.map((word, i) =>
             <li key={i}>{word}</li>
         );
 
@@ -27,10 +42,11 @@
 
                 <div class="tab-content">
                     <div id="charecters" class="tab-pane fade in active">
-                        <ul>{listItems}</ul>
+                        <ul>{charecters}</ul>
                     </div>
                     <div id="nouns" class="tab-pane fade">
-                        <button type="button" class="btn btn-success btn-lg"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-success btn-lg" onClick={() => this.addNoun("test")}><i class="fa fa-plus"></i></button>
+                        <ul>{nouns}</ul>
                     </div>
                     <div id="adjectives" class="tab-pane fade">
                         <button type="button" class="btn btn-success btn-lg"><i class="fa fa-plus"></i></button>
@@ -46,7 +62,4 @@
         );
     }
 
-    componentDidMount() {
-        //this.setState({ vocabulary: apiService.getVocabulary() });
-    }
 }
