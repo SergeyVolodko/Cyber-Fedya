@@ -1,14 +1,21 @@
+word_instances = [];
 class WordInScheme extends React.Component{
-    
     constructor(props){
         super();
         this.state = {
-            wordTypes: wordTypes,
+            wordTypes: globalWordTypes,
             currentWord: props.wordInJoke,
             id: "word-" + props.id + new Date().getTime(),
             moveDown: props.moveDown,
             moveUp: props.moveUp
         };
+        word_instances[this.state.id] = this;
+    }
+
+    wordSelected(e, id) {
+        var selectedWordText = e.params.data.text;
+
+        word_instances[id].state.currentWord.text = selectedWordText;
     }
 
     render(){
@@ -36,12 +43,14 @@ class WordInScheme extends React.Component{
 
     componentDidMount() {
         var id = this.state.id;
-        $('#'+id).select2({
+        var wordSelect = $('#' + id);
+        wordSelect.select2({
             allowClear: true,
             width: "80%",
             placeholder: this.state.currentWord.text,
             tags: true,
             createTag: select2CreateTag
         }).val("").trigger('change');
+        wordSelect.on('select2:select', function (value) { word_instances[id].wordSelected(value, id) });
     }
 }

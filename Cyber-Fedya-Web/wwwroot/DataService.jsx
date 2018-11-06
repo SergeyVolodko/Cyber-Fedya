@@ -8,6 +8,8 @@
         };
     }
 
+    // cache revocation ?
+    // sync-button ?
     componentDidMount() {
     }
 
@@ -23,6 +25,12 @@
     addToVocabulary(wordInput) {
         // Mocked:
         this.state.vocabulary[wordInput.type].push(wordInput.word);
+    }
+
+    createScheme(newScheme) {
+        // Mocked:
+        //newScheme.id = generateKey("mock_scheme_id");
+        this.state.schemas.push(newScheme);
     }
 
     getSchemas() {

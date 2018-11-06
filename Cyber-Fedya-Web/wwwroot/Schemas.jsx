@@ -2,13 +2,13 @@
 
     self = null;
 
-    constructor() {
-        super();
-        var schemas = dataService.getSchemas();
+    constructor(props) {
+        super(props);
         this.state = {
-            schemas: schemas,
-            selected_scheme: schemas[0],
-            wordTypes: wordTypes
+            schemas: props.schemas,
+            selected_scheme: props.schemas[0],
+            wordTypes: globalWordTypes,
+            notifyRefresh: props.notifyRefresh
         };
 
         self = this;
@@ -18,10 +18,10 @@
         var selectedSchemeName = e.params.data.text;
         var scheme = this.state.schemas.find(s => { return s.name === selectedSchemeName; });
         if (!scheme) {
-            scheme = new {
+            scheme = {
                 "name": selectedSchemeName,
-                "words": this.state.selected_scheme.words,
-                "id": this.state.selected_scheme.id
+                "words": clone(this.state.selected_scheme.words),
+                "id": generateKey("new-scheme-id-")
             };
         }
 
@@ -52,6 +52,11 @@
         self.setState({selected_scheme: self.state.selected_scheme});
     }
 
+    createSelectedScheme() {
+        dataService.createScheme(self.state.selected_scheme);
+        self.state.notifyRefresh();
+        self.forceUpdate();
+    }
 
     render() {
         var schemeItems = this.state.selected_scheme.words
@@ -78,7 +83,8 @@
                         </select>
                     </div>
                     <div class="row">
-                        <button type="button" class="btn btn-warning btn-lg col-xs-5">
+                        <button type="button" class="btn btn-warning btn-lg col-xs-5"
+                            onClick={() => this.createSelectedScheme()}>
                             <i class="fa fa-file btn-symbol"></i> Сохранить как новую схему
                         </button>
                         <div class="col-xs-2"></div>

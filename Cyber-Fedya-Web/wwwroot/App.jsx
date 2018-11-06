@@ -1,4 +1,4 @@
-﻿var wordTypes = [
+﻿var globalWordTypes = [
     "<Существительное>",
     "<Персонаж>",
     "<Прилагательное>",
@@ -7,10 +7,6 @@
 ];
 
 var dataService = new DataService({ apiRepository: new ApiRepository({ baseUrl: "http://localhost:40384/api/" }) });
-
-function generateKey(pre) {
-    return ""+ pre + new Date().getTime();
-}
 
 // Required to make possible entering custom text to select
 function select2CreateTag(params) {
