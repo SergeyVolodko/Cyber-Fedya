@@ -29,13 +29,16 @@ class WordInScheme extends React.Component{
                         onClick={() => this.state.moveUp(this.state.currentWord)}>
                     <i class="fa fa-arrow-up btn-symbol"></i>
                 </button>
+                <button class="btn word-in-scheme-arrow-button"
+                        onClick={() => this.state.moveDown(this.state.currentWord)}>
+                    <i class="fa fa-arrow-down btn-symbol"></i>
+                </button>
                 <select id={this.state.id}
                         title={this.state.currentWord.text}>
                     {wordOptions}
                 </select>
-                <button class="btn word-in-scheme-arrow-button"
-                        onClick={() => this.state.moveDown(this.state.currentWord)}>
-                    <i class="fa fa-arrow-down btn-symbol"></i>
+                <button class="btn word-in-scheme-arrow-button btn-danger">
+                    <i class="fa fa-times btn-symbol"></i>
                 </button>
             </div>
         </div>);
@@ -46,7 +49,7 @@ class WordInScheme extends React.Component{
         var wordSelect = $('#' + id);
         wordSelect.select2({
             allowClear: true,
-            width: "80%",
+            width: "70%",
             placeholder: this.state.currentWord.text,
             tags: true,
             createTag: select2CreateTag

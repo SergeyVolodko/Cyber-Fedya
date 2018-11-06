@@ -14,6 +14,8 @@
 
     notifyRefresh() {
         navigation_instance.setState({
+            //vocabulary: dataService.getVocabulary(),
+            //schemas: dataService.getSchemas()
             // Can't it be implemented without setState here?
         });
     }

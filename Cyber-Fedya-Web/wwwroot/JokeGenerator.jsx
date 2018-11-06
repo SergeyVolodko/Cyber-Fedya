@@ -26,8 +26,11 @@
     componentWillReceiveProps(nextProps) {
         // Handle update of selected scheme
         // Handle deletion of selected scheme
-        //this.setState({ selected_scheme: this.state.schemas[0] });
-        this.forceUpdate();
+        //joke_generator_instance.setState({
+        //    vocabulary: nextProps.vocabulary,
+        //    schemas: nextProps.schemas,
+        //    selected_scheme: nextProps.schemas[0]});
+        joke_generator_instance.forceUpdate();
     }
 
     generateJoke() {
@@ -55,7 +58,7 @@
                 <h3>Лэтc гоу - поехали!</h3>
                 <div class="scheme-selector">
                     <select id="joke-generator-schemas-select">
-                        {this.state.schemas.map((item) => <option key={item.id}>{item.name}</option>, this)}
+                        {joke_generator_instance.state.schemas.map((item) => <option key={item.id}>{item.name}</option>, this)}
                     </select>
                 </div>
 
@@ -64,13 +67,13 @@
                     <div class="col-xs-2">
                         <button type="button"
                             class="btn btn-secondary btn-lg generator-button"
-                            disabled={!this.state.previousJoke}
-                            onClick={() => this.returnPreviousJoke()}><i class="fa fa-backward" /></button>
+                            disabled={!joke_generator_instance.state.previousJoke}
+                            onClick={() => joke_generator_instance.returnPreviousJoke()}><i class="fa fa-backward" /></button>
                     </div>
                     <div class="col-xs-8">
                         <button type="button"
                             class="btn btn-primary btn-lg generator-button"
-                            onClick={() => this.generateJoke()}>
+                            onClick={() => joke_generator_instance.generateJoke()}>
                             <h2>Ещё!</h2>
                         </button>
                     </div>

@@ -33,6 +33,13 @@
         this.state.schemas.push(newScheme);
     }
 
+    updateScheme(id, schemeToUpdate) {
+        // Mocked:
+        var index = this.state.schemas.findIndex(s => { return s.id === id; });
+        this.state.schemas.splice(index, 1, schemeToUpdate);
+        //this.state.schemas.push(schemeToUpdate);
+    }
+
     getSchemas() {
         if (this.state.schemas.length === 0) {
             var data = this.state.apiRepository.getRequest("schemas");

@@ -8,15 +8,6 @@
 
 var dataService = new DataService({ apiRepository: new ApiRepository({ baseUrl: "http://localhost:40384/api/" }) });
 
-// Required to make possible entering custom text to select
-function select2CreateTag(params) {
-    return {
-      id: params.term,
-      text: params.term,
-      newOption: true
-    }
-  }
-
 class App extends React.Component{
 
     constructor() {
