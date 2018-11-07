@@ -7,7 +7,6 @@
         this.state = {
             schemas: props.schemas,
             selected_scheme: props.schemas[0],
-            prev_selected_scheme_id: -1,
             wordTypes: globalWordTypes,
             notifyRefresh: props.notifyRefresh
         };
@@ -16,12 +15,16 @@
     }
 
     componentWillReceiveProps(nextProps) {
-        //self.setState({
-        //    schemas: nextProps.schemas,
-        //    selected_scheme: nextProps.schemas[0],
-        //    prev_selected_scheme_id: -1
-        //});
+        //$('#schemas-select').empty().trigger("change");
         self.forceUpdate();
+        self.initSelect();
+        //var name = self.state.selected_scheme.name;
+        //self.setState({
+        //    //schemas: nextProps.schemas,
+        //    selected_scheme: self.state.schemas[0]
+        //});
+        //$('#schemas-select').val("").trigger("change");
+        //self.componentDidUpdate(null,null);
     }
 
     schemeSelected(e) {
@@ -31,11 +34,9 @@
             scheme = {
                 "name": selectedSchemeName,
                 "words": clone(this.state.selected_scheme.words),
-                "id": generateKey("new-scheme-id-")
+                "id": generateKey("new-scheme-id-"),
+                "base_id": !self.state.selected_scheme.base_id ? this.state.selected_scheme.id : self.state.selected_scheme.base_id
             };
-            this.setState({
-                prev_selected_scheme_id: this.state.selected_scheme.id
-            });
         }
 
         this.setState({
@@ -68,15 +69,15 @@
     createSelectedScheme() {
         dataService.createScheme(self.state.selected_scheme);
         self.state.notifyRefresh();
-        self.forceUpdate();
+        //self.forceUpdate();
     }
 
     saveSelectedScheme() {
-        var id = self.state.prev_selected_scheme_id;
+        var id = self.state.selected_scheme.base_id;
         self.state.selected_scheme.id = id;
         dataService.updateScheme(id, self.state.selected_scheme);
         self.state.notifyRefresh();
-        self.forceUpdate();
+        //self.forceUpdate();
     }
 
     render() {
@@ -99,7 +100,7 @@
                     <div class="scheme-selector">
                         <select id="schemas-select">
                             {self.state.schemas.map((item) =>
-                                <option key={item.id}>{item.name}</option>
+                                <option key={item.id} id={item.id}>{item.name}</option>
                             , this)}
                         </select>
                     </div>
@@ -121,6 +122,20 @@
     }
 
     componentDidMount() {
+        self.initSelect();
+    }
+    componentDidUpdate(prevProps, prevState) {
+        //$('#schemas-select').empty().trigger("change");
+        //var name = self.state.selected_scheme.name;
+        //self.setState({
+        //    //schemas: nextProps.schemas,
+        //    selected_scheme: self.state.schemas[0]
+        //});
+        self.initSelect();
+        //self.render();
+    }
+
+    initSelect() {
         var schemsSelect = $('#schemas-select');
         schemsSelect.select2({
             width: '100%',
@@ -128,6 +143,5 @@
             createTag: select2CreateTag
         });
         schemsSelect.on('select2:select', function (value) { self.schemeSelected(value) });
-        //schemsSelect.trigger('change');
     }
 }

@@ -16,7 +16,8 @@
 
     schemeSelected(e) {
         var selectedSchemeName = e.params.data.text;
-        var scheme = joke_generator_instance.state.schemas.find(s => { return s.name === selectedSchemeName; });
+        var scheme = joke_generator_instance.state.schemas
+            .find(s => { return s.name === selectedSchemeName; });
 
         joke_generator_instance.setState({
             selected_scheme: scheme
@@ -26,11 +27,7 @@
     componentWillReceiveProps(nextProps) {
         // Handle update of selected scheme
         // Handle deletion of selected scheme
-        //joke_generator_instance.setState({
-        //    vocabulary: nextProps.vocabulary,
-        //    schemas: nextProps.schemas,
-        //    selected_scheme: nextProps.schemas[0]});
-        joke_generator_instance.forceUpdate();
+        joke_generator_instance.setState({});
     }
 
     generateJoke() {
@@ -58,7 +55,7 @@
                 <h3>Лэтc гоу - поехали!</h3>
                 <div class="scheme-selector">
                     <select id="joke-generator-schemas-select">
-                        {joke_generator_instance.state.schemas.map((item) => <option key={item.id}>{item.name}</option>, this)}
+                        {joke_generator_instance.state.schemas.map((item) => <option key={item.id}>{item.name}</option>, joke_generator_instance)}
                     </select>
                 </div>
 
@@ -86,12 +83,21 @@
     }
 
     componentDidMount() {
+        joke_generator_instance.initSelect();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        joke_generator_instance.initSelect();
+    }
+
+    initSelect() {
         var schemsSelect = $('#joke-generator-schemas-select');
         schemsSelect.select2({
             width: '100%',
-            tags: true,
-            createTag: select2CreateTag
+            tags: false
+            //createTag: select2CreateTag
         });
         schemsSelect.on('select2:select', function (value) { joke_generator_instance.schemeSelected(value) });
     }
+
 }

@@ -18,7 +18,6 @@
             var data = this.state.apiRepository.getRequest("vocabulary");
             this.state.vocabulary = data;
         }
-
         return this.state.vocabulary;
     }
 
@@ -46,7 +45,6 @@
             // why this.setState({schemas: data}) does not work?
             this.state.schemas = data;
         }
-
         return this.state.schemas;
     }
 }
