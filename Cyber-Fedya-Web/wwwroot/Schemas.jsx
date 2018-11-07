@@ -14,19 +14,6 @@
         self = this;
     }
 
-    componentWillReceiveProps(nextProps) {
-        //$('#schemas-select').empty().trigger("change");
-        self.forceUpdate();
-        self.initSelect();
-        //var name = self.state.selected_scheme.name;
-        //self.setState({
-        //    //schemas: nextProps.schemas,
-        //    selected_scheme: self.state.schemas[0]
-        //});
-        //$('#schemas-select').val("").trigger("change");
-        //self.componentDidUpdate(null,null);
-    }
-
     schemeSelected(e) {
         var selectedSchemeName = e.params.data.text;
         var scheme = this.state.schemas.find(s => { return s.name === selectedSchemeName; });
@@ -76,6 +63,7 @@
         var id = self.state.selected_scheme.base_id;
         self.state.selected_scheme.id = id;
         dataService.updateScheme(id, self.state.selected_scheme);
+
         self.state.notifyRefresh();
         //self.forceUpdate();
     }
@@ -100,7 +88,7 @@
                     <div class="scheme-selector">
                         <select id="schemas-select">
                             {self.state.schemas.map((item) =>
-                                <option key={item.id} id={item.id}>{item.name}</option>
+                                <option key={item.id}>{item.name}</option>
                             , this)}
                         </select>
                     </div>
@@ -124,15 +112,16 @@
     componentDidMount() {
         self.initSelect();
     }
+
+    // React woodoo to keep scheme dropdowns up to date
+    componentWillReceiveProps(nextProps) {
+        self.forceUpdate();
+    }
     componentDidUpdate(prevProps, prevState) {
-        //$('#schemas-select').empty().trigger("change");
-        //var name = self.state.selected_scheme.name;
-        //self.setState({
-        //    //schemas: nextProps.schemas,
-        //    selected_scheme: self.state.schemas[0]
-        //});
         self.initSelect();
-        //self.render();
+        // select2 woodoo to remove duplicates on schema name change saved
+        var name = self.state.selected_scheme.name;
+        $('#schemas-select').val(name).trigger("change");
     }
 
     initSelect() {

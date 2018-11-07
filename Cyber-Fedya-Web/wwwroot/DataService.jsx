@@ -36,7 +36,6 @@
         // Mocked:
         var index = this.state.schemas.findIndex(s => { return s.id === id; });
         this.state.schemas.splice(index, 1, schemeToUpdate);
-        //this.state.schemas.push(schemeToUpdate);
     }
 
     getSchemas() {

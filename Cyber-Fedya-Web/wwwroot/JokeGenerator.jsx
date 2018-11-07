@@ -6,7 +6,7 @@
         this.state = {
             vocabulary: props.vocabulary,
             schemas: props.schemas,
-            selected_scheme: props.schemas[0],
+            selected_scheme_index: 0,
             previousJoke: "",
             joke : ""
         };
@@ -16,22 +16,22 @@
 
     schemeSelected(e) {
         var selectedSchemeName = e.params.data.text;
-        var scheme = joke_generator_instance.state.schemas
-            .find(s => { return s.name === selectedSchemeName; });
+        var index = joke_generator_instance.state.schemas
+            .findIndex(s => { return s.name === selectedSchemeName; });
 
         joke_generator_instance.setState({
-            selected_scheme: scheme
+            selected_scheme_index: index
         });
     }
 
     componentWillReceiveProps(nextProps) {
-        // Handle update of selected scheme
         // Handle deletion of selected scheme
         joke_generator_instance.setState({});
     }
 
     generateJoke() {
-        var words = joke_generator_instance.state.selected_scheme.words;
+        var scheme = joke_generator_instance.state.schemas[joke_generator_instance.state.selected_scheme_index];
+        var words = scheme.words;
         var sentence = "";
         words.forEach(function (word) {
             sentence += mapWord(word.text, joke_generator_instance.state.vocabulary) + " ";
@@ -95,9 +95,7 @@
         schemsSelect.select2({
             width: '100%',
             tags: false
-            //createTag: select2CreateTag
         });
         schemsSelect.on('select2:select', function (value) { joke_generator_instance.schemeSelected(value) });
     }
-
 }
