@@ -26,7 +26,7 @@
 
     componentWillReceiveProps(nextProps) {
         // Handle deletion of selected scheme
-        joke_generator_instance.setState({});
+        //joke_generator_instance.setState({});
     }
 
     generateJoke() {
@@ -55,7 +55,7 @@
                 <h3>Лэтc гоу - поехали!</h3>
                 <div class="scheme-selector">
                     <select id="joke-generator-schemas-select">
-                        {joke_generator_instance.state.schemas.map((item) => <option key={item.id}>{item.name}</option>, joke_generator_instance)}
+                        {this.state.schemas.map((item) => <option key={item.id}>{item.name}</option>, this)}
                     </select>
                 </div>
 
@@ -65,12 +65,12 @@
                         <button type="button"
                             class="btn btn-secondary btn-lg generator-button"
                             disabled={!joke_generator_instance.state.previousJoke}
-                            onClick={() => joke_generator_instance.returnPreviousJoke()}><i class="fa fa-backward" /></button>
+                            onClick={() => this.returnPreviousJoke()}><i class="fa fa-backward" /></button>
                     </div>
                     <div class="col-xs-8">
                         <button type="button"
                             class="btn btn-primary btn-lg generator-button"
-                            onClick={() => joke_generator_instance.generateJoke()}>
+                            onClick={() => this.generateJoke()}>
                             <h2>Ещё!</h2>
                         </button>
                     </div>
@@ -97,5 +97,6 @@
             tags: false
         });
         schemsSelect.on('select2:select', function (value) { joke_generator_instance.schemeSelected(value) });
+        schemsSelect.trigger("change");
     }
 }

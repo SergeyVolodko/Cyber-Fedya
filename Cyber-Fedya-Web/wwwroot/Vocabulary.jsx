@@ -2,7 +2,7 @@
 
     constructor(props) {
         super(props);
-        
+
         this.state = {
             vocabulary: props.vocabulary,
             notifyRefresh: props.notifyRefresh

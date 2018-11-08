@@ -28,7 +28,6 @@
 
     createScheme(newScheme) {
         // Mocked:
-        //newScheme.id = generateKey("mock_scheme_id");
         this.state.schemas.push(newScheme);
     }
 

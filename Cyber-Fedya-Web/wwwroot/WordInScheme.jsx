@@ -6,6 +6,7 @@ class WordInScheme extends React.Component{
             wordTypes: globalWordTypes,
             currentWord: props.wordInJoke,
             id: "word-" + props.id + new Date().getTime(),
+            delete: props.delete,
             moveDown: props.moveDown,
             moveUp: props.moveUp
         };
@@ -37,7 +38,8 @@ class WordInScheme extends React.Component{
                         title={this.state.currentWord.text}>
                     {wordOptions}
                 </select>
-                <button class="btn word-in-scheme-arrow-button btn-danger">
+                    <button class="btn word-in-scheme-arrow-button btn-danger"
+                        onClick={() => this.state.delete(this.state.currentWord)}>
                     <i class="fa fa-times btn-symbol"></i>
                 </button>
             </div>

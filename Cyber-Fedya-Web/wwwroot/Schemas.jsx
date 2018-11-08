@@ -32,7 +32,7 @@
     }
 
     moveUp(word) {
-        if (word.orderNumber === 1) {
+        if (word.orderNumber === 0) {
             return;
         }
         var prev = word.orderNumber - 1;
@@ -56,16 +56,35 @@
     createSelectedScheme() {
         dataService.createScheme(self.state.selected_scheme);
         self.state.notifyRefresh();
-        //self.forceUpdate();
     }
 
     saveSelectedScheme() {
-        var id = self.state.selected_scheme.base_id;
+        var id = !self.state.selected_scheme.base_id ? self.state.selected_scheme.id : self.state.selected_scheme.base_id;
         self.state.selected_scheme.id = id;
         dataService.updateScheme(id, self.state.selected_scheme);
 
         self.state.notifyRefresh();
-        //self.forceUpdate();
+    }
+
+    addNewWordToScheme() {
+        var nextNumber = self.state.selected_scheme.words.length;
+        self.state.selected_scheme.words.push({ "text": "Слово или несколько", "orderNumber": nextNumber});
+        self.forceUpdate();
+    }
+
+    deleteWordFromScheme(word) {
+        var words = self.state.selected_scheme.words;
+        var index = words.indexOf(word);
+
+        if (index < words.length )
+            for (var i = index; i < words.length; i++) {
+
+                self.state.selected_scheme.words[i].orderNumber -= 1;
+            }
+
+        self.state.selected_scheme.words.splice(index, 1);
+
+        self.forceUpdate();
     }
 
     render() {
@@ -76,7 +95,8 @@
                 <WordInScheme id={i}
                     wordInJoke={word}
                     moveDown={this.moveDown}
-                    moveUp={this.moveUp}/>
+                    moveUp={this.moveUp}
+                    delete={this.deleteWordFromScheme} />
             </div>
             ,this
         );
@@ -104,6 +124,10 @@
                         </button>
                     </div>
                     <div>{schemeItems}</div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-success btn-lg col-xs-12"
+                        onClick={() => this.addNewWordToScheme()}><i class="fa fa-plus"></i></button>
                 </div>
             </div>
         );
