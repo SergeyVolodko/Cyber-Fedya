@@ -1,4 +1,5 @@
 ﻿using System;
+using Cyber_Fedya_Web.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +16,9 @@ namespace Cyber_Fedya_Web
 		{
 			services.AddMemoryCache();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+			services.AddTransient<IVocabularyRepository, VocabularyRepository>();
+
 			services.AddReact();
 			services.AddMvc();
 

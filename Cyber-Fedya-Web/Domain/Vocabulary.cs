@@ -2,7 +2,7 @@
 
 namespace Cyber_Fedya_Web.Domain
 {
-	public class WordsDto
+	public class Vocabulary
 	{
 		public List<string> Nouns { get; set; }
 		public List<string> Verbs { get; set; }

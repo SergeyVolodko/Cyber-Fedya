@@ -26,7 +26,6 @@
 
     componentWillReceiveProps(nextProps) {
         // Handle deletion of selected scheme
-        //joke_generator_instance.setState({});
     }
 
     generateJoke() {
