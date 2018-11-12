@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using Cyber_Fedya_Web.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cyber_Fedya_Web
@@ -17,6 +18,7 @@ namespace Cyber_Fedya_Web
 		}
 
 		[HttpGet]
+		[Authorize]
 		[Route("vocabulary")]
 		public Vocabulary GetVocabulary()
 		{

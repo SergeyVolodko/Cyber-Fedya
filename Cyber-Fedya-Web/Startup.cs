@@ -1,5 +1,6 @@
 ﻿using System;
 using Cyber_Fedya_Web.Domain;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +20,15 @@ namespace Cyber_Fedya_Web
 
 			services.AddTransient<IVocabularyRepository, VocabularyRepository>();
 
+			services.AddAuthentication(options =>
+			{
+				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+			}).AddJwtBearer(options =>
+			{
+				options.Authority = "";
+				options.Audience = "";
+			});
 			services.AddReact();
 			services.AddMvc();
 
@@ -45,7 +55,9 @@ namespace Cyber_Fedya_Web
 				//  .AddScriptWithoutTransform("~/Scripts/bundle.server.js");
 			});
 
+			app.UseDefaultFiles();
 			app.UseStaticFiles();
+			app.UseAuthentication();
 			app.UseMvc();
 		}
 	}

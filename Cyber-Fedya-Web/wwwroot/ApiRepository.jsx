@@ -9,16 +9,25 @@
     }
 
     getRequest(url) {
+        var token = getAuthorizationToken();
+
         var response = $.ajax({
             type: "GET",
+            //dataType: "json",
+            crossDomain: true,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
             url: this.state.baseUrl + url,
-            async: false
-            //(error) => {
-            //self.setState({
-            //   isLoaded: true,
-            //   error
-            //})
-
+            async: false,
+            error: function(e)
+            {
+                //self.setState({
+                //   isLoaded: true,
+                //   error
+                //})
+                alert(url + " :: " + e.statusText);
+            }
         }).responseText;
 
         if (!this.state) {
@@ -30,4 +39,9 @@
 
         return JSON.parse(response);
     }
+
+    //dataType: "json",
+    //crossDomain: true,
+    //contentType: "application/json; charset=utf-8",
+    //data: JSON.stringify(data),
 }
