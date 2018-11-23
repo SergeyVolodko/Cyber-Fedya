@@ -3,16 +3,13 @@
     constructor() {
         super();
         this.auth0 = new auth0.WebAuth({
-            domain: '',
-            clientID: '',
-            redirectUri: window.location.href,
-            responseType: 'token id_token'
         });
 
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
         this.handleAuthentication = this.handleAuthentication.bind(this);
         this.isAuthenticated = this.isAuthenticated.bind(this);
+        this.revokeToken = this.revokeToken.bind(this);
     }
 
     handleAuthentication() {
@@ -32,6 +29,7 @@
     setSession(authResult) {
         // Set the time that the Access Token will expire at
         let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+        // accessToken and idToken are mismatched in the response!
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
@@ -53,5 +51,19 @@
 
     login() {
         this.auth0.authorize();
+    }
+
+    revokeToken() {
+        this.auth0.renewAuth({},
+            function(err, result) {
+                if (err) {
+                    if (err.error==="login_required") {
+                        this.login();
+                    }
+                    console.log(err);
+                } else {
+                    setSession(result);
+                }
+            });
     }
 }

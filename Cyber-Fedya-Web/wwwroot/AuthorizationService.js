@@ -2,7 +2,11 @@
 
 function getAuthorizationToken() {
     if (!authorizationClient.isAuthenticated()) {
-        authorizationClient.login();
+        if (localStorage.getItem('id_token')) {
+            authorizationClient.revokeToken();
+        } else {
+            authorizationClient.login();
+        }
     }
     return localStorage.getItem('id_token');
 }

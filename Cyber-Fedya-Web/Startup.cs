@@ -26,8 +26,8 @@ namespace Cyber_Fedya_Web
 				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 			}).AddJwtBearer(options =>
 			{
-				options.Authority = "";
-				options.Audience = "";
+				options.Authority = "https://my-test-api.eu.auth0.com";
+				options.Audience = "QvuPHcXRhZwV1QzmjXz1uFrKUg33fmkr";
 			});
 			services.AddReact();
 			services.AddMvc();

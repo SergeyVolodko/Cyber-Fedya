@@ -8,12 +8,6 @@
 
 var dataService = new DataService({ apiRepository: new ApiRepository({ baseUrl: "http://localhost:40384/api/" }) });
 
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var IndexRoute = ReactRouter.IndexRoute;
-var Link = ReactRouter.Link;
-var browserHistory = ReactRouter.browserHistory;
-
 class App extends React.Component{
     constructor() {
         super();
@@ -43,7 +37,7 @@ class App extends React.Component{
 
         //<div>
         // Loading...
-        // <div class="loader"></div>
+        // <div className="loading-circle fa-spin"></div>
         //</div>
         );
     }
