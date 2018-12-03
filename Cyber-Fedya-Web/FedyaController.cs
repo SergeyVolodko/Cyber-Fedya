@@ -19,6 +19,17 @@ namespace Cyber_Fedya_Web
 
 		[HttpGet]
 		[Authorize]
+		[Route("everything")]
+		public DataAggregate GetEverything()
+		{
+			return new DataAggregate
+			{
+				Vocabulary = vocabularyRepository.Load(),
+			};
+		}
+
+		[HttpGet]
+		[Authorize]
 		[Route("vocabulary")]
 		public Vocabulary GetVocabulary()
 		{

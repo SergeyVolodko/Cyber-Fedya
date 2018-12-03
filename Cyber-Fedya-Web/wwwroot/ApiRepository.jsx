@@ -8,10 +8,10 @@
         };
     }
 
-    getRequest(url) {
-        var token = getAuthorizationToken();
+    getRequest(url, onSuccess, onFailure) {
+        var token = localStorage.getItem('id_token');
 
-        var response = $.ajax({
+        $.ajax({
             type: "GET",
             //dataType: "json",
             crossDomain: true,
@@ -19,7 +19,10 @@
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
             },
             url: this.state.baseUrl + url,
-            async: false,
+            //async: false,
+            success: function(response) {
+                onSuccess(JSON.parse(response));
+            },
             error: function(e)
             {
                 //self.setState({
@@ -27,17 +30,18 @@
                 //   error
                 //})
                 alert(url + " :: " + e.statusText);
+                onFailure();
             }
-        }).responseText;
-
-        if (!this.state) {
-            this.state = {};
-        }
-        this.setState({
-            isLoaded: true
         });
 
-        return JSON.parse(response);
+        //if (!this.state) {
+        //    this.state = {};
+        //}
+        //this.setState({
+        //    isLoaded: true
+        //});
+
+        //return JSON.parse(response);
     }
 
     //dataType: "json",

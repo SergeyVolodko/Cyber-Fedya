@@ -18,3 +18,13 @@ function select2CreateTag(params) {
         newOption: true
     }
 }
+
+function myWait(continuationCondition, onFinish) {
+    setTimeout(function () {
+        if (continuationCondition) {
+            myWait(!localStorage.getItem("is_authentication_handled"), onFinish);
+        } else {
+            onFinish();
+        }
+    }, 300);
+};

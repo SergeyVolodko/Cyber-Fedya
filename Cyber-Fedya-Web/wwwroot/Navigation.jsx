@@ -6,7 +6,7 @@
         super(props);
         this.state = {
             vocabulary: dataService.getVocabulary(),
-            schemas: dataService.getSchemas()
+            schemas: []//dataService.getSchemas()
         };
         navigation_instance = this;
     }
@@ -31,9 +31,7 @@
                     <div id="generator" class="tab-pane fade in active">
                         <JokeGenerator vocabulary={navigation_instance.state.vocabulary} schemas={navigation_instance.state.schemas}/>
                     </div>
-                    <div id="schemas" class="tab-pane fade" >
-                        <Schemas notifyRefresh={navigation_instance.notifyRefresh} schemas={navigation_instance.state.schemas}/>
-                    </div>
+
                     <div id="vocabulary" class="tab-pane fade">
                         <Vocabulary vocabulary={navigation_instance.state.vocabulary} notifyRefresh={navigation_instance.notifyRefresh}/>
                     </div>
@@ -43,5 +41,8 @@
                 </div>
             </div>
         );
+        //<div id="schemas" class="tab-pane fade" >
+        //    <Schemas notifyRefresh={navigation_instance.notifyRefresh} schemas={navigation_instance.state.schemas} />
+        //    </div>
     }
 }

@@ -25,7 +25,7 @@ namespace Cyber_Fedya_Web.Domain
 				return new Vocabulary
 				{
 					Nouns = nouns,
-					Adjctives = adjectives,
+					Adjectives = adjectives,
 					Characters = characters,
 					Places = places,
 					Verbs = verbs

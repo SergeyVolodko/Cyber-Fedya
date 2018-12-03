@@ -3,6 +3,10 @@
     constructor() {
         super();
         this.auth0 = new auth0.WebAuth({
+
+            redirectUri: window.location.href,
+            responseType: 'token id_token',
+            scope: 'openid offline_access'
         });
 
         this.login = this.login.bind(this);
@@ -23,6 +27,7 @@
                 //location.pathname = "/error.html";
                 console.log(err);
             }
+            localStorage.setItem("is_authentication_handled", true);
         });
     }
 
@@ -53,16 +58,18 @@
         this.auth0.authorize();
     }
 
-    revokeToken() {
+    revokeToken(successHandler, failureHandler) {
         this.auth0.renewAuth({},
             function(err, result) {
                 if (err) {
                     if (err.error==="login_required") {
-                        this.login();
+                        this.login(successHandler, failureHandler);
                     }
+                    failureHandler();
                     console.log(err);
                 } else {
                     setSession(result);
+                    successHandler();
                 }
             });
     }
