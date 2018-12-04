@@ -14,8 +14,8 @@ var ReadDataEvents = Object.freeze({
     "DataFetchSucceeded": "DataFetchSucceeded",
     "SetOfflineDataSucceeded": "SetOfflineDataSucceeded",
     "GetOfflineDataSucceeded": "GetOfflineDataSucceeded",
+    "AuthorizationFailed": "AuthorizationFailed",
 
-    //"GettingOfflineData": "GettingOfflineData",
     //"Error": "Error"
 });
 
@@ -44,7 +44,8 @@ class DataService extends React.Component {
             { event: ReadDataEvents.SetOfflineDataSucceeded, from: STATES.SettingOfflineData, to: STATES.GettingOfflineData, successAction: ds.getOfflineData },
             { event: ReadDataEvents.GetOfflineDataSucceeded, from: STATES.GettingOfflineData, to: STATES.OK,                 successAction: ds.returnData },
 
-                //{ name: 'AuthorizationFailed', from: STATES.Authorizing, to: STATES.TokenRevokation },
+            { event: ReadDataEvents.AuthorizationFailed,     from: STATES.Authorizing,        to: STATES.TokenRevokation,    successAction: ds.reAuthorize },
+                //
                 //{ name: 'RevokationSucceeded', from: STATES.TokenRevoikation, to: STATES.DataFetching },
                 //{ name: 'RevokationFailed', from: STATES.TokenRevokation, to: STATES.GettingOfflineData },
                 
@@ -68,6 +69,10 @@ class DataService extends React.Component {
         ds.fsm.handleEvent(ReadDataEvents.AuthorizationFailed, null);
     }
 
+    reAuthorize() {
+
+    }
+
     // Authorizing -> DataFetching
     startDataFetching() {
         ds.state.apiRepository
@@ -89,7 +94,7 @@ class DataService extends React.Component {
     // SettingOfflineData -> GettingOfflineData
     getOfflineData() {
         try {
-            var data = localStorage.getItem("data");
+            var data = JSON.parse(localStorage.getItem("data"));
             ds.fsm.handleEvent(ReadDataEvents.GetOfflineDataSucceeded, data);
         }
         catch (e) {
@@ -108,26 +113,13 @@ class DataService extends React.Component {
     componentDidMount() {
     }
 
-    getVocabulary() {
-        this.getData();
-        //if (this.state.vocabulary.length === 0) {
-        //    var data = this.state.apiRepository.getRequest("vocabulary");
-        //    this.state.vocabulary = data;
-        //}
-        //return this.state.vocabulary;
-    }
-
 
     getData() {
         ds.fsm.handleEvent(ReadDataEvents.StartGettingData, null);
 
-        //myWait(!dataResult)
-
-        //{
-        //}
-        //while (this.fsm.state !== STATES.OK);
+        return waitFor(_ => this.fsm.state === STATES.OK)
+            .then(_ => dataResult);
     }
-
 
     addToVocabulary(wordInput) {
         // Mocked:

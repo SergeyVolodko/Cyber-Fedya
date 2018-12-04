@@ -1,11 +1,13 @@
-﻿class Navigation extends React.Component {
+﻿var emptyVocabulary = { nouns: [], adjectives: [], verbs: [], characters: [], places: [] };
+
+class Navigation extends React.Component {
 
     navigation_instance = null;
 
     constructor() {
         super();
         this.state = {
-            vocabulary: [],
+            vocabulary: emptyVocabulary,
             schemas: []
         };
         navigation_instance = this;
@@ -18,15 +20,17 @@
     }
 
     componentDidMount() {
-        this.setState({
-            vocabulary: dataService.getVocabulary()
-            //,schemas: dataService.getSchemas()
-        });
+        dataService.getData()
+            .then(data => {
+                    navigation_instance.setState({
+                        vocabulary: data.vocabulary
+                        //,schemas: dataService.getSchemas()
+                    });
+                }
+        );
     }
 
     render() {
-        
-
         return (
             <div>
                 <ul className="nav nav-pills">
@@ -37,7 +41,9 @@
                 </ul>
 
                 <div className="tab-content">
-                    
+                    <div id="vocabulary" class="tab-pane fade">
+                        <Vocabulary vocabulary={navigation_instance.state.vocabulary} notifyRefresh={navigation_instance.notifyRefresh} />
+                    </div>
                     <div id="history" className="tab-pane fade">
                         <FavoriteJokes />
                     </div>
@@ -49,9 +55,7 @@
         //    <JokeGenerator vocabulary={navigation_instance.state.vocabulary} schemas={navigation_instance.state.schemas} />
         //    </div>
 
-        //    <div id="vocabulary" class="tab-pane fade">
-        //        <Vocabulary vocabulary={navigation_instance.state.vocabulary} notifyRefresh={navigation_instance.notifyRefresh} />
-        //    </div>
+
         //<div id="schemas" class="tab-pane fade" >
         //    <Schemas notifyRefresh={navigation_instance.notifyRefresh} schemas={navigation_instance.state.schemas} />
         //    </div>

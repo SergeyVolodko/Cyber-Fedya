@@ -61,6 +61,10 @@
         this.auth0.renewAuth({},
             function(err, result) {
                 if (err) {
+                    if (err.error === "invalid_token") {
+                        alert(err);
+                    }
+
                     if (err.error==="login_required") {
                         this.login(successHandler, failureHandler);
                     }
@@ -70,6 +74,8 @@
                     setSession(result);
                     successHandler();
                 }
+                //??
+                location.pathname = "";
             });
     }
 }

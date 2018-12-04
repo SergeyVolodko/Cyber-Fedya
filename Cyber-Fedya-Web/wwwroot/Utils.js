@@ -29,6 +29,14 @@ function myWait(continuationCondition, onFinish) {
     }, 300);
 };
 
+function waitFor(conditionFunction) {
+    const poll = resolve => {
+        if (conditionFunction()) resolve();
+        else setTimeout(_ => poll(resolve), 200);
+    }
+    return new Promise(poll);
+}
+
 var StateMachine = function(transitions, initialState) {
 
     this.allTransitions = transitions;
