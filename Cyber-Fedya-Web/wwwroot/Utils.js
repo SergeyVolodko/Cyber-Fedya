@@ -28,3 +28,24 @@ function myWait(continuationCondition, onFinish) {
         }
     }, 300);
 };
+
+var StateMachine = function(transitions, initialState) {
+
+    this.allTransitions = transitions;
+    this.state = initialState;
+
+    this.handleEvent = function (event, input) {
+
+        var currentState = this.state;
+        var transition = this.allTransitions.find(function(t) {
+            return t.event === event &&
+                   t.from === currentState;
+        });
+
+        if (!transition) {
+            throw "Not existing transition";
+        }
+        this.state = transition.to;
+        transition.successAction(input);
+    }
+}

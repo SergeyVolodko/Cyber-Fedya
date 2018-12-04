@@ -5,9 +5,9 @@
     height: 48px;
     width: 48px;
     border-radius: 50%;
-    border-top: 4px solid orange;
+    border-top: 4px solid blue;
     border-right: 2px solid rgba(0,0,0, 0);
-    border-bottom: 4px solid orange;
+    border-bottom: 4px solid blue;
     border-left: 2px solid rgba(0,0,0, 0);
     z-index: 20050;
 }

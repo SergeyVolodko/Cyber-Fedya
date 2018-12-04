@@ -18,41 +18,44 @@ class App extends React.Component{
         myWait(!localStorage.getItem("is_authentication_handled"), this.setMainComponent);
         localStorage.removeItem("is_authentication_handled");
         app_this = this;
+
+        app_this.state = {
+            mainComponent: (
+                <div>
+                    <h1>Authorizing...</h1>
+                    <div className="loading-circle fa-spin"></div>
+                </div>)
+        };
     }
     //componentDidMount() {
         
     //}
 
     setMainComponent() {
-        app_this.mainComponent = "";
+        var mainComponent = app_this.state.mainComponent;
+
         switch (location.pathname) {
         case "":
         case "/":
-            app_this.mainComponent = <Navigation />;
+            mainComponent = <Navigation />;
             break;
         //case "/auth_callback":
         //    this.mainComponent = <AuthCallback/>;
         //    break;
         default:
-            app_this.mainComponent = <NotFound />;
+            mainComponent = <NotFound />;
         }
 
-        app_this.forceUpdate();
+        app_this.setState({ mainComponent });
+
+        //app_this.forceUpdate();
     }
 
     render() {
-        if (app_this.mainComponent === "") {
-            return (
-                <div>
-                    <h1>Authorizing...</h1>
-                    <div className="loading-circle fa-spin"></div>
-                </div>);
-        } else {
-            return (
-                <div>
-                    {this.mainComponent}
-                </div>);
-        }
+        return (
+            <div>
+                {app_this.state.mainComponent}
+            </div>);
 
         //<div>
         // Loading...

@@ -26,7 +26,6 @@ namespace Cyber_Fedya_Web
 				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 			}).AddJwtBearer(options =>
 			{
-				
 			});
 			services.AddReact();
 			services.AddMvc();

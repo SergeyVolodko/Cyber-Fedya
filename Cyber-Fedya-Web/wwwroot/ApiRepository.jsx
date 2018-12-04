@@ -20,8 +20,8 @@
             },
             url: this.state.baseUrl + url,
             //async: false,
-            success: function(response) {
-                onSuccess(JSON.parse(response));
+            success: function(data) {
+                onSuccess(data);
             },
             error: function(e)
             {

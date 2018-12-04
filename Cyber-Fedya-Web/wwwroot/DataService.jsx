@@ -8,6 +8,17 @@
     "Error": "Error"
 });
 
+var ReadDataEvents = Object.freeze({
+    "StartGettingData": "StartGettingData",
+    "AuthorizationSucceeded": "AuthorizationSucceeded",
+    "DataFetchSucceeded": "DataFetchSucceeded",
+    "SetOfflineDataSucceeded": "SetOfflineDataSucceeded",
+    "GetOfflineDataSucceeded": "GetOfflineDataSucceeded",
+
+    //"GettingOfflineData": "GettingOfflineData",
+    //"Error": "Error"
+});
+
 function clearStorage() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
@@ -20,61 +31,77 @@ class DataService extends React.Component {
         this.state = {
             //vocabulary: [],
             schemas: [],
-            apiRepository: props.apiRepository,
-            last_write: localStorage.getItem('last_write')
+            apiRepository: props.apiRepository
         };
         this.getData = this.getData.bind(this);
 
         ds = this;
-        this.fsm = new StateMachine({
-            init: STATES.OK,
-            transitions: [
-                { name: 'StartGettingData', from: STATES.OK, to: STATES.Authorizing },
-                { name: 'AuthorizationSucceeded', from: STATES.Authorizing, to: STATES.DataFetching },
-                { name: 'AuthorizationFailed', from: STATES.Authorizing, to: STATES.TokenRevokation },
-                { name: 'RevokationSucceeded', from: STATES.TokenRevoikation, to: STATES.DataFetching },
-                { name: 'RevokationFailed', from: STATES.TokenRevokation, to: STATES.GettingOfflineData },
-                { name: 'DataFetchSucceeded', from: STATES.DataFetching, to: STATES.SettingOfflineData },
-                { name: 'DataFetchFailed', from: STATES.DataFetching, to: STATES.GettingOfflineData },
-                { name: 'SetOfflineDataSucceeded', from: STATES.SettingOfflineData, to: STATES.GettingOfflineData },
-                { name: 'GetOfflineDataSucceeded', from: STATES.GettingOfflineData, to: STATES.OK },
-                { name: 'GetOfflineDataFailed', from: STATES.GettingOfflineData, to: STATES.Error },
+
+        this.fsm = new StateMachine([
+            { event: ReadDataEvents.StartGettingData,        from: STATES.OK,                 to: STATES.Authorizing,        successAction: ds.startAuthorization },
+            { event: ReadDataEvents.AuthorizationSucceeded,  from: STATES.Authorizing,        to: STATES.DataFetching,       successAction: ds.startDataFetching },
+            { event: ReadDataEvents.DataFetchSucceeded,      from: STATES.DataFetching,       to: STATES.SettingOfflineData, successAction: ds.setOfflineData },
+            { event: ReadDataEvents.SetOfflineDataSucceeded, from: STATES.SettingOfflineData, to: STATES.GettingOfflineData, successAction: ds.getOfflineData },
+            { event: ReadDataEvents.GetOfflineDataSucceeded, from: STATES.GettingOfflineData, to: STATES.OK,                 successAction: ds.returnData },
+
+                //{ name: 'AuthorizationFailed', from: STATES.Authorizing, to: STATES.TokenRevokation },
+                //{ name: 'RevokationSucceeded', from: STATES.TokenRevoikation, to: STATES.DataFetching },
+                //{ name: 'RevokationFailed', from: STATES.TokenRevokation, to: STATES.GettingOfflineData },
+                
+                //{ name: 'DataFetchFailed', from: STATES.DataFetching, to: STATES.GettingOfflineData },
+                //{ name: 'GetOfflineDataFailed', from: STATES.GettingOfflineData, to: STATES.Error }
             ],
-            methods: {
-                onStartgettingdata: function () {
-                    // Since Login will leave the application we need this workaround
-                    authorizationService.authorize(
-                            ds.handleSuccessfulAuthorization,
-                            ds.handleFailedAuthorization);
-                },
-
-                onAuthorizationsucceeded: function() {
-                    ds.state.apiRepository
-                        .getRequest("everything", ds.handleFetchedData, ds.handleFetchFailure);
-                },
-
-                onDatafetchsucceeded: function(data) {
-                    localStorage.setItem("data", JSON.stringify(data));
-                }
-            }
-        });
+            /*initial state:*/STATES.OK);
     }
 
+    // OK -> Authorizing
+    startAuthorization() {
+        authorizationService.authorize(
+            ds.handleSuccessfulAuthorization,
+            ds.handleFailedAuthorization);
+    }
     handleSuccessfulAuthorization() {
-        ds.fsm.authorizationsucceeded();
+        ds.fsm.handleEvent(ReadDataEvents.AuthorizationSucceeded, null);
     }
 
     handleFailedAuthorization() {
-        ds.fsm.authorizationfailed();
+        ds.fsm.handleEvent(ReadDataEvents.AuthorizationFailed, null);
     }
 
+    // Authorizing -> DataFetching
+    startDataFetching() {
+        ds.state.apiRepository
+            .getRequest("everything", ds.handleFetchedData, ds.handleFetchFailure);
+    }
     handleFetchedData(data) {
-        ds.fsm.datafetchsucceeded(data);
+        ds.fsm.handleEvent(ReadDataEvents.DataFetchSucceeded, data);
+    }
+    handleFetchFailure() {
+        ds.fsm.handleEvent(ReadDataEvents.DataFetchFailed, null);
     }
 
-    handleFetchFailure() {
-        ds.fsm.datafetchfailed();
+    // DataFetching -> SettingOfflineData
+    setOfflineData(data) {
+        localStorage.setItem("data", JSON.stringify(data));
+        ds.fsm.handleEvent(ReadDataEvents.SetOfflineDataSucceeded, null);
     }
+
+    // SettingOfflineData -> GettingOfflineData
+    getOfflineData() {
+        try {
+            var data = localStorage.getItem("data");
+            ds.fsm.handleEvent(ReadDataEvents.GetOfflineDataSucceeded, data);
+        }
+        catch (e) {
+            ds.fsm.handleEvent(ReadDataEvents.GetOfflineDataFailed, null);
+        }
+    }
+
+    returnData(data) {
+        dataResult = data;
+    }
+
+    dataResult = null;
 
     // cache revocation ?
     // sync-button ?
@@ -92,8 +119,9 @@ class DataService extends React.Component {
 
 
     getData() {
-        this.fsm.startgettingdata();
-        //if (!localStorage.getItem('login_is_in_progress'))
+        ds.fsm.handleEvent(ReadDataEvents.StartGettingData, null);
+
+        //myWait(!dataResult)
 
         //{
         //}

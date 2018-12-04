@@ -3,7 +3,6 @@
     constructor() {
         super();
         this.auth0 = new auth0.WebAuth({
-
             redirectUri: window.location.href,
             responseType: 'token id_token',
             scope: 'openid offline_access'
