@@ -8,8 +8,6 @@
             scope: 'openid offline_access'
         });
 
-        //this.auth0.crossOriginAuthentication();
-
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
         this.handleAuthentication = this.handleAuthentication.bind(this);
