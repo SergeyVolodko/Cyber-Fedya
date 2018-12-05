@@ -27,21 +27,10 @@
             {
                 //self.setState({
                 //   isLoaded: true,
-                //   error
                 //})
-                alert(url + " :: " + e.statusText);
                 onFailure();
             }
         });
-
-        //if (!this.state) {
-        //    this.state = {};
-        //}
-        //this.setState({
-        //    isLoaded: true
-        //});
-
-        //return JSON.parse(response);
     }
 
     //dataType: "json",

@@ -15,6 +15,8 @@ var ReadDataEvents = Object.freeze({
     "SetOfflineDataSucceeded": "SetOfflineDataSucceeded",
     "GetOfflineDataSucceeded": "GetOfflineDataSucceeded",
     "AuthorizationFailed": "AuthorizationFailed",
+    "DataFetchFailed": "DataFetchFailed",
+    "GetOfflineDataFailed": "GetOfflineDataFailed",
 
     //"Error": "Error"
 });
@@ -23,14 +25,13 @@ function clearStorage() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('data');
 }
 
 class DataService extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            //vocabulary: [],
-            schemas: [],
             apiRepository: props.apiRepository
         };
         this.getData = this.getData.bind(this);
@@ -44,13 +45,12 @@ class DataService extends React.Component {
             { event: ReadDataEvents.SetOfflineDataSucceeded, from: STATES.SettingOfflineData, to: STATES.GettingOfflineData, successAction: ds.getOfflineData },
             { event: ReadDataEvents.GetOfflineDataSucceeded, from: STATES.GettingOfflineData, to: STATES.OK,                 successAction: ds.returnData },
 
+            { event: ReadDataEvents.DataFetchFailed,         from: STATES.DataFetching,       to: STATES.GettingOfflineData, successAction: ds.getOfflineData },
+            { event: ReadDataEvents.GetOfflineDataFailed,    from: STATES.GettingOfflineData, to: STATES.Error,              successAction: ds.finishFlowWithError },
+
             { event: ReadDataEvents.AuthorizationFailed,     from: STATES.Authorizing,        to: STATES.TokenRevokation,    successAction: ds.reAuthorize },
-                //
                 //{ name: 'RevokationSucceeded', from: STATES.TokenRevoikation, to: STATES.DataFetching },
                 //{ name: 'RevokationFailed', from: STATES.TokenRevokation, to: STATES.GettingOfflineData },
-                
-                //{ name: 'DataFetchFailed', from: STATES.DataFetching, to: STATES.GettingOfflineData },
-                //{ name: 'GetOfflineDataFailed', from: STATES.GettingOfflineData, to: STATES.Error }
             ],
             /*initial state:*/STATES.OK);
     }
@@ -70,7 +70,7 @@ class DataService extends React.Component {
     }
 
     reAuthorize() {
-
+        alert("??");
     }
 
     // Authorizing -> DataFetching
@@ -95,6 +95,7 @@ class DataService extends React.Component {
     getOfflineData() {
         try {
             var data = JSON.parse(localStorage.getItem("data"));
+            if (!data) throw "No local data!";
             ds.fsm.handleEvent(ReadDataEvents.GetOfflineDataSucceeded, data);
         }
         catch (e) {
@@ -106,13 +107,16 @@ class DataService extends React.Component {
         dataResult = data;
     }
 
+    finishFlowWithError() {
+        location.pathname = "/error.html";
+    }
+
     dataResult = null;
 
     // cache revocation ?
     // sync-button ?
     componentDidMount() {
     }
-
 
     getData() {
         ds.fsm.handleEvent(ReadDataEvents.StartGettingData, null);
@@ -135,14 +139,5 @@ class DataService extends React.Component {
         // Mocked:
         var index = this.state.schemas.findIndex(s => { return s.id === id; });
         this.state.schemas.splice(index, 1, schemeToUpdate);
-    }
-
-    getSchemas() {
-        //if (this.state.schemas.length === 0) {
-        //    var data = this.state.apiRepository.getRequest("schemas");
-        //    // why this.setState({schemas: data}) does not work?
-        //    this.state.schemas = data;
-        //}
-        return this.state.schemas;
     }
 }

@@ -15,6 +15,15 @@
         this.forceUpdate();
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        if (nextProps.vocabulary === this.state.vocabulary) {
+            return;
+        }
+        this.setState({
+            vocabulary: nextProps.vocabulary
+        });
+    }
+
     render() {
         var characters = this.state.vocabulary.characters.map((word, i) =>
             <li key={i}>{word}</li>

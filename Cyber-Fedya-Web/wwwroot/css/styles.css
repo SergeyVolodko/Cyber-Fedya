@@ -1,13 +1,13 @@
 ﻿.loading-circle {
     position: absolute;
-    left: 49%;
-    top: 49%;
-    height: 48px;
-    width: 48px;
+    left: 47%;
+    top: 47%;
+    height: 100px;
+    width: 100px;
     border-radius: 50%;
-    border-top: 4px solid blue;
+    border-top: 4px solid #337ab7;
     border-right: 2px solid rgba(0,0,0, 0);
-    border-bottom: 4px solid blue;
+    border-bottom: 4px solid #337ab7;
     border-left: 2px solid rgba(0,0,0, 0);
     z-index: 20050;
 }

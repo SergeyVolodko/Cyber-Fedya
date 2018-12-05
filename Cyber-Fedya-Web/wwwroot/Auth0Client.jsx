@@ -8,6 +8,8 @@
             scope: 'openid offline_access'
         });
 
+        //this.auth0.crossOriginAuthentication();
+
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
         this.handleAuthentication = this.handleAuthentication.bind(this);
@@ -62,20 +64,18 @@
             function(err, result) {
                 if (err) {
                     if (err.error === "invalid_token") {
-                        alert(err);
+                        failureHandler();
                     }
-
                     if (err.error==="login_required") {
                         this.login(successHandler, failureHandler);
                     }
-                    failureHandler();
                     console.log(err);
                 } else {
                     setSession(result);
                     successHandler();
                 }
                 //??
-                location.pathname = "";
+                //location.pathname = "";
             });
     }
 }
