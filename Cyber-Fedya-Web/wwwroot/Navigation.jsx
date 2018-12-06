@@ -24,7 +24,7 @@ class Navigation extends React.Component {
             .then(data => {
                     navigation_instance.setState({
                         vocabulary: data.vocabulary
-                        //,schemas: dataService.getSchemas()
+                        //,schemas: data.Schemas
                     });
                 }
         );
@@ -41,9 +41,14 @@ class Navigation extends React.Component {
                 </ul>
 
                 <div className="tab-content">
-                    <div id="vocabulary" class="tab-pane fade">
+                    <div id="generator" class="tab-pane fade in active">
+                        <JokeGenerator vocabulary={navigation_instance.state.vocabulary} schemas={navigation_instance.state.schemas} />
+                    </div>
+
+                    <div id="vocabulary" className="tab-pane fade">
                         <Vocabulary vocabulary={navigation_instance.state.vocabulary} notifyRefresh={navigation_instance.notifyRefresh} />
                     </div>
+
                     <div id="history" className="tab-pane fade">
                         <FavoriteJokes />
                     </div>
@@ -51,13 +56,9 @@ class Navigation extends React.Component {
             </div>
         );
 
-        //<div id="generator" class="tab-pane fade in active">
-        //    <JokeGenerator vocabulary={navigation_instance.state.vocabulary} schemas={navigation_instance.state.schemas} />
-        //    </div>
-
-
-        //<div id="schemas" class="tab-pane fade" >
+        //<div id="schemas" className="tab-pane fade" >
         //    <Schemas notifyRefresh={navigation_instance.notifyRefresh} schemas={navigation_instance.state.schemas} />
         //    </div>
+
     }
 }

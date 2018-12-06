@@ -45,12 +45,10 @@ class DataService extends React.Component {
             { event: ReadDataEvents.SetOfflineDataSucceeded, from: STATES.SettingOfflineData, to: STATES.GettingOfflineData, successAction: ds.getOfflineData },
             { event: ReadDataEvents.GetOfflineDataSucceeded, from: STATES.GettingOfflineData, to: STATES.OK,                 successAction: ds.returnData },
 
-            { event: ReadDataEvents.DataFetchFailed,         from: STATES.DataFetching,       to: STATES.GettingOfflineData, successAction: ds.getOfflineData },
-            { event: ReadDataEvents.GetOfflineDataFailed,    from: STATES.GettingOfflineData, to: STATES.Error,              successAction: ds.finishFlowWithError },
+            { event: ReadDataEvents.AuthorizationFailed,     from: STATES.Authorizing,        to: STATES.GettingOfflineData, successAction: ds.getOfflineData },
 
-            { event: ReadDataEvents.AuthorizationFailed,     from: STATES.Authorizing,        to: STATES.TokenRevokation,    successAction: ds.reAuthorize },
-                //{ name: 'RevokationSucceeded', from: STATES.TokenRevoikation, to: STATES.DataFetching },
-                //{ name: 'RevokationFailed', from: STATES.TokenRevokation, to: STATES.GettingOfflineData },
+            { event: ReadDataEvents.DataFetchFailed,         from: STATES.DataFetching,       to: STATES.GettingOfflineData, successAction: ds.getOfflineData },
+            { event: ReadDataEvents.GetOfflineDataFailed,    from: STATES.GettingOfflineData, to: STATES.Error,              successAction: ds.finishFlowWithError }
             ],
             /*initial state:*/STATES.OK);
     }

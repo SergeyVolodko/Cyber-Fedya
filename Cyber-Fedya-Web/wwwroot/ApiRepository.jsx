@@ -9,7 +9,7 @@
     }
 
     getRequest(url, onSuccess, onFailure) {
-        var token = localStorage.getItem('id_token');
+        var token = localStorage.getItem('access_token');
 
         $.ajax({
             type: "GET",

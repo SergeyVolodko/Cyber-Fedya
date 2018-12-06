@@ -1,8 +1,15 @@
 ﻿class Auth0Client extends React.Component {
 
+
+    // It is crucial to specify in Auth0
+    // Both Allowed Callback URLs and Allowed Web Origins
+    // with the host url
+    // To make work both the login and the token revokation
     constructor() {
         super();
         this.auth0 = new auth0.WebAuth({
+            domain: 'my-test-api.eu.auth0.com',
+            clientID: 'QvuPHcXRhZwV1QzmjXz1uFrKUg33fmkr',
             redirectUri: window.location.href,
             responseType: 'token id_token',
             scope: 'openid offline_access'
@@ -32,10 +39,11 @@
 
     setSession(authResult) {
         // Set the time that the Access Token will expire at
-        let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+        var expiresAt = JSON.stringify((authResult.expiresIn/* * 1000*/) + new Date().getTime());
         // accessToken and idToken are mismatched in the response!
-        localStorage.setItem('access_token', authResult.accessToken);
-        localStorage.setItem('id_token', authResult.idToken);
+        //localStorage.setItem('access_token', authResult.accessToken);
+        localStorage.setItem('access_token', authResult.idToken);
+        localStorage.setItem('id_token', authResult.accessToken);
         localStorage.setItem('expires_at', expiresAt);
     }
 
@@ -49,7 +57,7 @@
     isAuthenticated() {
         // Check whether the current time is past the 
         // Access Token's expiry time
-        let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+        var expiresAt = JSON.parse(localStorage.getItem('expires_at'));
         return new Date().getTime() < expiresAt;
     }
 
@@ -58,22 +66,20 @@
     }
 
     revokeToken(successHandler, failureHandler) {
-        this.auth0.renewAuth({},
+        this.auth0.checkSession({},
             function(err, result) {
                 if (err) {
-                    if (err.error === "invalid_token") {
-                        failureHandler();
-                    }
                     if (err.error==="login_required") {
                         this.login(successHandler, failureHandler);
                     }
+                    failureHandler();
                     console.log(err);
                 } else {
-                    setSession(result);
+                    authorizationClient.setSession(result);
                     successHandler();
                 }
-                //??
-                //location.pathname = "";
             });
     }
 }
+
+var authorizationClient = new Auth0Client();

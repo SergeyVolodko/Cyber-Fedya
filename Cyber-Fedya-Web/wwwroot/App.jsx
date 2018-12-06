@@ -6,7 +6,7 @@
     "<Место>"
 ];
 
-var dataService = new DataService({ apiRepository: new ApiRepository({ baseUrl: "http://localhost:40384/api/" }) });
+var dataService = new DataService({ apiRepository: new ApiRepository({ baseUrl: "http://localhost:40385/api/" }) });
 
 class App extends React.Component{
     constructor() {

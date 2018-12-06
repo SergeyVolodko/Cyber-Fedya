@@ -1,6 +1,4 @@
-﻿var authorizationClient = new Auth0Client();
-
-class AuthorizationService extends React.Component {
+﻿class AuthorizationService extends React.Component {
     constructor() {
         super();
 
@@ -12,7 +10,7 @@ class AuthorizationService extends React.Component {
             successHandler();
             return;
         }
-        if (!localStorage.getItem('id_token')) {
+        if (!localStorage.getItem('access_token')) {
             authorizationClient.login();
         } else {
             authorizationClient.revokeToken(successHandler, failureHandler);
