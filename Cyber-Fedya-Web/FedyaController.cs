@@ -29,12 +29,13 @@ namespace Cyber_Fedya_Web
 			};
 		}
 
-		//[HttpPost]
-		//[Route("vocabulary")]
-		//public HttpResponseMessage AddWord(NewWordDto dto)
-		//{
-		//	return new HttpResponseMessage(HttpStatusCode.BadRequest);
-		//}
+		[HttpPost]
+		[Authorize]
+		[Route("vocabulary")]
+		public HttpResponseMessage AddWord([FromBody]NewWordDto dto)
+		{
+			return new HttpResponseMessage(HttpStatusCode.BadRequest);
+		}
 
 		//[HttpGet]
 		//[Route("schemas")]

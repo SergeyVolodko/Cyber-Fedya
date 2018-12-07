@@ -1,4 +1,4 @@
-﻿var STATES = Object.freeze({
+﻿var StatesRead = Object.freeze({
     "OK": "OK",
     "Authorizing": "Authorizing",
     "DataFetching": "DataFetching",
@@ -19,14 +19,7 @@ var ReadDataEvents = Object.freeze({
     "GetOfflineDataFailed": "GetOfflineDataFailed"
 });
 
-function clearStorage() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    localStorage.removeItem('data');
-}
-
-class DataService extends React.Component {
+class DataReadService extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,18 +30,18 @@ class DataService extends React.Component {
         ds = this;
 
         this.fsm = new StateMachine([
-            { event: ReadDataEvents.StartGettingData,        from: STATES.OK,                 to: STATES.Authorizing,        successAction: ds.startAuthorization },
-            { event: ReadDataEvents.AuthorizationSucceeded,  from: STATES.Authorizing,        to: STATES.DataFetching,       successAction: ds.startDataFetching },
-            { event: ReadDataEvents.DataFetchSucceeded,      from: STATES.DataFetching,       to: STATES.SettingOfflineData, successAction: ds.setOfflineData },
-            { event: ReadDataEvents.SetOfflineDataSucceeded, from: STATES.SettingOfflineData, to: STATES.GettingOfflineData, successAction: ds.getOfflineData },
-            { event: ReadDataEvents.GetOfflineDataSucceeded, from: STATES.GettingOfflineData, to: STATES.OK,                 successAction: ds.returnData },
+            { event: ReadDataEvents.StartGettingData,        from: StatesRead.OK,                 to: StatesRead.Authorizing,        successAction: ds.startAuthorization },
+            { event: ReadDataEvents.AuthorizationSucceeded,  from: StatesRead.Authorizing,        to: StatesRead.DataFetching,       successAction: ds.startDataFetching },
+            { event: ReadDataEvents.DataFetchSucceeded,      from: StatesRead.DataFetching,       to: StatesRead.SettingOfflineData, successAction: ds.setOfflineData },
+            { event: ReadDataEvents.SetOfflineDataSucceeded, from: StatesRead.SettingOfflineData, to: StatesRead.GettingOfflineData, successAction: ds.getOfflineData },
+            { event: ReadDataEvents.GetOfflineDataSucceeded, from: StatesRead.GettingOfflineData, to: StatesRead.OK,                 successAction: ds.returnData },
 
-            { event: ReadDataEvents.AuthorizationFailed,     from: STATES.Authorizing,        to: STATES.GettingOfflineData, successAction: ds.getOfflineData },
+            { event: ReadDataEvents.AuthorizationFailed,     from: StatesRead.Authorizing,        to: StatesRead.GettingOfflineData, successAction: ds.getOfflineData },
 
-            { event: ReadDataEvents.DataFetchFailed,         from: STATES.DataFetching,       to: STATES.GettingOfflineData, successAction: ds.getOfflineData },
-            { event: ReadDataEvents.GetOfflineDataFailed,    from: STATES.GettingOfflineData, to: STATES.Error,              successAction: ds.finishFlowWithError }
+            { event: ReadDataEvents.DataFetchFailed,         from: StatesRead.DataFetching,       to: StatesRead.GettingOfflineData, successAction: ds.getOfflineData },
+            { event: ReadDataEvents.GetOfflineDataFailed,    from: StatesRead.GettingOfflineData, to: StatesRead.Error,              successAction: ds.finishFlowWithError }
             ],
-            /*initial state:*/STATES.OK);
+            /*initial state:*/StatesRead.OK);
     }
 
     // OK -> Authorizing
@@ -109,31 +102,11 @@ class DataService extends React.Component {
 
     dataResult = null;
 
-    // cache revocation ?
-    // sync-button ?
-    componentDidMount() {
-    }
-
+    // Public methods:
     getData() {
         ds.fsm.handleEvent(ReadDataEvents.StartGettingData, null);
 
-        return waitFor(_ => this.fsm.state === STATES.OK)
+        return waitFor(_ => this.fsm.state === StatesRead.OK)
             .then(_ => dataResult);
-    }
-
-    addToVocabulary(wordInput) {
-        // Mocked:
-        this.state.vocabulary[wordInput.type].push(wordInput.word);
-    }
-
-    createScheme(newScheme) {
-        // Mocked:
-        this.state.schemas.push(newScheme);
-    }
-
-    updateScheme(id, schemeToUpdate) {
-        // Mocked:
-        var index = this.state.schemas.findIndex(s => { return s.id === id; });
-        this.state.schemas.splice(index, 1, schemeToUpdate);
     }
 }

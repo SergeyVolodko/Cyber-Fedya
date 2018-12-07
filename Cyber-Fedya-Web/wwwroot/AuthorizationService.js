@@ -17,5 +17,3 @@
         }
     }
 }
-
-var authorizationService = new AuthorizationService();

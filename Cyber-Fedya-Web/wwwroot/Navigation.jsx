@@ -20,7 +20,7 @@ class Navigation extends React.Component {
     }
 
     componentDidMount() {
-        dataService.getData()
+        dataReadService.getData()
             .then(data => {
                     navigation_instance.setState({
                         vocabulary: data.vocabulary,

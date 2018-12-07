@@ -63,7 +63,7 @@ class Schemas extends React.Component{
     }
 
     createSelectedScheme() {
-        dataService.createScheme(shemas_instance.state.selected_scheme);
+        dataWriteService.createScheme(shemas_instance.state.selected_scheme);
         shemas_instance.state.notifyRefresh();
     }
 
@@ -72,7 +72,7 @@ class Schemas extends React.Component{
             ? shemas_instance.state.selected_scheme.id
             : shemas_instance.state.selected_scheme.base_id;
         shemas_instance.state.selected_scheme.id = id;
-        dataService.updateScheme(id, shemas_instance.state.selected_scheme);
+        dataWriteService.updateScheme(id, shemas_instance.state.selected_scheme);
 
         shemas_instance.state.notifyRefresh();
     }

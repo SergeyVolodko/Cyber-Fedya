@@ -6,7 +6,12 @@
     "<Место>"
 ];
 
-var dataService = new DataService({ apiRepository: new ApiRepository({ baseUrl: "http://localhost:40385/api/" }) });
+// Registrations
+var authorizationService = new AuthorizationService();
+var apiRepo = new ApiRepository({ baseUrl: "http://localhost:40385/api/" });
+var dataReadService = new DataReadService({ apiRepository: apiRepo });
+var dataWriteService = new DataWriteService({ apiRepository: apiRepo });
+// Registrations
 
 class App extends React.Component{
     constructor() {

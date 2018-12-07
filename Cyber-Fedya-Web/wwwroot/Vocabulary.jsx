@@ -10,7 +10,7 @@
     }
 
     addNoun(word) {
-        //dataService.addToVocabulary({ type: "nouns", word: word });
+        dataWriteService.addToVocabulary({ type: "nouns", word: word });
         this.state.notifyRefresh();
         this.forceUpdate();
     }
