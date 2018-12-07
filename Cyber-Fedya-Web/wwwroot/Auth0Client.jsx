@@ -1,6 +1,4 @@
 ﻿class Auth0Client extends React.Component {
-
-
     // It is crucial to specify in Auth0
     // Both Allowed Callback URLs and Allowed Web Origins
     // with the host url
@@ -8,8 +6,6 @@
     constructor() {
         super();
         this.auth0 = new auth0.WebAuth({
-            domain: 'my-test-api.eu.auth0.com',
-            clientID: 'QvuPHcXRhZwV1QzmjXz1uFrKUg33fmkr',
             redirectUri: window.location.href,
             responseType: 'token id_token',
             scope: 'openid offline_access'
@@ -30,7 +26,6 @@
                 location.pathname = "";
             } else if (err) {
                 location.pathname = "";
-                //location.pathname = "/error.html";
                 console.log(err);
             }
             localStorage.setItem("is_authentication_handled", true);
@@ -41,7 +36,6 @@
         // Set the time that the Access Token will expire at
         var expiresAt = JSON.stringify((authResult.expiresIn/* * 1000*/) + new Date().getTime());
         // accessToken and idToken are mismatched in the response!
-        //localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('access_token', authResult.idToken);
         localStorage.setItem('id_token', authResult.accessToken);
         localStorage.setItem('expires_at', expiresAt);
@@ -70,7 +64,7 @@
             function(err, result) {
                 if (err) {
                     if (err.error==="login_required") {
-                        this.login(successHandler, failureHandler);
+                        this.login();
                     }
                     failureHandler();
                     console.log(err);

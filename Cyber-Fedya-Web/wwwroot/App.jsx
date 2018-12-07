@@ -15,7 +15,7 @@ class App extends React.Component{
 
         this.mainComponent = "";
 
-        myWait(!localStorage.getItem("is_authentication_handled"), this.setMainComponent);
+        waitForAuthorization(!localStorage.getItem("is_authentication_handled"), this.setMainComponent);
         localStorage.removeItem("is_authentication_handled");
         app_this = this;
 
@@ -27,9 +27,6 @@ class App extends React.Component{
                 </div>)
         };
     }
-    //componentDidMount() {
-        
-    //}
 
     setMainComponent() {
         var mainComponent = app_this.state.mainComponent;
@@ -39,16 +36,11 @@ class App extends React.Component{
         case "/":
             mainComponent = <Navigation />;
             break;
-        //case "/auth_callback":
-        //    this.mainComponent = <AuthCallback/>;
-        //    break;
         default:
             mainComponent = <NotFound />;
         }
 
         app_this.setState({ mainComponent });
-
-        //app_this.forceUpdate();
     }
 
     render() {

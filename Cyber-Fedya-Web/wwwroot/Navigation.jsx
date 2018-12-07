@@ -1,4 +1,4 @@
-﻿var emptyVocabulary = { nouns: [], adjectives: [], verbs: [], characters: [], places: [] };
+﻿const emptyVocabulary = { nouns: [], adjectives: [], verbs: [], characters: [], places: [] };
 
 class Navigation extends React.Component {
 
@@ -23,8 +23,8 @@ class Navigation extends React.Component {
         dataService.getData()
             .then(data => {
                     navigation_instance.setState({
-                        vocabulary: data.vocabulary
-                        //,schemas: data.Schemas
+                        vocabulary: data.vocabulary,
+                        schemas: data.Schemas
                     });
                 }
         );
@@ -41,8 +41,12 @@ class Navigation extends React.Component {
                 </ul>
 
                 <div className="tab-content">
-                    <div id="generator" class="tab-pane fade in active">
+                    <div id="generator" className="tab-pane fade in active">
                         <JokeGenerator vocabulary={navigation_instance.state.vocabulary} schemas={navigation_instance.state.schemas} />
+                    </div>
+
+                    <div id="schemas" className="tab-pane fade" >
+                        <Schemas notifyRefresh={navigation_instance.notifyRefresh} schemas={navigation_instance.state.schemas} />
                     </div>
 
                     <div id="vocabulary" className="tab-pane fade">
@@ -55,10 +59,5 @@ class Navigation extends React.Component {
                 </div>
             </div>
         );
-
-        //<div id="schemas" className="tab-pane fade" >
-        //    <Schemas notifyRefresh={navigation_instance.notifyRefresh} schemas={navigation_instance.state.schemas} />
-        //    </div>
-
     }
 }

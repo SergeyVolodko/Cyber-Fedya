@@ -1,4 +1,7 @@
-﻿// Caches
+﻿// From example: https://github.com/altrusl/habr-pwa/blob/master/hello-habr/sw.js
+// Of this article: https://habr.com/post/419585/
+
+// Caches
 var CURRENT_CACHES = {
     font: 'font-cache-v1',
     css: 'css-cache-v1',

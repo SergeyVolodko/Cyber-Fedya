@@ -16,9 +16,7 @@ var ReadDataEvents = Object.freeze({
     "GetOfflineDataSucceeded": "GetOfflineDataSucceeded",
     "AuthorizationFailed": "AuthorizationFailed",
     "DataFetchFailed": "DataFetchFailed",
-    "GetOfflineDataFailed": "GetOfflineDataFailed",
-
-    //"Error": "Error"
+    "GetOfflineDataFailed": "GetOfflineDataFailed"
 });
 
 function clearStorage() {

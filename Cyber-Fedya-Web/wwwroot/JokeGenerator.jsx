@@ -52,29 +52,29 @@
         return (
             <div>
                 <h3>Лэтc гоу - поехали!</h3>
-                <div class="scheme-selector">
+                <div className="scheme-selector">
                     <select id="joke-generator-schemas-select">
                         {this.state.schemas.map((item) => <option key={item.id}>{item.name}</option>, this)}
                     </select>
                 </div>
 
-                <textarea class="form-control generated-joke-text" id="joke" rows="10" value={this.state.joke}></textarea>
-                <div class="row">
-                    <div class="col-xs-2">
+                <textarea className="form-control generated-joke-text" id="joke" rows="10" value={this.state.joke}></textarea>
+                <div className="row">
+                    <div className="col-xs-2">
                         <button type="button"
-                            class="btn btn-secondary btn-lg generator-button"
+                                className="btn btn-secondary btn-lg generator-button"
                             disabled={!joke_generator_instance.state.previousJoke}
-                            onClick={() => this.returnPreviousJoke()}><i class="fa fa-backward" /></button>
+                            onClick={() => this.returnPreviousJoke()}><i className="fa fa-backward" /></button>
                     </div>
-                    <div class="col-xs-8">
+                    <div className="col-xs-8">
                         <button type="button"
-                            class="btn btn-primary btn-lg generator-button"
+                                className="btn btn-primary btn-lg generator-button"
                             onClick={() => this.generateJoke()}>
                             <h2>Ещё!</h2>
                         </button>
                     </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-success btn-lg generator-button"><i class="fa fa-save"></i></button>
+                    <div className="col-xs-2">
+                        <button type="button" className="btn btn-success btn-lg generator-button"><i className="fa fa-save"></i></button>
                     </div>
                 </div>
             </div>

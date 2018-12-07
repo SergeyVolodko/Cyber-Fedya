@@ -8,7 +8,7 @@ namespace Cyber_Fedya_Web.Domain
 		public int OrderNumber { get; set; }
 	}
 
-	public class SchemaDto
+	public class Scheme
 	{
 		public string Id { get; set; }
 		public string Name { get; set; }

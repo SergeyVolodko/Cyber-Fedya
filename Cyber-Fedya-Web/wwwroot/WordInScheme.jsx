@@ -24,23 +24,23 @@ class WordInScheme extends React.Component{
             <option key={index}>{wordType}</option>, this);
 
         return(
-        <div class="word-in-scheme-container">
-            <div class="word-type-selector">
-                <button class="btn word-in-scheme-arrow-button"
+            <div className="word-in-scheme-container">
+                <div className="word-type-selector">
+                    <button className="btn word-in-scheme-arrow-button"
                         onClick={() => this.state.moveUp(this.state.currentWord)}>
-                    <i class="fa fa-arrow-up btn-symbol"></i>
+                        <i className="fa fa-arrow-up btn-symbol"></i>
                 </button>
-                <button class="btn word-in-scheme-arrow-button"
+                    <button className="btn word-in-scheme-arrow-button"
                         onClick={() => this.state.moveDown(this.state.currentWord)}>
-                    <i class="fa fa-arrow-down btn-symbol"></i>
+                        <i className="fa fa-arrow-down btn-symbol"></i>
                 </button>
                 <select id={this.state.id}
                         title={this.state.currentWord.text}>
                     {wordOptions}
                 </select>
-                    <button class="btn word-in-scheme-arrow-button btn-danger"
+                    <button className="btn word-in-scheme-arrow-button btn-danger"
                         onClick={() => this.state.delete(this.state.currentWord)}>
-                    <i class="fa fa-times btn-symbol"></i>
+                        <i className="fa fa-times btn-symbol"></i>
                 </button>
             </div>
         </div>);

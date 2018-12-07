@@ -19,10 +19,10 @@ function select2CreateTag(params) {
     }
 }
 
-function myWait(continuationCondition, onFinish) {
+function waitForAuthorization(continuationCondition, onFinish) {
     setTimeout(function () {
         if (continuationCondition) {
-            myWait(!localStorage.getItem("is_authentication_handled"), onFinish);
+            waitForAuthorization(!localStorage.getItem("is_authentication_handled"), onFinish);
         } else {
             onFinish();
         }

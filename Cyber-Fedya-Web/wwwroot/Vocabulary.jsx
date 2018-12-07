@@ -15,7 +15,7 @@
         this.forceUpdate();
     }
 
-    componentWillUpdate(nextProps, nextState) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.vocabulary === this.state.vocabulary) {
             return;
         }
