@@ -14,6 +14,15 @@ class Navigation extends React.Component {
     }
 
     notifyRefresh() {
+        dataReadService.getData()
+            .then(data => {
+                    navigation_instance.setState({
+                        vocabulary: data.vocabulary,
+                        schemas: data.schemas
+                    });
+                }
+        );
+
         navigation_instance.setState({
             // Can't it be implemented without setState here?
         });
@@ -24,7 +33,7 @@ class Navigation extends React.Component {
             .then(data => {
                     navigation_instance.setState({
                         vocabulary: data.vocabulary,
-                        schemas: data.Schemas
+                        schemas: data.schemas
                     });
                 }
         );

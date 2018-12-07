@@ -17,6 +17,7 @@ namespace Cyber_Fedya_Web
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			services.AddTransient<IVocabularyRepository, VocabularyRepository>();
+			services.AddTransient<ISchemeRepository, SchemeRepository>();
 
 			services.AddAuthentication(options =>
 			{

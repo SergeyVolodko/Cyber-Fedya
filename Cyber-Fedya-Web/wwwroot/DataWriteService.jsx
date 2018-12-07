@@ -120,25 +120,25 @@ class DataWriteService extends React.Component {
     componentDidMount() {
     }
 
-    createScheme(newScheme) {
-        // Mocked:
-        this.state.schemas.push(newScheme);
-    }
-
     dataToSend = null;
+
+    createScheme(newScheme) {
+        dataToSend = { type: 'create', entity: 'schemes', body: newScheme }
+
+        dsw.fsm.handleEvent(WriteDataEvents.StartSendingData, null);
+
+        return waitFor(_ => this.fsm.state === StatesWrite.OK)
+            .then(_ => 201);
+    }
 
     addToVocabulary(wordInput) {
         dataToSend = { type: 'create', entity: 'vocabulary', body: wordInput }
 
         dsw.fsm.handleEvent(WriteDataEvents.StartSendingData, null);
 
-        waitFor(_ => this.fsm.state === StatesWrite.OK)
-            .then(_ => dataResult);
-
-        //this.state.vocabulary[wordInput.type].push(wordInput.word);
+        return waitFor(_ => this.fsm.state === StatesWrite.OK)
+            .then(_ => 201);
     }
-
-
 
     updateScheme(id, schemeToUpdate) {
         // Mocked:

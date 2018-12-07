@@ -1,0 +1,16 @@
+﻿{
+  "Id": "1",
+  "Name": "Схема Баскова",
+  "Words": [
+    { "Text": "У", "OrderNumber": 0 },
+    { "Text": "<Персонаж>", "OrderNumber": 1 },
+    { "Text": "такой", "OrderNumber": 2 },
+    { "Text": "<Прилагательное>", "OrderNumber": 3 },
+    { "Text": "<Существительное>", "OrderNumber": 4 },
+    { "Text": "что он", "OrderNumber": 5 },
+    { "Text": "<Глагол>", "OrderNumber": 6 },
+    { "Text": "в", "OrderNumber": 7 },
+    { "Text": "<Прилагательное>", "OrderNumber": 8 },
+    { "Text": "<Существительное>", "OrderNumber": 9 }
+  ] 
+}

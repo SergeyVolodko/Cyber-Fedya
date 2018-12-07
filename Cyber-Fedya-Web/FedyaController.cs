@@ -11,10 +11,14 @@ namespace Cyber_Fedya_Web
 	public class FedyaController : Controller
 	{
 		private readonly IVocabularyRepository vocabularyRepository;
+		private readonly ISchemeRepository schemeRepository;
 
-		public FedyaController(IVocabularyRepository vocabularyRepository)
+		public FedyaController(
+			IVocabularyRepository vocabularyRepository,
+			ISchemeRepository schemeRepository)
 		{
 			this.vocabularyRepository = vocabularyRepository;
+			this.schemeRepository = schemeRepository;
 		}
 
 		[HttpGet]
@@ -25,60 +29,30 @@ namespace Cyber_Fedya_Web
 			return new DataAggregate
 			{
 				Vocabulary = vocabularyRepository.Load(),
-				Schemas = new List<Scheme>()
+				Schemas = schemeRepository.LoadAll()
 			};
 		}
 
 		[HttpPost]
 		[Authorize]
 		[Route("vocabulary")]
-		public HttpResponseMessage AddWord([FromBody]NewWordDto dto)
+		public HttpResponseMessage AddWord(
+			[FromBody]NewWord newWord)
 		{
 			return new HttpResponseMessage(HttpStatusCode.BadRequest);
 		}
 
-		//[HttpGet]
-		//[Route("schemas")]
-		//public IList<Scheme> GetSchemas()
-		//{
-		//	return new List<Scheme>
-		//	{
-		//		new Scheme
-		//		{
-		//			Id = "1",
-		//			Name = "Персонаж",
-		//			Words = new List<WordInScheme>{ new WordInScheme
-		//			{
-		//				Text = "<Персонаж>",
-		//				OrderNumber = 1
-		//			}}
-		//		},
-		//		new Scheme
-		//		{
-		//			Id = "2",
-		//			Name = "777",
-		//			Words = new List<WordInScheme>{
-		//				new WordInScheme { Text = "У", OrderNumber = 0 },
-		//				new WordInScheme { Text = "<Персонаж>", OrderNumber = 1 },
-		//				new WordInScheme { Text = "такой", OrderNumber = 2 },
-		//				new WordInScheme { Text = "<Прилагательное>", OrderNumber = 3 },
-		//				new WordInScheme { Text = "<Существительное>", OrderNumber = 4 },
-		//				new WordInScheme { Text = "что он", OrderNumber = 5 },
-		//				new WordInScheme { Text = "<Глагол>", OrderNumber = 6 },
-		//				new WordInScheme { Text = "в", OrderNumber = 7 },
-		//				new WordInScheme { Text = "<Прилагательное>", OrderNumber = 8 },
-		//				new WordInScheme { Text = "<Существительное>", OrderNumber = 9 }
-		//			}
-		//		},
-		//	};
-		//}
+		[HttpPost]
+		[Authorize]
+		[Route("schemes")]
+		public HttpResponseMessage CreateScheme(
+			[FromBody]Scheme scheme)
+		{
+			schemeRepository.Create(scheme);
+			return new HttpResponseMessage(HttpStatusCode.Created);
+		}
 
-		//[HttpPost]
-		//[Route("schemas")]
-		//public HttpResponseMessage CreateScheme(Scheme dto)
-		//{
-		//	return new HttpResponseMessage(HttpStatusCode.BadRequest);
-		//}
+
 
 		//[HttpPost]
 		//[Route("sentenses")]
