@@ -1,19 +1,32 @@
 ﻿class FavoriteJokes extends React.Component{
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            selectedProvince: ""
+            jokes: props.jokes
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.jokes === this.state.jokes) {
+            return;
+        }
+        this.setState({
+            jokes: nextProps.jokes
+        });
+    }
+
     render() {
+        var jokes = this.state.jokes.map((joke, i) =>
+            <li className="list-group-item stored-joke">{joke}</li>
+            , this
+        );
+
         return (
             <div>
                 <h3>Сохранённые шедевры</h3>
                 <ul className="list-group">
-                    <li className="list-group-item stored-joke">У Баскова такой сильный голос, что он может петь в открытый шланг</li>
-                    <li className="list-group-item stored-joke">Фрикаделька - это пильмень-нудист</li>
+                    {jokes}
                 </ul>
             </div>
         );

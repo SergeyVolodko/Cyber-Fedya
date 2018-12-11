@@ -12,13 +12,16 @@ namespace Cyber_Fedya_Web
 	{
 		private readonly IVocabularyRepository vocabularyRepository;
 		private readonly ISchemeRepository schemeRepository;
+		private readonly IJokeRepository jokeRepository;
 
 		public FedyaController(
 			IVocabularyRepository vocabularyRepository,
-			ISchemeRepository schemeRepository)
+			ISchemeRepository schemeRepository,
+			IJokeRepository jokeRepository)
 		{
 			this.vocabularyRepository = vocabularyRepository;
 			this.schemeRepository = schemeRepository;
+			this.jokeRepository = jokeRepository;
 		}
 
 		[HttpGet]
@@ -29,7 +32,8 @@ namespace Cyber_Fedya_Web
 			return new DataAggregate
 			{
 				Vocabulary = vocabularyRepository.Load(),
-				Schemas = schemeRepository.LoadAll()
+				Schemas = schemeRepository.LoadAll(),
+				Jokes = jokeRepository.LoadAll()
 			};
 		}
 

@@ -22,9 +22,9 @@ class App extends React.Component{
 
         waitForAuthorization(!localStorage.getItem("is_authentication_handled"), this.setMainComponent);
         localStorage.removeItem("is_authentication_handled");
-        app_this = this;
+        app_instance = this;
 
-        app_this.state = {
+        app_instance.state = {
             mainComponent: (
                 <div>
                     <h1>Authorizing...</h1>
@@ -34,7 +34,7 @@ class App extends React.Component{
     }
 
     setMainComponent() {
-        var mainComponent = app_this.state.mainComponent;
+        var mainComponent = app_instance.state.mainComponent;
 
         switch (location.pathname) {
         case "":
@@ -45,13 +45,13 @@ class App extends React.Component{
             mainComponent = <NotFound />;
         }
 
-        app_this.setState({ mainComponent });
+        app_instance.setState({ mainComponent });
     }
 
     render() {
         return (
             <div>
-                {app_this.state.mainComponent}
+                {app_instance.state.mainComponent}
             </div>);
 
         //<div>

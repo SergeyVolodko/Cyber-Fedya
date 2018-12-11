@@ -9,7 +9,7 @@
             dictinary = vocabulary.characters;
             break;
         case "<Прилагательное>":
-            dictinary = vocabulary.adjctives;
+            dictinary = vocabulary.adjectives;
             break;
         case "<Глагол>":
             dictinary = vocabulary.verbs;
@@ -17,9 +17,9 @@
         case "<Место>":
             dictinary = vocabulary.places;
             break;
-        
+
         default:
-            return word;
+           return word;
     }
 
     var index = Math.floor(Math.random() * dictinary.length);

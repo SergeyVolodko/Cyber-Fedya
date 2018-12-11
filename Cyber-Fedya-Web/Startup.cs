@@ -18,6 +18,7 @@ namespace Cyber_Fedya_Web
 
 			services.AddTransient<IVocabularyRepository, VocabularyRepository>();
 			services.AddTransient<ISchemeRepository, SchemeRepository>();
+			services.AddTransient<IJokeRepository, JokeRepository>();
 
 			services.AddAuthentication(options =>
 			{

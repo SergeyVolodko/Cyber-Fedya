@@ -25,7 +25,19 @@
     }
 
     componentWillReceiveProps(nextProps) {
-        // Handle deletion of selected scheme
+        if (nextProps.schemas === joke_generator_instance.state.schemas
+            && nextProps.vocabulary === joke_generator_instance.state.vocabulary) {
+            return;
+        }
+        joke_generator_instance.setState({
+            schemas: nextProps.schemas,
+            vocabulary: nextProps.vocabulary
+        });
+
+        // Later handle the deletion of a selected scheme
+    }
+
+    saveJoke() {
     }
 
     generateJoke() {
@@ -62,19 +74,22 @@
                 <div className="row">
                     <div className="col-xs-2">
                         <button type="button"
-                                className="btn btn-secondary btn-lg generator-button"
+                            className="btn btn-secondary btn-lg generator-button"
                             disabled={!joke_generator_instance.state.previousJoke}
                             onClick={() => this.returnPreviousJoke()}><i className="fa fa-backward" /></button>
                     </div>
                     <div className="col-xs-8">
                         <button type="button"
-                                className="btn btn-primary btn-lg generator-button"
+                            className="btn btn-primary btn-lg generator-button"
                             onClick={() => this.generateJoke()}>
                             <h2>Ещё!</h2>
                         </button>
                     </div>
                     <div className="col-xs-2">
-                        <button type="button" className="btn btn-success btn-lg generator-button"><i className="fa fa-save"></i></button>
+                        <button type="button" className="btn btn-success btn-lg generator-button"
+                                onClick={() => this.saveJoke()}>
+                            <i className="fa fa-save"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -86,6 +101,10 @@
     }
 
     componentDidUpdate(prevProps, prevState) {
+        if (prevState.schemas == joke_generator_instance.state.schemas
+            && prevState.vocabulary == joke_generator_instance.state.vocabulary) {
+            return;
+        }
         joke_generator_instance.initSelect();
     }
 

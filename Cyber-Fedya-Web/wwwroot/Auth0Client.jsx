@@ -60,11 +60,11 @@
     }
 
     revokeToken(successHandler, failureHandler) {
-        this.auth0.checkSession({},
+        authorizationClient.auth0.checkSession({},
             function(err, result) {
                 if (err) {
                     if (err.error==="login_required") {
-                        this.login();
+                        authorizationClient.login();
                     }
                     failureHandler();
                     console.log(err);
