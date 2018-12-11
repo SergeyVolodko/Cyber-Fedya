@@ -58,10 +58,6 @@ class DataReadService extends React.Component {
         ds.fsm.handleEvent(ReadDataEvents.AuthorizationFailed, null);
     }
 
-    reAuthorize() {
-        alert("??");
-    }
-
     // Authorizing -> DataFetching
     startDataFetching() {
         ds.state.apiRepository

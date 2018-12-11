@@ -31,6 +31,15 @@
         var nouns = this.state.vocabulary.nouns.map((word, i) =>
             <li key={i}>{word}</li>
         );
+        var adjectives = this.state.vocabulary.adjectives.map((word, i) =>
+            <li key={i}>{word}</li>
+        );
+        var verbs = this.state.vocabulary.verbs.map((word, i) =>
+            <li key={i}>{word}</li>
+        );
+        var places = this.state.vocabulary.places.map((word, i) =>
+            <li key={i}>{word}</li>
+        );
 
         return (
             <div>
@@ -54,12 +63,15 @@
                     </div>
                     <div id="adjectives" className="tab-pane fade">
                         <button type="button" className="btn btn-success btn-lg"><i className="fa fa-plus"></i></button>
+                        <ul>{adjectives}</ul>
                     </div>
                     <div id="verbs" className="tab-pane fade">
                         <button type="button" className="btn btn-success btn-lg"><i className="fa fa-plus"></i></button>
+                        <ul>{verbs}</ul>
                     </div>
                     <div id="places" className="tab-pane fade">
                         <button type="button" className="btn btn-success btn-lg"><i className="fa fa-plus"></i></button>
+                        <ul>{places}</ul>
                     </div>
                 </div>
             </div>

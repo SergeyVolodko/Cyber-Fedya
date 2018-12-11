@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using Cyber_Fedya_Web.Domain;
 using Microsoft.AspNetCore.Authorization;
