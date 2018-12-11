@@ -39,6 +39,8 @@ class DataWriteService extends React.Component {
 
         this.addToVocabulary = this.addToVocabulary.bind(this);
         this.addNewJoke = this.addNewJoke.bind(this);
+        this.createScheme = this.createScheme.bind(this);
+        this.updateScheme = this.updateScheme.bind(this);
 
         dsw = this;
 
@@ -80,7 +82,7 @@ class DataWriteService extends React.Component {
         }
         else if (dataToSend.type === 'update') {
             dsw.state.apiRepository
-                .putRequest(dataToSend.entity, dataToSend.body, dsw.handleSentData, dsw.handleSendFailure);
+                .putRequest(dataToSend.entity, dataToSend.id, dataToSend.body, dsw.handleSentData, dsw.handleSendFailure);
         }
     }
     handleSentData(data) {
@@ -132,6 +134,15 @@ class DataWriteService extends React.Component {
             .then(_ => 201);
     }
 
+    updateScheme(id, schemeToUpdate) {
+        dataToSend = { type: 'update', entity: 'schemes', body: schemeToUpdate, id: id }
+
+        dsw.fsm.handleEvent(WriteDataEvents.StartSendingData, null);
+
+        return waitFor(_ => this.fsm.state === StatesWrite.OK)
+            .then(_ => 201);
+    }
+
     addToVocabulary(wordInput) {
         dataToSend = { type: 'create', entity: 'vocabulary', body: wordInput }
 
@@ -148,11 +159,5 @@ class DataWriteService extends React.Component {
 
         return waitFor(_ => this.fsm.state === StatesWrite.OK)
             .then(_ => 201);
-    }
-
-    updateScheme(id, schemeToUpdate) {
-        // Mocked:
-        var index = this.state.schemas.findIndex(s => { return s.id === id; });
-        this.state.schemas.splice(index, 1, schemeToUpdate);
     }
 }

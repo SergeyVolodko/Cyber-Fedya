@@ -55,6 +55,17 @@ namespace Cyber_Fedya_Web
 			return new HttpResponseMessage(HttpStatusCode.Created);
 		}
 
+		[HttpPut]
+		[Authorize]
+		[Route("schemes/{id}")]
+		public HttpResponseMessage UpdateScheme(
+			string id,
+			[FromBody]Scheme scheme)
+		{
+			schemeRepository.Update(id, scheme);
+			return new HttpResponseMessage(HttpStatusCode.Created);
+		}
+
 		[HttpPost]
 		[Authorize]
 		[Route("jokes")]

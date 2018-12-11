@@ -57,4 +57,26 @@
         });
     }
 
+    putRequest(url, id, body, onSuccess, onFailure) {
+        var token = localStorage.getItem('access_token');
+
+        $.ajax({
+            type: "PUT",
+            dataType: "json",
+            crossDomain: true,
+            contentType: "application/json; charset=utf-8",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            url: this.state.baseUrl + url + '/' + id,
+            data: JSON.stringify(body),
+            success: function(data) {
+                onSuccess(data);
+            },
+            error: function(e)
+            {
+                onFailure();
+            }
+        });
+    }
 }

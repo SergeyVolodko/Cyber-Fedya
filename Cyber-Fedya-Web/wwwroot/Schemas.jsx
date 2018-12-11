@@ -77,9 +77,12 @@ class Schemas extends React.Component{
             ? schemes_instance.state.selected_scheme.id
             : schemes_instance.state.selected_scheme.base_id;
         schemes_instance.state.selected_scheme.id = id;
-        dataWriteService.updateScheme(id, schemes_instance.state.selected_scheme);
 
-        schemes_instance.state.notifyRefresh();
+        dataWriteService.updateScheme(id, schemes_instance.state.selected_scheme)
+            .then(_ => {
+                schemes_instance.state.notifyRefresh();
+                alert('Схема обновлена');
+            });
     }
 
     addNewWordToScheme() {

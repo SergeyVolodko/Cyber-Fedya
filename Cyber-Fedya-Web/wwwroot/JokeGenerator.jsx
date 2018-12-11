@@ -108,8 +108,7 @@
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.schemas == joke_generator_instance.state.schemas
-            && prevState.vocabulary == joke_generator_instance.state.vocabulary) {
+        if (prevState.schemas == joke_generator_instance.state.schemas) {
             return;
         }
         joke_generator_instance.initSelect();

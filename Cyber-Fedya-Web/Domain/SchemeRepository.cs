@@ -10,6 +10,7 @@ namespace Cyber_Fedya_Web.Domain
 		List<Scheme> LoadAll();
 
 		void Create(Scheme scheme);
+		void Update(string id, Scheme scheme);
 	}
 
 	public class SchemeRepository : ISchemeRepository
@@ -21,6 +22,7 @@ namespace Cyber_Fedya_Web.Domain
 			lock (theLock)
 			{
 				var result = new List<Scheme>();
+
 				var path = Path.Combine("Data", "schemes");
 				foreach (var file in Directory.EnumerateFiles(path))
 				{
@@ -40,6 +42,23 @@ namespace Cyber_Fedya_Web.Domain
 				scheme.Id = id;
 
 				var filePath = Path.Combine("Data", "schemes", $"{id}.json");
+				var content = JsonConvert.SerializeObject(scheme);
+
+				File.WriteAllText(filePath, content);
+			}
+		}
+
+		public void Update(string id, Scheme scheme)
+		{
+			lock (theLock)
+			{
+				var filePath = Path.Combine("Data", "schemes", $"{id}.json");
+
+				if (!File.Exists(filePath))
+				{
+					throw new ArgumentException($"Scheme not found: {id}");
+				}
+
 				var content = JsonConvert.SerializeObject(scheme);
 
 				File.WriteAllText(filePath, content);
