@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Cyber_Fedya_Web.Domain
@@ -27,10 +28,11 @@ namespace Cyber_Fedya_Web.Domain
 		{
 			lock (theLock)
 			{
-				var fileName = "_stored_jokes.txt";
-				var newJokes = new List<string> { joke };
+				joke = joke.Replace("\r\n", "").Replace(Environment.NewLine, "").Replace("\n", "");
 
-				File.AppendAllLines(Path.Combine("Data", fileName), newJokes);
+				var path = Path.Combine("Data", "_stored_jokes.txt");
+
+				File.AppendAllText(path, $"{Environment.NewLine}{joke}");
 			}
 		}
 	}

@@ -4,10 +4,10 @@ namespace Cyber_Fedya_Web.Domain
 {
 	public class Vocabulary
 	{
-		public List<string> Nouns { get; set; }
-		public List<string> Verbs { get; set; }
-		public List<string> Adjectives { get; set; }
-		public List<string> Characters { get; set; }
-		public List<string> Places { get; set; }
+		public SortedSet<string> Nouns { get; set; }
+		public SortedSet<string> Verbs { get; set; }
+		public SortedSet<string> Adjectives { get; set; }
+		public SortedSet<string> Characters { get; set; }
+		public SortedSet<string> Places { get; set; }
 	}
 }

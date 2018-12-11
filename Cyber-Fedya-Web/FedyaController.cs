@@ -55,13 +55,14 @@ namespace Cyber_Fedya_Web
 			return new HttpResponseMessage(HttpStatusCode.Created);
 		}
 
-
-
-		//[HttpPost]
-		//[Route("sentenses")]
-		//public HttpResponseMessage SaveSentence(string sentence)
-		//{
-		//	return new HttpResponseMessage(HttpStatusCode.BadRequest);
-		//}
+		[HttpPost]
+		[Authorize]
+		[Route("jokes")]
+		public HttpResponseMessage CreateJoke(
+			[FromBody]string joke)
+		{
+			jokeRepository.Create(joke);
+			return new HttpResponseMessage(HttpStatusCode.Created);
+		}
 	}
 }

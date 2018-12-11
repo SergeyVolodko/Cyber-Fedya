@@ -5,20 +5,21 @@
         this.state = {
             jokes: props.jokes
         };
+        jokes_instance = this;
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.jokes === this.state.jokes) {
+        if (nextProps.jokes === jokes_instance.state.jokes) {
             return;
         }
-        this.setState({
+        jokes_instance.setState({
             jokes: nextProps.jokes
         });
     }
 
     render() {
-        var jokes = this.state.jokes.map((joke, i) =>
-            <li className="list-group-item stored-joke">{joke}</li>
+        var jokes = jokes_instance.state.jokes.map((joke, i) =>
+            <li key={i} className="list-group-item stored-joke">{joke}</li>
             , this
         );
 

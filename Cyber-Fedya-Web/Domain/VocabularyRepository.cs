@@ -33,11 +33,11 @@ namespace Cyber_Fedya_Web.Domain
 			}
 		}
 
-		private List<string> readFromFile(string fileName)
+		private SortedSet<string> readFromFile(string fileName)
 		{
 			var path = Path.Combine("Data", fileName);
 			var lines = File.ReadAllLines(path);
-			return new List<string>(lines);
+			return new SortedSet<string>(lines);
 		}
 	}
 }

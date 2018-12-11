@@ -38,6 +38,7 @@ class DataWriteService extends React.Component {
         };
 
         this.addToVocabulary = this.addToVocabulary.bind(this);
+        this.addNewJoke = this.addNewJoke.bind(this);
 
         dsw = this;
 
@@ -133,6 +134,15 @@ class DataWriteService extends React.Component {
 
     addToVocabulary(wordInput) {
         dataToSend = { type: 'create', entity: 'vocabulary', body: wordInput }
+
+        dsw.fsm.handleEvent(WriteDataEvents.StartSendingData, null);
+
+        return waitFor(_ => this.fsm.state === StatesWrite.OK)
+            .then(_ => 201);
+    }
+
+    addNewJoke(joke) {
+        dataToSend = { type: 'create', entity: 'jokes', body: joke }
 
         dsw.fsm.handleEvent(WriteDataEvents.StartSendingData, null);
 

@@ -8,7 +8,8 @@
             schemas: props.schemas,
             selected_scheme_index: 0,
             previousJoke: "",
-            joke : ""
+            joke: "",
+            notifyRefresh: props.notifyRefresh
         };
 
         joke_generator_instance = this;
@@ -38,6 +39,12 @@
     }
 
     saveJoke() {
+        dataWriteService
+            .addNewJoke(joke_generator_instance.state.joke)
+            .then(_ => {
+                joke_generator_instance.state.notifyRefresh();
+                alert('Сохранено');
+            });
     }
 
     generateJoke() {

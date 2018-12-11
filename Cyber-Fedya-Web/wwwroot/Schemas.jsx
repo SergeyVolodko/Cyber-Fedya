@@ -65,7 +65,11 @@ class Schemas extends React.Component{
     createSelectedScheme() {
         dataWriteService
             .createScheme(schemes_instance.state.selected_scheme)
-            .then(_ => schemes_instance.state.notifyRefresh());
+            .then(_ =>
+            {
+                schemes_instance.state.notifyRefresh();
+                alert('Сохранено');
+            });
     }
 
     saveSelectedScheme() {
@@ -80,7 +84,7 @@ class Schemas extends React.Component{
 
     addNewWordToScheme() {
         var nextNumber = schemes_instance.state.selected_scheme.words.length;
-        schemes_instance.state.selected_scheme.words.push({ "text": "Слово или несколько", "orderNumber": nextNumber});
+        schemes_instance.state.selected_scheme.words.push({ text: "Слово или несколько", orderNumber: nextNumber });
         schemes_instance.forceUpdate();
     }
 
