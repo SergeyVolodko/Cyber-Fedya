@@ -1,4 +1,4 @@
-﻿var globalWordTypes = [
+﻿const globalWordTypes = [
     "<Существительное>",
     "<Персонаж>",
     "<Прилагательное>",
@@ -25,11 +25,7 @@ class App extends React.Component{
         app_instance = this;
 
         app_instance.state = {
-            mainComponent: (
-                <div>
-                    <h1>Authorizing...</h1>
-                    <div className="loading-circle fa-spin"></div>
-                </div>)
+            mainComponent: <Spinner text="Authorizing..." />
         };
     }
 

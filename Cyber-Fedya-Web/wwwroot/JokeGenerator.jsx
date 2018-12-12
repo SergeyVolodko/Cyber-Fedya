@@ -9,7 +9,8 @@
             selected_scheme_index: 0,
             previousJoke: "",
             joke: "",
-            notifyRefresh: props.notifyRefresh
+            notifyRefresh: props.notifyRefresh,
+            notifyOperationStart: props.notifyOperationStart
         };
 
         joke_generator_instance = this;
@@ -39,6 +40,7 @@
     }
 
     saveJoke() {
+        joke_generator_instance.state.notifyOperationStart();
         dataWriteService
             .addNewJoke(joke_generator_instance.state.joke)
             .then(_ => {

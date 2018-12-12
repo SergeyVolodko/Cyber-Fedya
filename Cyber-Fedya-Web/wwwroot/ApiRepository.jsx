@@ -2,9 +2,7 @@
     constructor(props) {
         super(props);
         this.state = {
-            baseUrl: props.baseUrl,
-            error: null,
-            isLoaded: false
+            baseUrl: props.baseUrl
         };
     }
 
@@ -23,9 +21,6 @@
             },
             error: function(e)
             {
-                //self.setState({
-                //   isLoaded: true,
-                //})
                 onFailure();
             }
         });
@@ -49,9 +44,6 @@
             },
             error: function(e)
             {
-                //self.setState({
-                //   isLoaded: true,
-                //})
                 onFailure();
             }
         });

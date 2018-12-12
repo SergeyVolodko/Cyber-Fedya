@@ -9,9 +9,16 @@ class Navigation extends React.Component {
         this.state = {
             vocabulary: emptyVocabulary,
             schemas: [],
-            jokes: []
+            jokes: [],
+            isLoading: false
         };
         navigation_instance = this;
+    }
+
+    operationStart() {
+        navigation_instance.setState({
+            isLoading: true
+        });
     }
 
     notifyRefresh() {
@@ -20,7 +27,8 @@ class Navigation extends React.Component {
                     navigation_instance.setState({
                         vocabulary: data.vocabulary,
                         jokes: data.jokes,
-                        schemas: data.schemas
+                        schemas: data.schemas,
+                        isLoading: false
                     });
                 }
         );
@@ -31,12 +39,14 @@ class Navigation extends React.Component {
     }
 
     componentDidMount() {
+        navigation_instance.operationStart();
         dataReadService.getData()
             .then(data => {
                     navigation_instance.setState({
                         vocabulary: data.vocabulary,
                         jokes: data.jokes,
-                        schemas: data.schemas
+                        schemas: data.schemas,
+                        isLoading: false
                     });
                 }
         );
@@ -53,16 +63,26 @@ class Navigation extends React.Component {
                 </ul>
 
                 <div className="tab-content">
+                    {navigation_instance.state.isLoading && <Spinner text="Загрузка..." />}
                     <div id="generator" className="tab-pane fade in active">
-                        <JokeGenerator vocabulary={navigation_instance.state.vocabulary} schemas={navigation_instance.state.schemas} notifyRefresh={navigation_instance.notifyRefresh}/>
+                        <JokeGenerator
+                            vocabulary={navigation_instance.state.vocabulary}
+                            schemas={navigation_instance.state.schemas}
+                            notifyRefresh={navigation_instance.notifyRefresh}
+                            notifyOperationStart={navigation_instance.operationStart} />
                     </div>
 
                     <div id="schemas" className="tab-pane fade" >
-                        <Schemas notifyRefresh={navigation_instance.notifyRefresh} schemas={navigation_instance.state.schemas} />
+                        <Schemas
+                            schemas={navigation_instance.state.schemas}
+                            notifyRefresh={navigation_instance.notifyRefresh}
+                            notifyOperationStart={navigation_instance.operationStart}/>
                     </div>
 
                     <div id="vocabulary" className="tab-pane fade">
-                        <Vocabulary vocabulary={navigation_instance.state.vocabulary} notifyRefresh={navigation_instance.notifyRefresh} />
+                        <Vocabulary
+                            vocabulary={navigation_instance.state.vocabulary}
+                            notifyRefresh={navigation_instance.notifyRefresh} />
                     </div>
 
                     <div id="jokes" className="tab-pane fade">

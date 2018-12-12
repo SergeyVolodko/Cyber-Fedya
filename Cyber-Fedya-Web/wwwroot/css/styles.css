@@ -1,18 +1,41 @@
-﻿.loading-circle {
+﻿.spinner-blocker {
+    position:fixed;
+    top: 0;
+    left: 0;
+    background-color: grey;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    z-index: 20050;
+}
+
+.spinner-circle {
     position: absolute;
     left: 47%;
     top: 47%;
     height: 100px;
     width: 100px;
     border-radius: 50%;
-    border-top: 4px solid #337ab7;
+    opacity: 1;
+    border-top: 8px solid white;
     border-right: 2px solid rgba(0,0,0, 0);
-    border-bottom: 4px solid #337ab7;
+    border-bottom: 8px solid white;
     border-left: 2px solid rgba(0,0,0, 0);
-    z-index: 20050;
+    z-index: 20051;
 }
 
-.tab-content{
+.spinner-text {
+    position: absolute;
+    left: 42%;
+    top: 40%;
+    height: 100px;
+    width: 100px;
+    color: white;
+    font-size: 50px;
+    text-align: center;
+}
+
+.tab-content {
     margin-left: 10px;
 }
 
