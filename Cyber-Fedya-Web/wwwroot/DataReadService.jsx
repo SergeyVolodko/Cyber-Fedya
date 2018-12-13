@@ -19,6 +19,10 @@ var ReadDataEvents = Object.freeze({
 });
 
 class DataReadService extends React.Component {
+
+    dataResult = null;
+    hasConnectionErrors = false;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -54,6 +58,7 @@ class DataReadService extends React.Component {
     }
 
     handleFailedAuthorization() {
+        ds.hasConnectionErrors = true;
         ds.fsm.handleEvent(ReadDataEvents.AuthorizationFailed, null);
     }
 
@@ -66,6 +71,7 @@ class DataReadService extends React.Component {
         ds.fsm.handleEvent(ReadDataEvents.DataFetchSucceeded, data);
     }
     handleFetchFailure() {
+        ds.hasConnectionErrors = true;
         ds.fsm.handleEvent(ReadDataEvents.DataFetchFailed, null);
     }
 
@@ -88,20 +94,19 @@ class DataReadService extends React.Component {
     }
 
     returnData(data) {
-        dataResult = data;
+        data.hasConnectionErrors = ds.hasConnectionErrors;
+        ds.dataResult = data;
     }
 
     finishFlowWithError() {
         location.pathname = "/error.html";
     }
 
-    dataResult = null;
-
     // Public methods:
     getData() {
         ds.fsm.handleEvent(ReadDataEvents.StartGettingData, null);
 
         return waitFor(_ => this.fsm.state === StatesRead.OK)
-            .then(_ => dataResult);
+            .then(_ => ds.dataResult);
     }
 }

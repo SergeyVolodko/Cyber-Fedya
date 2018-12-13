@@ -10,6 +10,8 @@ var CURRENT_CACHES = {
     image: 'image-cache-v1'
 };
 
+self = this;
+
 self.addEventListener('install', (event) => {
     self.skipWaiting();
     console.log('Service Worker has been installed');

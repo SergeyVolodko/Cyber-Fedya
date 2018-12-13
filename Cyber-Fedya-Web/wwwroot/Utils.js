@@ -51,7 +51,7 @@ var StateMachine = function(transitions, initialState) {
         });
 
         if (!transition) {
-            throw "Not existing transition";
+            throw "Not existing transition\n" + transition;
         }
         this.state = transition.to;
         transition.successAction(input);

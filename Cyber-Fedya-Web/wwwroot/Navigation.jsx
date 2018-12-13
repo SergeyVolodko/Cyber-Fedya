@@ -37,7 +37,7 @@ class Navigation extends React.Component {
                         jokes: data.jokes,
                         schemas: data.schemas,
                         isLoading: false,
-                        isOffline: false
+                        isOffline: data.hasConnectionErrors
                     });
                 }
         );
@@ -55,7 +55,8 @@ class Navigation extends React.Component {
                         vocabulary: data.vocabulary,
                         jokes: data.jokes,
                         schemas: data.schemas,
-                        isLoading: false
+                        isLoading: false,
+                        isOffline: data.hasConnectionErrors
                     });
                 }
         );
