@@ -10,7 +10,8 @@
             previousJoke: "",
             joke: "",
             notifyRefresh: props.notifyRefresh,
-            notifyOperationStart: props.notifyOperationStart
+            notifyOperationStart: props.notifyOperationStart,
+            notifyOperationFailed: props.notifyOperationFailed
         };
 
         joke_generator_instance = this;
@@ -43,7 +44,12 @@
         joke_generator_instance.state.notifyOperationStart();
         dataWriteService
             .addNewJoke(joke_generator_instance.state.joke)
-            .then(_ => {
+            .then(isSuccessful => {
+                if (!isSuccessful) {
+                    joke_generator_instance.state.notifyOperationFailed();
+                    alert('Не получается сохранить шутку. Скорее всего нет соединения');
+                    return;
+                }
                 joke_generator_instance.state.notifyRefresh();
                 alert('Сохранено');
             });

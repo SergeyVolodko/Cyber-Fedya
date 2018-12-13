@@ -15,7 +15,9 @@ class Schemas extends React.Component{
             schemas: props.schemas,
             selected_scheme: props.schemas.length > 0 ? props.schemas[0] : emptyScheme,
             wordTypes: globalWordTypes,
-            notifyRefresh: props.notifyRefresh
+            notifyRefresh: props.notifyRefresh,
+            notifyOperationStart: props.notifyOperationStart,
+            notifyOperationFailed: props.notifyOperationFailed
         };
 
         schemes_instance = this;
@@ -63,23 +65,32 @@ class Schemas extends React.Component{
     }
 
     createSelectedScheme() {
+        schemes_instance.state.notifyOperationStart();
         dataWriteService
             .createScheme(schemes_instance.state.selected_scheme)
-            .then(_ =>
-            {
+            .then(isSuccessful => {
+                if (!isSuccessful) {
+                    schemes_instance.state.notifyOperationFailed();
+                    return;
+                }
                 schemes_instance.state.notifyRefresh();
                 alert('Сохранено');
             });
     }
 
     saveSelectedScheme() {
+        schemes_instance.state.notifyOperationStart();
         var id = !schemes_instance.state.selected_scheme.base_id
             ? schemes_instance.state.selected_scheme.id
             : schemes_instance.state.selected_scheme.base_id;
         schemes_instance.state.selected_scheme.id = id;
 
         dataWriteService.updateScheme(id, schemes_instance.state.selected_scheme)
-            .then(_ => {
+            .then(isSuccessful => {
+                if (!isSuccessful) {
+                    schemes_instance.state.notifyOperationFailed();
+                    return;
+                }
                 schemes_instance.state.notifyRefresh();
                 alert('Схема обновлена');
             });

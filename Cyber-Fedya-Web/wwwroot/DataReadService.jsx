@@ -2,7 +2,6 @@
     "OK": "OK",
     "Authorizing": "Authorizing",
     "DataFetching": "DataFetching",
-    "TokenRevokation": "TokenRevokation",
     "SettingOfflineData": "SettingOfflineData",
     "GettingOfflineData": "GettingOfflineData",
     "Error": "Error"

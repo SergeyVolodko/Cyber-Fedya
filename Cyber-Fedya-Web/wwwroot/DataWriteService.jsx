@@ -2,25 +2,15 @@
     "OK": "OK",
     "Authorizing": "Authorizing",
     "DataSending": "DataSending",
-
-    //"TokenRevokation": "TokenRevokation",
-    //"SettingOfflineData": "SettingOfflineData",
-    //"GettingOfflineData": "GettingOfflineData",
-    //"Error": "Error"
+    "SettingOfflineMode": "SettingOfflineMode",
+    "Failure": "Failure"
 });
 
 var WriteDataEvents = Object.freeze({
     "StartSendingData": "StartSendingData",
     "AuthorizationSucceeded": "AuthorizationSucceeded",
     "DataSendSucceeded": "DataSendSucceeded",
-
-    "DataSendFailed": "DataSendFailed",
-
-    //"SetOfflineDataSucceeded": "SetOfflineDataSucceeded",
-    //"GetOfflineDataSucceeded": "GetOfflineDataSucceeded",
-    //"AuthorizationFailed": "AuthorizationFailed",
-    
-    //"GetOfflineDataFailed": "GetOfflineDataFailed"
+    "DataSendFailed": "DataSendFailed"
 });
 
 function clearStorage() {
@@ -49,13 +39,10 @@ class DataWriteService extends React.Component {
             { event: WriteDataEvents.AuthorizationSucceeded,  from: StatesWrite.Authorizing,        to: StatesWrite.DataSending,        successAction: dsw.startDataSending },
             { event: WriteDataEvents.DataSendSucceeded,       from: StatesWrite.DataSending,        to: StatesWrite.OK,                 successAction: dsw.completeSending },
 
-            //{ event: ReadDataEvents.SetOfflineDataSucceeded, from: StatesRead.SettingOfflineData, to: StatesRead.GettingOfflineData, successAction: ds.getOfflineData },
-            //{ event: ReadDataEvents.GetOfflineDataSucceeded, from: StatesRead.GettingOfflineData, to: StatesRead.OK,                 successAction: ds.returnData },
+            { event: WriteDataEvents.AuthorizationFailed,     from: StatesWrite.Authorizing,        to: StatesWrite.Failure,            successAction: dsw.finishFlowWithError },
+            { event: WriteDataEvents.DataSendFailed,          from: StatesWrite.DataSending,        to: StatesWrite.Failure,            successAction: dsw.finishFlowWithError },
 
-            //{ event: ReadDataEvents.AuthorizationFailed,     from: StatesRead.Authorizing,        to: StatesRead.GettingOfflineData, successAction: ds.getOfflineData },
-
-            //{ event: ReadDataEvents.DataFetchFailed,         from: StatesRead.DataFetching,       to: StatesRead.GettingOfflineData, successAction: ds.getOfflineData },
-            //{ event: ReadDataEvents.GetOfflineDataFailed,    from: StatesRead.GettingOfflineData, to: StatesRead.Error,              successAction: ds.finishFlowWithError }
+            { event: WriteDataEvents.StartSendingData,        from: StatesWrite.Failure,            to: StatesWrite.Authorizing,        successAction: dsw.startAuthorization },
             ],
             /*initial state:*/StatesWrite.OK);
     }
@@ -92,31 +79,11 @@ class DataWriteService extends React.Component {
         dsw.fsm.handleEvent(WriteDataEvents.DataSendFailed, null);
     }
 
-    //// DataFetching -> SettingOfflineData
-    //setOfflineData(data) {
-    //    localStorage.setItem("data", JSON.stringify(data));
-    //    ds.fsm.handleEvent(ReadDataEvents.SetOfflineDataSucceeded, null);
-    //}
-
-    //// SettingOfflineData -> GettingOfflineData
-    //getOfflineData() {
-    //    try {
-    //        var data = JSON.parse(localStorage.getItem("data"));
-    //        if (!data) throw "No local data!";
-    //        ds.fsm.handleEvent(ReadDataEvents.GetOfflineDataSucceeded, data);
-    //    }
-    //    catch (e) {
-    //        ds.fsm.handleEvent(ReadDataEvents.GetOfflineDataFailed, null);
-    //    }
-    //}
+    finishFlowWithError() {
+    }
 
     completeSending() {
     }
-
-    //finishFlowWithError() {
-    //    location.pathname = "/error.html";
-    //}
-
 
     // cache revocation ?
     // sync-button ?
@@ -130,8 +97,8 @@ class DataWriteService extends React.Component {
 
         dsw.fsm.handleEvent(WriteDataEvents.StartSendingData, null);
 
-        return waitFor(_ => this.fsm.state === StatesWrite.OK)
-            .then(_ => 201);
+        return waitFor(_ => this.fsm.state === StatesWrite.OK || this.fsm.state === StatesWrite.Failure)
+            .then(_ => this.fsm.state === StatesWrite.OK);
     }
 
     updateScheme(id, schemeToUpdate) {
@@ -139,8 +106,8 @@ class DataWriteService extends React.Component {
 
         dsw.fsm.handleEvent(WriteDataEvents.StartSendingData, null);
 
-        return waitFor(_ => this.fsm.state === StatesWrite.OK)
-            .then(_ => 201);
+        return waitFor(_ => this.fsm.state === StatesWrite.OK || this.fsm.state === StatesWrite.Failure)
+            .then(_ => this.fsm.state === StatesWrite.OK);
     }
 
     addToVocabulary(wordInput) {
@@ -148,8 +115,8 @@ class DataWriteService extends React.Component {
 
         dsw.fsm.handleEvent(WriteDataEvents.StartSendingData, null);
 
-        return waitFor(_ => this.fsm.state === StatesWrite.OK)
-            .then(_ => 201);
+        return waitFor(_ => this.fsm.state === StatesWrite.OK || this.fsm.state === StatesWrite.Failure)
+            .then(_ => this.fsm.state === StatesWrite.OK);
     }
 
     addNewJoke(joke) {
@@ -157,7 +124,7 @@ class DataWriteService extends React.Component {
 
         dsw.fsm.handleEvent(WriteDataEvents.StartSendingData, null);
 
-        return waitFor(_ => this.fsm.state === StatesWrite.OK)
-            .then(_ => 201);
+        return waitFor(_ => this.fsm.state === StatesWrite.OK || this.fsm.state === StatesWrite.Failure)
+            .then(_ => this.fsm.state === StatesWrite.OK);
     }
 }
