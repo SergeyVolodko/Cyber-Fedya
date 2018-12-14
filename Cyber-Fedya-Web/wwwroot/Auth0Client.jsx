@@ -6,6 +6,8 @@
     constructor() {
         super();
         this.auth0 = new auth0.WebAuth({
+            domain: Config.Auth0Domain,
+            clientID: Config.Auth0ClientId,
             redirectUri: window.location.href,
             responseType: 'token id_token',
             scope: 'openid offline_access'
@@ -75,5 +77,3 @@
             });
     }
 }
-
-var authorizationClient = new Auth0Client();

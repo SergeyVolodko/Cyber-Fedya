@@ -7,8 +7,9 @@
 ];
 
 // Registrations
-var authorizationService = new AuthorizationService();
-var apiRepo = new ApiRepository({ baseUrl: "http://localhost:40385/api/" });
+var apiRepo = new ApiRepository({ baseUrl: Config.BaseUrl });
+var authorizationClient = new Auth0Client();
+var authorizationService = new AuthorizationService({ apiRepository: apiRepo, authorizationClient: authorizationClient });
 var dataReadService = new DataReadService({ apiRepository: apiRepo });
 var dataWriteService = new DataWriteService({ apiRepository: apiRepo });
 // Registrations

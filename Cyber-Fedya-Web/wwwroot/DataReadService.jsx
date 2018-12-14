@@ -21,7 +21,6 @@ var ReadDataEvents = Object.freeze({
 class DataReadService extends React.Component {
 
     dataResult = null;
-    hasConnectionErrors = false;
 
     constructor(props) {
         super(props);
@@ -104,6 +103,7 @@ class DataReadService extends React.Component {
 
     // Public methods:
     getData() {
+        ds.hasConnectionErrors = false;
         ds.fsm.handleEvent(ReadDataEvents.StartGettingData, null);
 
         return waitFor(_ => this.fsm.state === StatesRead.OK)

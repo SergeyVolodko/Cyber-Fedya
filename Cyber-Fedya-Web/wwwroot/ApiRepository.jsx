@@ -6,6 +6,17 @@
         };
     }
 
+    isOnline() {
+        var result = $.ajax({
+            type: "GET",
+            url: "https://" + Config.Auth0Domain + "/.well-known/openid-configuration",
+            async: false
+
+        }).responseText;
+
+        return !!result;
+    }
+
     getRequest(url, onSuccess, onFailure) {
         var token = localStorage.getItem('access_token');
 

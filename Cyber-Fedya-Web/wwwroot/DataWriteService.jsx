@@ -85,7 +85,6 @@ class DataWriteService extends React.Component {
     completeSending() {
     }
 
-    // cache revocation ?
     // sync-button ?
     componentDidMount() {
     }
