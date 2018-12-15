@@ -17,7 +17,6 @@
         this.logout = this.logout.bind(this);
         this.handleAuthentication = this.handleAuthentication.bind(this);
         this.isAuthenticated = this.isAuthenticated.bind(this);
-        this.revokeToken = this.revokeToken.bind(this);
     }
 
     handleAuthentication() {
@@ -59,21 +58,5 @@
 
     login() {
         this.auth0.authorize();
-    }
-
-    revokeToken(successHandler, failureHandler) {
-        authorizationClient.auth0.checkSession({},
-            function(err, result) {
-                if (err) {
-                    if (err.error==="login_required") {
-                        authorizationClient.login();
-                    }
-                    failureHandler();
-                    console.log(err);
-                } else {
-                    authorizationClient.setSession(result);
-                    successHandler();
-                }
-            });
     }
 }

@@ -1,4 +1,14 @@
-﻿.spinner-blocker {
+﻿.main-menu-tab-button {
+    width: 200px;
+    font-size: 30px;
+}
+
+.main-menu-tab-button-text {
+    padding: 10px 5px !important;
+    text-align: center;
+}
+
+.spinner-blocker {
     position:fixed;
     top: 0;
     left: 0;
@@ -33,6 +43,10 @@
     color: white;
     font-size: 50px;
     text-align: center;
+}
+
+.main-menu-tab {
+
 }
 
 .tab-content {

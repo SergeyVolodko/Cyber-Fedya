@@ -50,11 +50,6 @@ class App extends React.Component{
             <div>
                 {app_instance.state.mainComponent}
             </div>);
-
-        //<div>
-        // Loading...
-        // <div className="loading-circle fa-spin"></div>
-        //</div>
     }
 }
 

@@ -71,10 +71,10 @@ class Navigation extends React.Component {
         return (
             <div>
                 <ul className="nav nav-pills">
-                    <li className="active"><a data-toggle="pill" href="#generator"><h1>Поехали!</h1></a></li>
-                    <li><a data-toggle="pill" href="#schemas"><h1>Схемы</h1></a></li>
-                    <li><a data-toggle="pill" href="#vocabulary"><h1>Словарь</h1></a></li>
-                    <li><a data-toggle="pill" href="#jokes"><h1>Архив</h1></a></li>
+                    <li className="active main-menu-tab-button"><a className="main-menu-tab-button-text" data-toggle="pill" href="#generator">Поехали!</a></li>
+                    <li className="main-menu-tab-button"><a className="main-menu-tab-button-text" data-toggle="pill" href="#schemas">Схемы</a></li>
+                    <li className="main-menu-tab-button"><a className="main-menu-tab-button-text" data-toggle="pill" href="#vocabulary">Словарь</a></li>
+                    <li className="main-menu-tab-button"><a className="main-menu-tab-button-text" data-toggle="pill" href="#jokes">Архив</a></li>
                 </ul>
                 {navigation_instance.state.isOffline && offlineAlert}
 

@@ -6,6 +6,7 @@
         this.apiRepository = props.apiRepository;
 
         this.authorize = this.authorize.bind(this);
+        this.revokeToken = this.revokeToken.bind(this);
     }
 
     authorize(successHandler, failureHandler) {
@@ -20,7 +21,23 @@
         if (!localStorage.getItem('access_token')) {
             this.authorizationClient.login();
         } else {
-            this.authorizationClient.revokeToken(successHandler, failureHandler);
+            this.revokeToken(successHandler, failureHandler);
         }
+    }
+
+    revokeToken(successHandler, failureHandler) {
+        this.authorizationClient.auth0.checkSession({},
+            function (err, result) {
+                if (err) {
+                    if (err.error === "login_required") {
+                        authorizationClient.login();
+                    }
+                    failureHandler();
+                    console.log(err);
+                } else {
+                    authorizationClient.setSession(result);
+                    successHandler();
+                }
+            });
     }
 }
