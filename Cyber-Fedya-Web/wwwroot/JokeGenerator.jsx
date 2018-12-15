@@ -85,23 +85,23 @@
                     </select>
                 </div>
 
-                <textarea className="form-control generated-joke-text" id="joke" rows="10" value={this.state.joke}></textarea>
-                <div className="row">
-                    <div className="col-xs-2">
+                <p className="form-control generated-joke-text" id="joke">{this.state.joke}</p>
+                <div>
+                    <div className="col-xs-2 buttons-row-right">
                         <button type="button"
-                            className="btn btn-secondary btn-lg generator-button"
+                            className="btn btn-secondary btn-prev-joke generator-button"
                             disabled={!joke_generator_instance.state.previousJoke}
                             onClick={() => this.returnPreviousJoke()}><i className="fa fa-backward" /></button>
                     </div>
-                    <div className="col-xs-8">
+                    <div className="col-xs-8 buttons-row">
                         <button type="button"
-                            className="btn btn-primary btn-lg generator-button"
+                            className="btn btn-primary btn-generate-joke generator-button"
                             onClick={() => this.generateJoke()}>
                             <h2>Ещё!</h2>
                         </button>
                     </div>
-                    <div className="col-xs-2">
-                        <button type="button" className="btn btn-success btn-lg generator-button"
+                    <div className="col-xs-2 buttons-row-left">
+                        <button type="button" className="btn btn-success btn-save-joke generator-button"
                                 onClick={() => this.saveJoke()}>
                             <i className="fa fa-save"></i>
                         </button>

@@ -1,6 +1,23 @@
-﻿@media screen and (max-width:820px) {
+﻿@media screen and (max-width:768px) {
     .main-menu-tab-button {
-        width: 24.5%;
+        width: 24%;
         font-size: 19px;
+    }
+
+    .generator-button {
+        height: 70px;
+    }
+
+    .generated-joke-text {
+        font-size: 30px !important;
+        min-height: 55vh;
+    }
+
+    .btn-prev-joke {
+        /*height: 70px;*/
+    }
+
+    .btn-save-joke {
+        /*height: 70px;*/
     }
 }
