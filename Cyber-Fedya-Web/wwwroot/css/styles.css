@@ -84,8 +84,16 @@
     width: 100%;
 }
 
+.list-group {
+    max-height: 80vh;
+    margin-bottom: 10px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .stored-joke {
     font-size: 29px;
+    padding: 25px 20px;
 }
 
 .scheme-selector {

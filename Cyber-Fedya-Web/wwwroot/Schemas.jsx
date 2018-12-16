@@ -180,7 +180,6 @@ class Schemas extends React.Component{
                 selected_scheme: nextProps.schemas[0]
             });
         }
-        //schemes_instance.forceUpdate();
     }
 
     componentDidUpdate(prevProps, prevState) {

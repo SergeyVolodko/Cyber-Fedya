@@ -13,6 +13,11 @@
         min-height: 55vh;
     }
 
+    .stored-joke {
+        font-size: 22px;
+        padding: 10px;
+    }
+
     .btn-prev-joke {
         /*height: 70px;*/
     }
