@@ -116,53 +116,6 @@ class Schemas extends React.Component{
 
         schemes_instance.forceUpdate();
     }
-
-    render() {
-        var schemeItems = schemes_instance.state.selected_scheme.words
-            .sort((a, b) => a.orderNumber - b.orderNumber)
-            .map((word, i) =>
-            <div key={generateKey(i)}>
-                <WordInScheme id={i}
-                    wordInJoke={word}
-                    moveDown={this.moveDown}
-                    moveUp={this.moveUp}
-                    delete={this.deleteWordFromScheme} />
-            </div>
-            ,this
-        );
-
-        return (
-            <div>
-                <h3>Схемы шуток</h3>
-                <div>
-                    <div className="scheme-selector">
-                        <select id="schemas-select">
-                            {schemes_instance.state.schemas.map((item) =>
-                                <option key={item.id}>{item.name}</option>
-                            , this)}
-                        </select>
-                    </div>
-                    <div className="row">
-                        <button type="button" className="btn btn-warning btn-lg col-xs-5"
-                            onClick={() => schemes_instance.createSelectedScheme()}>
-                            <i className="fa fa-file btn-symbol"></i> Сохранить как новую схему
-                        </button>
-                        <div className="col-xs-2"></div>
-                        <button type="button" className="btn btn-warning btn-lg col-xs-5"
-                            onClick={() => schemes_instance.saveSelectedScheme()}>
-                            <i className="fa fa-save btn-symbol"></i> Сохранить как обновления этой схемы
-                        </button>
-                    </div>
-                    <div>{schemeItems}</div>
-                </div>
-                <div className="row">
-                    <button type="button" className="btn btn-success btn-lg col-xs-12"
-                        onClick={() => this.addNewWordToScheme()}><i className="fa fa-plus"></i></button>
-                </div>
-            </div>
-        );
-    }
-
     componentDidMount() {
         schemes_instance.initSelect();
     }
@@ -190,6 +143,53 @@ class Schemas extends React.Component{
         // select2 woodoo to remove duplicates on schema name change saved
         var name = schemes_instance.state.selected_scheme.name;
         $('#schemas-select').val(name).trigger("change");
+    }
+
+    render() {
+        var schemeItems = schemes_instance.state.selected_scheme.words
+            .sort((a, b) => a.orderNumber - b.orderNumber)
+            .map((word, i) =>
+            <div key={generateKey(i)}>
+                <WordInScheme id={i}
+                    wordInJoke={word}
+                    moveDown={this.moveDown}
+                    moveUp={this.moveUp}
+                    delete={this.deleteWordFromScheme} />
+            </div>
+            ,this
+        );
+
+        return (
+            <div>
+                <h3>Схемы шуток</h3>
+                <div>
+                    <div className="scheme-selector">
+                        <select id="schemas-select">
+                            {schemes_instance.state.schemas.map((item) =>
+                                <option key={item.id}>{item.name}</option>
+                            , this)}
+                        </select>
+                    </div>
+                    <div>
+                        <button type="button" className="btn btn-success btn-save-scheme col-xs-5"
+                            onClick={() => schemes_instance.createSelectedScheme()}>
+                            <i className="fa fa-file btn-save-scheme-text"></i> Как новую схему
+                        </button>
+                        <div className="col-xs-2"></div>
+                        <button type="button" className="btn btn-success btn-save-scheme col-xs-5"
+                            onClick={() => schemes_instance.saveSelectedScheme()}>
+                            <i className="fa fa-save btn-save-scheme-text"></i> Как обновление этой схемы
+                        </button>
+                    </div>
+
+                    <div className="scheme-items-container">{schemeItems}</div>
+                </div>
+                <div >
+                    <button type="button" className="btn btn-primary btn-lg col-xs-12"
+                        onClick={() => this.addNewWordToScheme()}><i className="fa fa-plus"></i></button>
+                </div>
+            </div>
+        );
     }
 
     initSelect() {

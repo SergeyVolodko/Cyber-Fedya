@@ -65,7 +65,7 @@ class Navigation extends React.Component {
     render() {
         var offlineAlert = (
             <div className="alert alert-danger">
-                <h1 className="text-center">Работает без интернета</h1>
+                <p className="text-center">Работает без интернета</p>
             </div>);
 
         return (

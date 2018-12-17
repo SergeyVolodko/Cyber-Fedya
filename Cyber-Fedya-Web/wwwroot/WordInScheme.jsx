@@ -26,32 +26,34 @@ class WordInScheme extends React.Component{
         return(
             <div className="word-in-scheme-container">
                 <div className="word-type-selector">
-                    <button className="btn word-in-scheme-arrow-button"
-                        onClick={() => this.state.moveUp(this.state.currentWord)}>
-                        <i className="fa fa-arrow-up btn-symbol"></i>
-                </button>
-                    <button className="btn word-in-scheme-arrow-button"
-                        onClick={() => this.state.moveDown(this.state.currentWord)}>
-                        <i className="fa fa-arrow-down btn-symbol"></i>
-                </button>
                 <select id={this.state.id}
                         title={this.state.currentWord.text}>
                     {wordOptions}
                 </select>
-                    <button className="btn word-in-scheme-arrow-button btn-danger"
+                    <button className="btn btn-danger word-in-scheme-remove-button"
                         onClick={() => this.state.delete(this.state.currentWord)}>
                         <i className="fa fa-times btn-symbol"></i>
-                </button>
+                    </button>
+                    <br />
+                    <button className="btn word-in-scheme-arrow-button"
+                            onClick={() => this.state.moveDown(this.state.currentWord)}>
+                        <i className="fa fa-retweet btn-symbol"></i>
+                    </button>
             </div>
         </div>);
     }
+
+    //    <button className="btn word-in-scheme-arrow-button"
+    //        onClick={() => this.state.moveUp(this.state.currentWord)}>
+    //        <i className="fa fa-arrow-up btn-symbol"></i>
+    //</button>
 
     componentDidMount() {
         var id = this.state.id;
         var wordSelect = $('#' + id);
         wordSelect.select2({
             allowClear: true,
-            width: "70%",
+            width: "80%",
             placeholder: this.state.currentWord.text,
             tags: true,
             createTag: select2CreateTag

@@ -3,6 +3,18 @@
         width: 24%;
         font-size: 19px;
     }
+    .spinner-circle {
+        left: 40%;
+        top: 40%;
+        border-top: 4px solid white;
+        border-bottom: 4px solid white;
+    }
+
+    .spinner-text {
+        left: 38%;
+        top: 34%;
+        font-size: 25px;
+    }
 
     .generator-button {
         height: 70px;
@@ -18,11 +30,67 @@
         padding: 10px;
     }
 
+    .btn-save-scheme-text {
+        font-size: 15px;
+    }
+    
+    .btn-symbol {
+        font-size: 25px;
+    }
+
     .btn-prev-joke {
         /*height: 70px;*/
+        
     }
 
     .btn-save-joke {
         /*height: 70px;*/
+    }
+
+    .scheme-items-container {
+        margin-top: 70px;
+    }
+
+    .word-in-scheme-container {
+        margin: 0;
+        padding: 0;
+        /*margin-top: 10px; 
+        border: cadetblue 1px solid;
+        border-radius: 5px;*/
+    }
+
+    .word-in-scheme-arrow-button {
+        height: 50px;
+        width: 50px;
+        border-radius: 10px;
+        margin: 0;
+        margin-left: 40%;
+        font-size: 25px;
+    }
+
+    .word-in-scheme-remove-button{
+        height: 50px;
+        width: 50px;
+        border-radius: 10px;
+    }
+
+    .word-in-scheme-selector {
+        font-size: 14px;
+    }
+
+    .select2-selection.select2-selection {
+        min-height: 40px;
+        max-height: 40px;
+        font-size: 25px;
+        padding: 5px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow{
+        height: 40px;
+    }
+    .select2-results__option,
+    .select2-search__field
+    {
+        font-size: 20px;
     }
 }

@@ -26,7 +26,7 @@ class App extends React.Component{
         app_instance = this;
 
         app_instance.state = {
-            mainComponent: <Spinner text="Authorizing..." />
+            mainComponent: <Spinner text="Авторизация..." />
         };
     }
 

@@ -100,15 +100,34 @@
     margin: 10px 0px;
 }
 
-.word-in-scheme-container{
-    padding: 10px; 
+.btn-save-scheme {
+    white-space: normal;
+}
+
+.word-in-scheme-container {
+    padding: 10px;
 }
 
 .word-type-selector{
-    margin: 10px;
+    /*margin: 10px;*/
 }
 
-.word-in-scheme-arrow-button{
+.word-in-scheme-selector {
+    font-size: 20px;
+}
+
+.scheme-items-container {
+
+}
+
+.word-in-scheme-arrow-button {
+    height: 60px;
+    width: 80px;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+.word-in-scheme-remove-button{
     height: 60px;
     width: 80px;
     border-radius: 20px;
@@ -116,6 +135,10 @@
 }
 
 .btn-symbol{
+    font-size: 25px;
+}
+
+.btn-save-scheme-text {
     font-size: 25px;
 }
 
@@ -132,7 +155,7 @@
 .select2-results__option,
 .select2-search__field
 {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 /* .select2-results__options, */
