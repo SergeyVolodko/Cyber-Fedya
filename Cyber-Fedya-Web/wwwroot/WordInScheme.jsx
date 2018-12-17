@@ -6,9 +6,9 @@ class WordInScheme extends React.Component{
             wordTypes: globalWordTypes,
             currentWord: props.wordInJoke,
             id: "word-" + props.id + new Date().getTime(),
+            isLastWord: props.isLastWord,
             delete: props.delete,
-            moveDown: props.moveDown,
-            moveUp: props.moveUp
+            moveDown: props.moveDown
         };
         word_instances[this.state.id] = this;
     }
@@ -29,24 +29,20 @@ class WordInScheme extends React.Component{
                 <select id={this.state.id}
                         title={this.state.currentWord.text}>
                     {wordOptions}
-                </select>
+                    </select>
                     <button className="btn btn-danger word-in-scheme-remove-button"
                         onClick={() => this.state.delete(this.state.currentWord)}>
                         <i className="fa fa-times btn-symbol"></i>
                     </button>
                     <br />
+                    {!this.state.isLastWord && 
                     <button className="btn word-in-scheme-arrow-button"
                             onClick={() => this.state.moveDown(this.state.currentWord)}>
                         <i className="fa fa-retweet btn-symbol"></i>
-                    </button>
+                    </button>}
             </div>
         </div>);
     }
-
-    //    <button className="btn word-in-scheme-arrow-button"
-    //        onClick={() => this.state.moveUp(this.state.currentWord)}>
-    //        <i className="fa fa-arrow-up btn-symbol"></i>
-    //</button>
 
     componentDidMount() {
         var id = this.state.id;

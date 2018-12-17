@@ -30,8 +30,9 @@
         padding: 10px;
     }
 
-    .btn-save-scheme-text {
+    .btn-save-scheme {
         font-size: 15px;
+        min-height: 40px;
     }
     
     .btn-symbol {
@@ -48,21 +49,17 @@
     }
 
     .scheme-items-container {
-        margin-top: 70px;
+        margin-top: 90px;
     }
 
     .word-in-scheme-container {
         margin: 0;
-        padding: 0;
-        /*margin-top: 10px; 
-        border: cadetblue 1px solid;
-        border-radius: 5px;*/
+        padding: 0 5px;
     }
 
     .word-in-scheme-arrow-button {
         height: 50px;
         width: 50px;
-        border-radius: 10px;
         margin: 0;
         margin-left: 40%;
         font-size: 25px;

@@ -91,7 +91,7 @@
                         <button type="button"
                             className="btn btn-secondary btn-prev-joke generator-button"
                             disabled={!joke_generator_instance.state.previousJoke}
-                            onClick={() => this.returnPreviousJoke()}><i className="fa fa-backward" /></button>
+                            onClick={() => this.returnPreviousJoke()}><i className="fa fa-backward btn-symbol"/></button>
                     </div>
                     <div className="col-xs-8 buttons-row">
                         <button type="button"
@@ -103,7 +103,7 @@
                     <div className="col-xs-2 buttons-row-left">
                         <button type="button" className="btn btn-success btn-save-joke generator-button"
                                 onClick={() => this.saveJoke()}>
-                            <i className="fa fa-save"></i>
+                            <i className="fa fa-save btn-symbol"></i>
                         </button>
                     </div>
                 </div>
