@@ -2,7 +2,12 @@
     .main-menu-tab-button {
         width: 24%;
         font-size: 19px;
+        height: auto;
     }
+    .main-menu-tab-button-text {
+        height: auto;
+    }
+
     .spinner-circle {
         left: 40%;
         top: 40%;
@@ -30,13 +35,33 @@
         padding: 10px;
     }
 
-    .btn-save-scheme {
-        font-size: 15px;
-        min-height: 40px;
+    .scheme-save-buttons-container {
+        margin-left: 0;
     }
-    
+
+    .btn-save-scheme {
+        font-size: 14px;
+        min-height: 40px;
+        margin-right: 0;
+    }
+
+    .scheme-save-buttons-filler {
+        display: inherit;
+    }
+
     .btn-symbol {
         font-size: 25px;
+    }
+
+    .buttons-row-left {
+        margin-left: 0;
+    }
+
+    .buttons-row {
+        margin-left: 0;
+    }
+
+    .buttons-row-right {
     }
 
     .btn-prev-joke {
@@ -49,12 +74,13 @@
     }
 
     .scheme-items-container {
-        margin-top: 90px;
+        margin-top: 80px;
+        margin-left: 0;
     }
 
     .word-in-scheme-container {
         margin: 0;
-        padding: 0 5px;
+        padding: 0;
     }
 
     .word-in-scheme-arrow-button {
@@ -73,6 +99,17 @@
 
     .word-in-scheme-selector {
         font-size: 14px;
+    }
+
+    .add-word-to-scheme-btn-container {
+        margin-left: 0;
+        margin-bottom: 75px;
+        margin-top: 0;
+        padding: 10px;
+    }
+
+    .list-group {
+        margin: 10px 0;
     }
 
     .select2-selection.select2-selection {

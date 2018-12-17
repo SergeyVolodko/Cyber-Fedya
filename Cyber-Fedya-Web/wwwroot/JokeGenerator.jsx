@@ -78,7 +78,7 @@
     render() {
         return (
             <div>
-                <h3>Лэтc гоу - поехали!</h3>
+                <h3 className="tab-title">Лэтc гоу - поехали!</h3>
                 <div className="scheme-selector">
                     <select id="joke-generator-schemas-select">
                         {this.state.schemas.map((item) => <option key={item.id}>{item.name}</option>, this)}
@@ -87,7 +87,7 @@
 
                 <p className="form-control generated-joke-text" id="joke">{this.state.joke}</p>
                 <div>
-                    <div className="col-xs-2 buttons-row-right">
+                    <div className="col-xs-2 col-md-1 buttons-row-right">
                         <button type="button"
                             className="btn btn-secondary btn-prev-joke generator-button"
                             disabled={!joke_generator_instance.state.previousJoke}
@@ -100,7 +100,7 @@
                             <h2>Ещё!</h2>
                         </button>
                     </div>
-                    <div className="col-xs-2 buttons-row-left">
+                    <div className="col-xs-2 col-md-1 buttons-row-left">
                         <button type="button" className="btn btn-success btn-save-joke generator-button"
                                 onClick={() => this.saveJoke()}>
                             <i className="fa fa-save btn-symbol"></i>

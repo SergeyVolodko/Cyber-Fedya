@@ -151,7 +151,7 @@ class Schemas extends React.Component{
 
         return (
             <div>
-                <h3>Схемы шуток</h3>
+                <h3 className="tab-title">Схемы шуток</h3>
                 <div>
                     <div className="scheme-selector">
                         <select id="schemas-select">
@@ -160,27 +160,28 @@ class Schemas extends React.Component{
                             , this)}
                         </select>
                     </div>
-                    <div>
+                    <div className="scheme-save-buttons-container">
                         <button type="button"
-                            className="btn btn-success btn-save-scheme col-xs-5 col-md-3"
+                            className="btn btn-success btn-save-scheme col-xs-5 col-md-2"
                             onClick={() => schemes_instance.createSelectedScheme()}>
                             <i className="fa fa-file"></i> Как новую схему
                         </button>
-                        <div className="col-xs-2 col-md-1"></div>
+                        <div className="scheme-save-buttons-filler col-xs-2"></div>
                         <button type="button"
-                            className="btn btn-success btn-save-scheme col-xs-5 col-md-3"
+                            className="btn btn-success btn-save-scheme col-xs-5 col-md-2"
                             onClick={() => schemes_instance.saveSelectedScheme()}>
                             <i className="fa fa-save"></i> Как обновление этой схемы
                         </button>
                     </div>
 
                     <div className="scheme-items-container">{schemeItems}</div>
-                </div>
-                <div className="word-in-scheme-container">
-                    <button type="button" className="btn btn-primary btn-lg col-xs-12"
-                        onClick={() => this.addNewWordToScheme()}>
-                        <i className="fa fa-plus btn-symbol"></i>
-                    </button>
+
+                    <div className="add-word-to-scheme-btn-container">
+                        <button type="button" className="btn btn-lg col-xs-12 col-md-10"
+                                onClick={() => this.addNewWordToScheme()}>
+                            <i className="fa fa-plus btn-symbol"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         );

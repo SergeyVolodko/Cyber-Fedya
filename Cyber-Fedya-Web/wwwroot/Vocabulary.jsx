@@ -43,7 +43,7 @@
 
         return (
             <div>
-                <h3>Федин словарный запас</h3>
+                <h3 className="tab-title">Федин словарный запас</h3>
 
                 <ul className="nav nav-pills nav-justified">
                     <li className="active"><a data-toggle="pill" href="#characters"><h1>Герои</h1></a></li>
