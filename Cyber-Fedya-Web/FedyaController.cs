@@ -42,7 +42,7 @@ namespace Cyber_Fedya_Web
 		public HttpResponseMessage AddWord(
 			[FromBody]NewWord newWord)
 		{
-			return new HttpResponseMessage(HttpStatusCode.BadRequest);
+			return new HttpResponseMessage(HttpStatusCode.InternalServerError);
 		}
 
 		[HttpPost]

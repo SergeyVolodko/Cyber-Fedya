@@ -20,66 +20,56 @@
     getRequest(url, onSuccess, onFailure) {
         var token = localStorage.getItem('access_token');
 
-        $.ajax({
-            type: "GET",
-            crossDomain: true,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-            },
-            url: this.state.baseUrl + url,
-            success: function(data) {
-                onSuccess(data);
-            },
-            error: function(e)
-            {
-                onFailure();
+        fetch(this.state.baseUrl + url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Authorization': 'Bearer ' + token
             }
-        });
+        })
+        .then(response => response.json())
+        .then(data => onSuccess(data))
+        .catch(err => onFailure());
     }
 
     postRequest(url, body, onSuccess, onFailure) {
         var token = localStorage.getItem('access_token');
 
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            crossDomain: true,
-            contentType: "application/json; charset=utf-8",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-            },
-            url: this.state.baseUrl + url,
-            data: JSON.stringify(body),
-            success: function(data) {
-                onSuccess(data);
-            },
-            error: function(e)
-            {
-                onFailure();
-            }
-        });
+        fetch(this.state.baseUrl + url,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                        'Authorization': 'Bearer ' + token
+                    }
+                })
+            .then(response => response.json())
+            .then(result => {
+                if (result.statusCode > 201)
+                    onFailure();
+                else
+                    onSuccess();
+            });
     }
 
     putRequest(url, id, body, onSuccess, onFailure) {
         var token = localStorage.getItem('access_token');
 
-        $.ajax({
-            type: "PUT",
-            dataType: "json",
-            crossDomain: true,
-            contentType: "application/json; charset=utf-8",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-            },
-            url: this.state.baseUrl + url + '/' + id,
-            data: JSON.stringify(body),
-            success: function(data) {
-                onSuccess(data);
-            },
-            error: function(e)
-            {
-                onFailure();
+        fetch(this.state.baseUrl + url + '/' + id, {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Authorization': 'Bearer ' + token
             }
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.statusCode > 201)
+                onFailure();
+            else
+                onSuccess();
         });
     }
 }

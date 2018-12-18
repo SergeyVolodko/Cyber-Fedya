@@ -30,7 +30,7 @@ class WordInScheme extends React.Component{
                         title={this.state.currentWord.text}>
                     {wordOptions}
                     </select>
-                    <button className="btn btn-danger word-in-scheme-remove-button"
+                    <button className="btn btn-primary word-in-scheme-remove-button"
                         onClick={() => this.state.delete(this.state.currentWord)}>
                         <i className="fa fa-times btn-symbol"></i>
                     </button>

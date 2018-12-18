@@ -72,8 +72,8 @@ class DataWriteService extends React.Component {
                 .putRequest(dataToSend.entity, dataToSend.id, dataToSend.body, dsw.handleSentData, dsw.handleSendFailure);
         }
     }
-    handleSentData(data) {
-        dsw.fsm.handleEvent(WriteDataEvents.DataSendSucceeded, data);
+    handleSentData() {
+        dsw.fsm.handleEvent(WriteDataEvents.DataSendSucceeded, null);
     }
     handleSendFailure() {
         dsw.fsm.handleEvent(WriteDataEvents.DataSendFailed, null);
