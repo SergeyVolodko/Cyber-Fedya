@@ -25,7 +25,7 @@
 
         return (
             <div>
-                <h3 className="tab-title">Сохранённые шедевры</h3>
+                <p className="tab-title">Сохранённые шедевры</p>
                 <ul className="list-group">
                     {jokes}
                 </ul>

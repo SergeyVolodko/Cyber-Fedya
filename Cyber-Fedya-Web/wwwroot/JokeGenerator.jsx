@@ -78,7 +78,7 @@
     render() {
         return (
             <div>
-                <h3 className="tab-title">Лэтc гоу - поехали!</h3>
+                <p className="tab-title">Лэтc гоу - поехали!</p>
                 <div className="scheme-selector">
                     <select id="joke-generator-schemas-select">
                         {this.state.schemas.map((item) => <option key={item.id}>{item.name}</option>, this)}

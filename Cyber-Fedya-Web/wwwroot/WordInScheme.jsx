@@ -36,7 +36,7 @@ class WordInScheme extends React.Component{
                     </button>
                     <br />
                     {!this.state.isLastWord && 
-                    <button className="btn word-in-scheme-arrow-button"
+                        <button className="btn btn-primary word-in-scheme-arrow-button"
                             onClick={() => this.state.moveDown(this.state.currentWord)}>
                         <i className="fa fa-retweet btn-symbol"></i>
                     </button>}

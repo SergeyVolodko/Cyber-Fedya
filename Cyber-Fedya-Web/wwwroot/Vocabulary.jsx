@@ -22,6 +22,7 @@
         this.setState({
             vocabulary: nextProps.vocabulary
         });
+        new Awesomplete(document.getElementById("characters-text-search"), { list: nextProps.vocabulary.characters });
     }
 
     render() {
@@ -43,19 +44,20 @@
 
         return (
             <div>
-                <h3 className="tab-title">Федин словарный запас</h3>
+                <p className="tab-title">Федин словарный запас</p>
 
                 <ul className="nav nav-pills nav-justified">
-                    <li className="active"><a data-toggle="pill" href="#characters"><h1>Герои</h1></a></li>
-                    <li><a data-toggle="pill" href="#nouns"><h1>Существительные</h1></a></li>
-                    <li><a data-toggle="pill" href="#adjectives"><h1>Прилагательные</h1></a></li>
-                    <li><a data-toggle="pill" href="#verbs"><h1>Глаголы</h1></a></li>
-                    <li><a data-toggle="pill" href="#places"><h1>Места</h1></a></li>
+                    <li className="active word-menu-tab-button"><a data-toggle="pill" href="#characters" className="word-menu-tab-button-text">Герои</a></li>
+                    <li className="word-menu-tab-button"><a data-toggle="pill" href="#nouns" className="word-menu-tab-button-text">Существительные</a></li>
+                    <li className="word-menu-tab-button"><a data-toggle="pill" href="#adjectives" className="word-menu-tab-button-text">Прилагательные</a></li>
+                    <li className="word-menu-tab-button"><a data-toggle="pill" href="#verbs" className="word-menu-tab-button-text">Глаголы</a></li>
+                    <li className="word-menu-tab-button"><a data-toggle="pill" href="#places" className="word-menu-tab-button-text">Места</a></li>
                 </ul>
 
                 <div className="tab-content">
                     <div id="characters" className="tab-pane fade in active">
-                        <ul>{characters}</ul>
+                        <input id="characters-text-search"/>
+                        <ul id="vocabulary-characters-list">{characters}</ul>
                     </div>
                     <div id="nouns" className="tab-pane fade">
                         <button type="button" className="btn btn-success btn-lg" onClick={() => this.addNoun("test")}><i className="fa fa-plus"></i></button>
@@ -77,4 +79,13 @@
             </div>
         );
     }
+
+    //<input list="browsers" />
+    //    <datalist id="browsers">
+    //        <option value="Internet Explorer" />
+    //        <option value="Firefox" />
+    //        <option value="Chrome" />
+    //        <option value="Opera" />
+    //        <option value="Safari" />
+    //    </datalist>
 }

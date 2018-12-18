@@ -151,7 +151,7 @@ class Schemas extends React.Component{
 
         return (
             <div>
-                <h3 className="tab-title">Схемы шуток</h3>
+                <p className="tab-title">Схемы шуток</p>
                 <div>
                     <div className="scheme-selector">
                         <select id="schemas-select">
@@ -164,7 +164,7 @@ class Schemas extends React.Component{
                         <button type="button"
                             className="btn btn-success btn-save-scheme col-xs-5 col-md-2"
                             onClick={() => schemes_instance.createSelectedScheme()}>
-                            <i className="fa fa-file"></i> Как новую схему
+                            <i className="fa fa-copy"></i> Как новую схему
                         </button>
                         <div className="scheme-save-buttons-filler col-xs-2"></div>
                         <button type="button"
@@ -177,7 +177,7 @@ class Schemas extends React.Component{
                     <div className="scheme-items-container">{schemeItems}</div>
 
                     <div className="add-word-to-scheme-btn-container">
-                        <button type="button" className="btn btn-lg col-xs-12 col-md-10"
+                        <button type="button" className="btn btn-primary btn-lg col-xs-12 col-md-10"
                                 onClick={() => this.addNewWordToScheme()}>
                             <i className="fa fa-plus btn-symbol"></i>
                         </button>

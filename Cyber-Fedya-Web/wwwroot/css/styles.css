@@ -68,7 +68,7 @@
 
 .spinner-text {
     position: absolute;
-    left: 42%;
+    left: 46%;
     top: 40%;
     height: 100px;
     width: 100px;
@@ -163,6 +163,21 @@
 
 .btn-symbol{
     font-size: 40px;
+}
+
+.word-menu-tab-button {
+    font-size: 25px;
+    height: 60px;
+}
+
+.word-menu-tab-button-text {
+    text-align: center;
+    height: 60px;
+}
+
+
+.alert {
+    margin-bottom: 10px;
 }
 
 .select2-selection.select2-selection {
