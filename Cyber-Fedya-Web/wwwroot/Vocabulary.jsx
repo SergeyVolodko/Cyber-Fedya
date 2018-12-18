@@ -5,14 +5,15 @@
 
         this.state = {
             vocabulary: props.vocabulary,
-            notifyRefresh: props.notifyRefresh
+            notifyRefresh: props.notifyRefresh,
+            enteredWord: ""
         };
     }
 
-    addNoun(word) {
-        dataWriteService.addToVocabulary({ type: "nouns", word: word });
+    addEnteredWordTo(wordType) {
+        var word = this.state.enteredWord;
+        dataWriteService.addToVocabulary({ type: wordType, word: word });
         this.state.notifyRefresh();
-        this.forceUpdate();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -23,6 +24,24 @@
             vocabulary: nextProps.vocabulary
         });
         new Awesomplete(document.getElementById("characters-text-search"), { list: nextProps.vocabulary.characters });
+        new Awesomplete(document.getElementById("nouns-text-search"), { list: nextProps.vocabulary.nouns });
+        new Awesomplete(document.getElementById("adjectives-text-search"), { list: nextProps.vocabulary.adjectives });
+        new Awesomplete(document.getElementById("verbs-text-search"), { list: nextProps.vocabulary.verbs });
+        new Awesomplete(document.getElementById("places-text-search"), { list: nextProps.vocabulary.places });
+    }
+
+    canWordBeAddedTo(vocabularyType) {
+        var words = this.state.vocabulary[vocabularyType];
+        var word = this.state.enteredWord;
+
+        if (!word || word.length < 2) {
+            return false;
+        }
+        return words.indexOf(word) === -1;
+    }
+
+    handleWordChange(e) {
+        this.setState({ enteredWord: e.target.value });
     }
 
     render() {
@@ -56,36 +75,78 @@
 
                 <div className="tab-content">
                     <div id="characters" className="tab-pane fade in active">
-                        <input id="characters-text-search"/>
-                        <ul id="vocabulary-characters-list">{characters}</ul>
+                        <div className="vocabulary-page">
+                            <input id="characters-text-search" className="input-word-text-search"
+                                value={this.state.enteredWord}
+                                onChange={this.handleWordChange.bind(this)} />
+
+                            <button type="button" className="btn btn-success btn-lg"
+                                onClick={() => this.addEnteredWordTo("characters")}
+                                disabled={!this.canWordBeAddedTo("characters")}>
+                                <i className="fa fa-plus"></i>
+                            </button>
+
+                            <ul className="vocabulary-words-list">{characters}</ul>
+                        </div>
                     </div>
                     <div id="nouns" className="tab-pane fade">
-                        <button type="button" className="btn btn-success btn-lg" onClick={() => this.addNoun("test")}><i className="fa fa-plus"></i></button>
-                        <ul>{nouns}</ul>
+                        <div className="vocabulary-page">
+                            <input id="nouns-text-search" className="input-word-text-search"
+                               value={this.state.enteredWord}
+                                onChange={this.handleWordChange.bind(this)} />
+
+                            <button type="button" className="btn btn-success btn-lg"
+                                    onClick={() => this.addEnteredWordTo("nouns")}
+                                    disabled={!this.canWordBeAddedTo("nouns")}>
+                                <i className="fa fa-plus"></i></button>
+
+                            <ul className="vocabulary-words-list">{nouns}</ul>
+                        </div>
                     </div>
                     <div id="adjectives" className="tab-pane fade">
-                        <button type="button" className="btn btn-success btn-lg"><i className="fa fa-plus"></i></button>
-                        <ul>{adjectives}</ul>
+                        <div className="vocabulary-page">
+                            <input id="adjectives-text-search" className="input-word-text-search"
+                               value={this.state.enteredWord}
+                                onChange={this.handleWordChange.bind(this)} />
+
+                            <button type="button" className="btn btn-success btn-lg"
+                                onClick={() => this.addEnteredWordTo("adjectives")}
+                                disabled={!this.canWordBeAddedTo("adjectives")}>
+                                <i className="fa fa-plus"></i></button>
+
+                            <ul className="vocabulary-words-list">{adjectives}</ul>
+                        </div>
                     </div>
                     <div id="verbs" className="tab-pane fade">
-                        <button type="button" className="btn btn-success btn-lg"><i className="fa fa-plus"></i></button>
-                        <ul>{verbs}</ul>
+                        <div className="vocabulary-page">
+                            <input id="verbs-text-search" className="input-word-text-search"
+                               value={this.state.enteredWord}
+                                onChange={this.handleWordChange.bind(this)} />
+
+                            <button type="button" className="btn btn-success btn-lg"
+                                onClick={() => this.addEnteredWordTo("verbs")}
+                                disabled={!this.canWordBeAddedTo("verbs")}>
+                                <i className="fa fa-plus"></i></button>
+
+                            <ul className="vocabulary-words-list">{verbs}</ul>
+                        </div>
                     </div>
                     <div id="places" className="tab-pane fade">
-                        <button type="button" className="btn btn-success btn-lg"><i className="fa fa-plus"></i></button>
-                        <ul>{places}</ul>
+                        <div className="vocabulary-page">
+                            <input id="places-text-search" className="input-word-text-search"
+                               value={this.state.enteredWord}
+                                onChange={this.handleWordChange.bind(this)} />
+
+                            <button type="button" className="btn btn-success btn-lg"
+                                onClick={() => this.addEnteredWordTo("places")}
+                                disabled={!this.canWordBeAddedTo("places")}>
+                                <i className="fa fa-plus"></i></button>
+
+                            <ul className="vocabulary-words-list">{places}</ul>
+                        </div>
                     </div>
                 </div>
             </div>
         );
     }
-
-    //<input list="browsers" />
-    //    <datalist id="browsers">
-    //        <option value="Internet Explorer" />
-    //        <option value="Firefox" />
-    //        <option value="Chrome" />
-    //        <option value="Opera" />
-    //        <option value="Safari" />
-    //    </datalist>
 }

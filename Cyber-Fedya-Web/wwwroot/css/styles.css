@@ -175,6 +175,27 @@
     height: 60px;
 }
 
+.vocabulary-page {
+    margin: 50px 10% 0;
+    font-size: 28px;
+}
+.input-word-text-search {
+    width: 100%;
+    margin-bottom: 15px;
+    padding-top: 0;
+    height: 45px;
+}
+.awesomplete {
+    width: 90%;
+    margin-right: 15px;
+    margin-top: 5px;
+}
+.vocabulary-words-list {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
 
 .alert {
     margin-bottom: 10px;
