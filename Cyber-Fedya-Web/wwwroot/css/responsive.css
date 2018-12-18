@@ -12,6 +12,12 @@
     .alert {
         font-size: 13px;
     }
+    .toast-title {
+        font-size: 15px;
+    }
+    .toast-message {
+        font-size: 15px;
+    }
 
     .tab-title {
         font-size: 18px;

@@ -12,7 +12,14 @@
 
     addEnteredWordTo(wordType) {
         var word = this.state.enteredWord;
-        dataWriteService.addToVocabulary({ type: wordType, word: word });
+        dataWriteService.addToVocabulary({ type: wordType, word: word })
+            .then(isSuccessful => {
+                if (!isSuccessful) {
+                    toastr.error("Не удалось сохранить слово", "Ошибка");
+                    return;
+                }
+                toastr.success("Слово успешно добавлено", "Сохранено");
+            });
         this.state.notifyRefresh();
     }
 

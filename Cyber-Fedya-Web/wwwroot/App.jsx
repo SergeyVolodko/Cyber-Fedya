@@ -24,7 +24,7 @@ class App extends React.Component{
         waitForAuthorization(!localStorage.getItem("is_authentication_handled"), this.setMainComponent);
         localStorage.removeItem("is_authentication_handled");
         app_instance = this;
-
+        
         app_instance.state = {
             mainComponent: <Spinner text="Авторизация..." />
         };

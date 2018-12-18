@@ -59,11 +59,12 @@ class Schemas extends React.Component{
             .createScheme(schemes_instance.state.selected_scheme)
             .then(isSuccessful => {
                 if (!isSuccessful) {
+                    toastr.error("Не удалось сохранить схему", "Ошибка");
                     schemes_instance.state.notifyOperationFailed();
                     return;
                 }
                 schemes_instance.state.notifyRefresh();
-                alert('Сохранено');
+                toastr.success("Новая схема сохранена", "Сохранено");
             });
     }
 
@@ -77,11 +78,12 @@ class Schemas extends React.Component{
         dataWriteService.updateScheme(id, schemes_instance.state.selected_scheme)
             .then(isSuccessful => {
                 if (!isSuccessful) {
+                    toastr.error("Не удалось обновить схему", "Ошибка");
                     schemes_instance.state.notifyOperationFailed();
                     return;
                 }
                 schemes_instance.state.notifyRefresh();
-                alert('Схема обновлена');
+                toastr.success("Схема обновлена", "Сохранено");
             });
     }
 

@@ -47,11 +47,12 @@
             .then(isSuccessful => {
                 if (!isSuccessful) {
                     joke_generator_instance.state.notifyOperationFailed();
-                    alert('Не получается сохранить шутку. Скорее всего нет соединения');
+                    toastr.error("Не удалось сохранить шутку", "Ошибка");
                     return;
                 }
                 joke_generator_instance.state.notifyRefresh();
-                alert('Сохранено');
+
+                toastr.success("Шутка успешно сохранена", "Сохранено");
             });
     }
 
@@ -102,7 +103,8 @@
                     </div>
                     <div className="col-xs-2 col-md-1 buttons-row-left">
                         <button type="button" className="btn btn-success btn-save-joke generator-button"
-                                onClick={() => this.saveJoke()}>
+                            onClick={() => this.saveJoke()}
+                            disabled={!this.state.joke}>
                             <i className="fa fa-save btn-symbol"></i>
                         </button>
                     </div>
