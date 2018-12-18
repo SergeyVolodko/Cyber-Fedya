@@ -80,7 +80,7 @@
                                 value={this.state.enteredWord}
                                 onChange={this.handleWordChange.bind(this)} />
 
-                            <button type="button" className="btn btn-success btn-lg"
+                            <button type="button" className="btn btn-success btn-add-word"
                                 onClick={() => this.addEnteredWordTo("characters")}
                                 disabled={!this.canWordBeAddedTo("characters")}>
                                 <i className="fa fa-plus"></i>
@@ -95,7 +95,7 @@
                                value={this.state.enteredWord}
                                 onChange={this.handleWordChange.bind(this)} />
 
-                            <button type="button" className="btn btn-success btn-lg"
+                            <button type="button" className="btn btn-success btn-add-word"
                                     onClick={() => this.addEnteredWordTo("nouns")}
                                     disabled={!this.canWordBeAddedTo("nouns")}>
                                 <i className="fa fa-plus"></i></button>
@@ -109,7 +109,7 @@
                                value={this.state.enteredWord}
                                 onChange={this.handleWordChange.bind(this)} />
 
-                            <button type="button" className="btn btn-success btn-lg"
+                            <button type="button" className="btn btn-success btn-add-word"
                                 onClick={() => this.addEnteredWordTo("adjectives")}
                                 disabled={!this.canWordBeAddedTo("adjectives")}>
                                 <i className="fa fa-plus"></i></button>
@@ -123,7 +123,7 @@
                                value={this.state.enteredWord}
                                 onChange={this.handleWordChange.bind(this)} />
 
-                            <button type="button" className="btn btn-success btn-lg"
+                            <button type="button" className="btn btn-success btn-add-word"
                                 onClick={() => this.addEnteredWordTo("verbs")}
                                 disabled={!this.canWordBeAddedTo("verbs")}>
                                 <i className="fa fa-plus"></i></button>
@@ -137,7 +137,7 @@
                                value={this.state.enteredWord}
                                 onChange={this.handleWordChange.bind(this)} />
 
-                            <button type="button" className="btn btn-success btn-lg"
+                            <button type="button" className="btn btn-success btn-add-word"
                                 onClick={() => this.addEnteredWordTo("places")}
                                 disabled={!this.canWordBeAddedTo("places")}>
                                 <i className="fa fa-plus"></i></button>

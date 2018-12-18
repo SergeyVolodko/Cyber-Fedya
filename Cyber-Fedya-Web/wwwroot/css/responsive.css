@@ -1,4 +1,5 @@
 ﻿@media screen and (max-width:768px) {
+    /* Navigation */
     .main-menu-tab-button {
         width: 24%;
         font-size: 19px;
@@ -7,8 +8,17 @@
     .main-menu-tab-button-text {
         height: auto;
     }
+
+    .alert {
+        font-size: 13px;
+    }
+
     .tab-title {
         font-size: 18px;
+    }
+    .tab-content {
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
     .spinner-circle {
@@ -24,6 +34,7 @@
         font-size: 25px;
     }
 
+    /* Joke generator */
     .generator-button {
         height: 70px;
     }
@@ -32,12 +43,30 @@
         font-size: 30px !important;
         min-height: 55vh;
     }
+    .buttons-row-left {
+        margin-left: 0;
+    }
+    .buttons-row {
+        margin-left: 0;
+    }
+    .buttons-row-right {
+    }
+    .btn-prev-joke {
+    }
+    .btn-save-joke {
+    }
+
+    /* Favorite jokes */
+    .list-group {
+        margin: 10px 0;
+    }
 
     .stored-joke {
-        font-size: 22px;
+        font-size: 18px;
         padding: 10px;
     }
 
+    /* Schemes */
     .scheme-save-buttons-container {
         margin-left: 0;
     }
@@ -54,26 +83,6 @@
 
     .btn-symbol {
         font-size: 25px;
-    }
-
-    .buttons-row-left {
-        margin-left: 0;
-    }
-
-    .buttons-row {
-        margin-left: 0;
-    }
-
-    .buttons-row-right {
-    }
-
-    .btn-prev-joke {
-        /*height: 70px;*/
-        
-    }
-
-    .btn-save-joke {
-        /*height: 70px;*/
     }
 
     .scheme-items-container {
@@ -111,19 +120,46 @@
         padding: 10px;
     }
 
-    .list-group {
-        margin: 10px 0;
-    }
-
+    /* Vocabulary */
     .word-menu-tab-button {
         font-size: 16px;
         height: 35px;
+        background: white;
     }
 
     .word-menu-tab-button-text {
         height: 35px;
     }
 
+    .vocabulary-page {
+        margin: 10px 0 0;
+        font-size: 12px;
+    }
+
+    .input-word-text-search {
+        margin-bottom: 10px;
+        height: 25px;
+    }
+    .awesomplete {
+        width: 80%;
+        margin-right: 5px;
+        margin-top: 0;
+    }
+
+    .btn-add-word {
+        font-size: 11px;
+    }
+
+    .vocabulary-words-list {
+        list-style-type: none;
+        margin-left: -35px;
+    }
+
+    .vocabulary-words-list > li {
+        margin-right: 10px;
+    }
+
+    /* Technical */
     .select2-selection.select2-selection {
         min-height: 40px;
         max-height: 40px;

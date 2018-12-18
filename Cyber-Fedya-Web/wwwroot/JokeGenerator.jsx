@@ -89,7 +89,7 @@
                 <div>
                     <div className="col-xs-2 col-md-1 buttons-row-right">
                         <button type="button"
-                            className="btn btn-secondary btn-prev-joke generator-button"
+                            className="btn btn-primary btn-prev-joke generator-button"
                             disabled={!joke_generator_instance.state.previousJoke}
                             onClick={() => this.returnPreviousJoke()}><i className="fa fa-backward btn-symbol"/></button>
                     </div>
