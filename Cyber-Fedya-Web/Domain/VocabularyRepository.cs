@@ -12,7 +12,14 @@ namespace Cyber_Fedya_Web.Domain
 
 	public class VocabularyRepository : IVocabularyRepository
 	{
-		object theLock = new object();
+		private readonly string dataFolder;
+		private readonly object theLock = new object();
+
+		public VocabularyRepository(
+			IApiConfiguration configuration)
+		{
+			dataFolder = configuration.DataFolder;
+		}
 
 		public void AddNewWord(NewWord word)
 		{
@@ -20,7 +27,7 @@ namespace Cyber_Fedya_Web.Domain
 			{
 				var fileName = $"{word.Type}.txt";
 
-				var path = Path.Combine("Data", fileName);
+				var path = Path.Combine(dataFolder, fileName);
 				if (!File.Exists(path))
 				{
 					throw new Exception("Wrong word type!");
@@ -53,7 +60,7 @@ namespace Cyber_Fedya_Web.Domain
 
 		private SortedSet<string> readFromFile(string fileName)
 		{
-			var path = Path.Combine("Data", fileName);
+			var path = Path.Combine(dataFolder, fileName);
 			var lines = File.ReadAllLines(path);
 			return new SortedSet<string>(lines);
 		}

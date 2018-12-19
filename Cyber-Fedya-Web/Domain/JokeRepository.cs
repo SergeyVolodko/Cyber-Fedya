@@ -14,13 +14,20 @@ namespace Cyber_Fedya_Web.Domain
 
 	public class JokeRepository : IJokeRepository
 	{
-		object theLock = new object();
+		private readonly string dataFolder;
+		private readonly object theLock = new object();
+
+		public JokeRepository(
+			IApiConfiguration configuration)
+		{
+			dataFolder = configuration.DataFolder;
+		}
 
 		public List<string> LoadAllJokeTexts()
 		{
 			lock (theLock)
 			{
-				var path = Path.Combine("Data", "_stored_jokes.json");
+				var path = Path.Combine(dataFolder, "_stored_jokes.json");
 				var json = File.ReadAllText(path);
 				var jokes = JsonConvert.DeserializeObject<List<Joke>>(json);
 
@@ -32,7 +39,7 @@ namespace Cyber_Fedya_Web.Domain
 		{
 			lock (theLock)
 			{
-				var path = Path.Combine("Data", "_stored_jokes.json");
+				var path = Path.Combine(dataFolder, "_stored_jokes.json");
 
 				var json = File.ReadAllText(path);
 				var jokes = JsonConvert.DeserializeObject<List<Joke>>(json);
@@ -43,7 +50,7 @@ namespace Cyber_Fedya_Web.Domain
 					Timestamp = DateTime.UtcNow
 				});
 
-				File.WriteAllText(path, JsonConvert.SerializeObject(jokes));
+				File.WriteAllText(path, JsonConvert.SerializeObject(jokes, Formatting.Indented));
 			}
 		}
 	}

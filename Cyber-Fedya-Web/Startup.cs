@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using React.AspNet;
 
@@ -11,6 +12,22 @@ namespace Cyber_Fedya_Web
 {
 	public class Startup
 	{
+		public IApiConfiguration apiConfiguration { get; }
+
+		public Startup(IHostingEnvironment env)
+		{
+			var configBuilder = new ConfigurationBuilder()
+				.SetBasePath(env.ContentRootPath)
+				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+				.AddEnvironmentVariables();
+
+			this.apiConfiguration = new ApiConfiguration();
+
+			var configurationRoot = configBuilder.Build();
+			configurationRoot.GetSection("ApiConfiguration").Bind(apiConfiguration);
+		}
+
 		public IServiceProvider ConfigureServices(IServiceCollection services)
 		{
 			services.AddMemoryCache();
@@ -19,6 +36,7 @@ namespace Cyber_Fedya_Web
 			services.AddTransient<IVocabularyRepository, VocabularyRepository>();
 			services.AddTransient<ISchemeRepository, SchemeRepository>();
 			services.AddTransient<IJokeRepository, JokeRepository>();
+			services.AddSingleton(this.apiConfiguration);
 
 			services.AddAuthentication(options =>
 			{
@@ -26,6 +44,8 @@ namespace Cyber_Fedya_Web
 				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 			}).AddJwtBearer(options =>
 			{
+				options.Authority = this.apiConfiguration.Auth0Domain;
+				options.Audience = this.apiConfiguration.Auth0ClientId;
 			});
 			services.AddReact();
 			services.AddMvc();

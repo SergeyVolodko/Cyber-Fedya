@@ -10,12 +10,20 @@ namespace Cyber_Fedya_Web.Domain
 		List<Scheme> LoadAll();
 
 		void Create(Scheme scheme);
+
 		void Update(string id, Scheme scheme);
 	}
 
 	public class SchemeRepository : ISchemeRepository
 	{
-		object theLock = new object();
+		private readonly string dataFolder;
+		private readonly object theLock = new object();
+
+		public SchemeRepository(
+			IApiConfiguration configuration)
+		{
+			dataFolder = configuration.DataFolder;
+		}
 
 		public List<Scheme> LoadAll()
 		{
@@ -23,7 +31,7 @@ namespace Cyber_Fedya_Web.Domain
 			{
 				var result = new List<Scheme>();
 
-				var path = Path.Combine("Data", "schemes");
+				var path = Path.Combine(dataFolder, "schemes");
 				foreach (var file in Directory.EnumerateFiles(path))
 				{
 					var content = File.ReadAllText(file);
@@ -41,7 +49,7 @@ namespace Cyber_Fedya_Web.Domain
 				var id = $"{removeSpecialCharacters(scheme.Name)}-{Guid.NewGuid()}";
 				scheme.Id = id;
 
-				var filePath = Path.Combine("Data", "schemes", $"{id}.json");
+				var filePath = Path.Combine(dataFolder, "schemes", $"{id}.json");
 				var content = JsonConvert.SerializeObject(scheme);
 
 				File.WriteAllText(filePath, content);
@@ -52,7 +60,7 @@ namespace Cyber_Fedya_Web.Domain
 		{
 			lock (theLock)
 			{
-				var filePath = Path.Combine("Data", "schemes", $"{id}.json");
+				var filePath = Path.Combine(dataFolder, "schemes", $"{id}.json");
 
 				if (!File.Exists(filePath))
 				{
