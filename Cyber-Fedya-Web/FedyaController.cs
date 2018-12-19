@@ -32,7 +32,7 @@ namespace Cyber_Fedya_Web
 			{
 				Vocabulary = vocabularyRepository.Load(),
 				Schemas = schemeRepository.LoadAll(),
-				Jokes = jokeRepository.LoadAll()
+				Jokes = jokeRepository.LoadAllJokeTexts()
 			};
 		}
 

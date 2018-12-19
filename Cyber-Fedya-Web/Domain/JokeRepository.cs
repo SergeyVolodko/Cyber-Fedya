@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace Cyber_Fedya_Web.Domain
 {
 	public interface IJokeRepository
 	{
-		List<string> LoadAll();
+		List<string> LoadAllJokeTexts();
 		void Create(string joke);
 	}
 
@@ -14,13 +16,15 @@ namespace Cyber_Fedya_Web.Domain
 	{
 		object theLock = new object();
 
-		public List<string> LoadAll()
+		public List<string> LoadAllJokeTexts()
 		{
 			lock (theLock)
 			{
-				var path = Path.Combine("Data", "_stored_jokes.txt");
-				var lines = File.ReadAllLines(path);
-				return new List<string>(lines);
+				var path = Path.Combine("Data", "_stored_jokes.json");
+				var json = File.ReadAllText(path);
+				var jokes = JsonConvert.DeserializeObject<List<Joke>>(json);
+
+				return jokes.Select(j => j.Text).ToList();
 			}
 		}
 
@@ -28,11 +32,18 @@ namespace Cyber_Fedya_Web.Domain
 		{
 			lock (theLock)
 			{
-				joke = joke.Replace("\r\n", "").Replace(Environment.NewLine, "").Replace("\n", "");
+				var path = Path.Combine("Data", "_stored_jokes.json");
 
-				var path = Path.Combine("Data", "_stored_jokes.txt");
+				var json = File.ReadAllText(path);
+				var jokes = JsonConvert.DeserializeObject<List<Joke>>(json);
 
-				File.AppendAllText(path, $"{Environment.NewLine}{joke}");
+				jokes.Add(new Joke
+				{
+					Text = joke,
+					Timestamp = DateTime.UtcNow
+				});
+
+				File.WriteAllText(path, JsonConvert.SerializeObject(jokes));
 			}
 		}
 	}
