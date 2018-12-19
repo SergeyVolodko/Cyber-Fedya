@@ -42,7 +42,8 @@ namespace Cyber_Fedya_Web
 		public HttpResponseMessage AddWord(
 			[FromBody]NewWord newWord)
 		{
-			return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+			vocabularyRepository.AddNewWord(newWord);
+			return new HttpResponseMessage(HttpStatusCode.OK);
 		}
 
 		[HttpPost]
@@ -63,7 +64,7 @@ namespace Cyber_Fedya_Web
 			[FromBody]Scheme scheme)
 		{
 			schemeRepository.Update(id, scheme);
-			return new HttpResponseMessage(HttpStatusCode.Created);
+			return new HttpResponseMessage(HttpStatusCode.OK);
 		}
 
 		[HttpPost]

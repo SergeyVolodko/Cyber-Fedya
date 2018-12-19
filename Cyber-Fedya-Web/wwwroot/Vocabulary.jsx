@@ -21,6 +21,7 @@
                 toastr.success("Слово успешно добавлено", "Сохранено");
             });
         this.state.notifyRefresh();
+        this.forceUpdate();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -28,13 +29,23 @@
             return;
         }
         this.setState({
-            vocabulary: nextProps.vocabulary
+            vocabulary: nextProps.vocabulary,
+            enteredWord: ""
         });
-        new Awesomplete(document.getElementById("characters-text-search"), { list: nextProps.vocabulary.characters });
-        new Awesomplete(document.getElementById("nouns-text-search"), { list: nextProps.vocabulary.nouns });
-        new Awesomplete(document.getElementById("adjectives-text-search"), { list: nextProps.vocabulary.adjectives });
-        new Awesomplete(document.getElementById("verbs-text-search"), { list: nextProps.vocabulary.verbs });
-        new Awesomplete(document.getElementById("places-text-search"), { list: nextProps.vocabulary.places });
+
+        autocompleteCharecters.list = nextProps.vocabulary.characters;
+        autocompleteNouns.list = nextProps.vocabulary.nouns;
+        autocompleteAdjectives.list = nextProps.vocabulary.adjectives;
+        autocompleteVerbs.list = nextProps.vocabulary.verbs;
+        autocompletePlaces.list = nextProps.vocabulary.places;
+    }
+
+    componentDidMount() {
+        autocompleteCharecters = new Awesomplete(document.getElementById("characters-text-search"), { list: this.state.vocabulary.characters });
+        autocompleteNouns = new Awesomplete(document.getElementById("nouns-text-search"), { list: this.state.vocabulary.nouns });
+        autocompleteAdjectives = new Awesomplete(document.getElementById("adjectives-text-search"), { list: this.state.vocabulary.adjectives });
+        autocompleteVerbs = new Awesomplete(document.getElementById("verbs-text-search"), { list: this.state.vocabulary.verbs });
+        autocompletePlaces = new Awesomplete(document.getElementById("places-text-search"), { list: this.state.vocabulary.places });
     }
 
     canWordBeAddedTo(vocabularyType) {

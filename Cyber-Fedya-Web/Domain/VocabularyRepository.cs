@@ -1,16 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Cyber_Fedya_Web.Domain
 {
 	public interface IVocabularyRepository
 	{
+		void AddNewWord(NewWord word);
 		Vocabulary Load();
 	}
 
 	public class VocabularyRepository : IVocabularyRepository
 	{
 		object theLock = new object();
+
+		public void AddNewWord(NewWord word)
+		{
+			lock (theLock)
+			{
+				var fileName = $"{word.Type}.txt";
+
+				var path = Path.Combine("Data", fileName);
+				if (!File.Exists(path))
+				{
+					throw new Exception("Wrong word type!");
+				}
+
+				File.AppendAllText(path, $"{Environment.NewLine}{word.Word}");
+			}
+		}
 
 		public Vocabulary Load()
 		{
