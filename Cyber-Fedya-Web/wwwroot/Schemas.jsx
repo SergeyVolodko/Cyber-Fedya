@@ -24,20 +24,23 @@ class Schemas extends React.Component{
     }
 
     schemeSelected(e) {
-        var selectedSchemeName = e.params.data.text;
-        var scheme = this.state.schemas.find(s => { return s.name === selectedSchemeName; });
+        schemes_instance.executeSelectSchemeByName(e.params.data.text);
+    }
+
+    executeSelectSchemeByName(name) {
+        var scheme = schemes_instance.state.schemas.find(s => { return s.name === name; });
         if (!scheme) {
             scheme = {
-                "name": selectedSchemeName,
-                "words": clone(this.state.selected_scheme.words),
+                "name": name,
+                "words": clone(schemes_instance.state.selected_scheme.words),
                 "id": generateKey("new-scheme-id-"),
                 "base_id": !schemes_instance.state.selected_scheme.base_id
-                    ? this.state.selected_scheme.id
+                    ? schemes_instance.state.selected_scheme.id
                     : schemes_instance.state.selected_scheme.base_id
             };
         }
 
-        this.setState({
+        schemes_instance.setState({
             selected_scheme: scheme
         });
     }
@@ -108,33 +111,20 @@ class Schemas extends React.Component{
         schemes_instance.forceUpdate();
     }
 
-    componentDidMount() {
-        schemes_instance.initSelect();
-    }
-
     // React woodoo to keep scheme dropdowns up to date
     componentWillReceiveProps(nextProps) {
-        if (nextProps.schemas === this.state.schemas) {
+        if (nextProps.schemas === schemes_instance.state.schemas) {
             return;
         }
-        this.setState({
+        schemes_instance.setState({
             schemas: nextProps.schemas
         });
-        if (this.state.selected_scheme == emptyScheme) {
-            this.setState({
+
+        if (schemes_instance.state.selected_scheme == emptyScheme) {
+            schemes_instance.setState({
                 selected_scheme: nextProps.schemas[0]
             });
         }
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.schemas == schemes_instance.state.schemas) {
-            return;
-        }
-        schemes_instance.initSelect();
-        // select2 woodoo to remove duplicates on schema name change saved
-        var name = schemes_instance.state.selected_scheme.name;
-        $('#schemas-select').val(name).trigger("change");
     }
 
     render() {
@@ -145,8 +135,8 @@ class Schemas extends React.Component{
                 <WordInScheme id={i}
                     wordInJoke={word}
                     isLastWord={i === schemes_instance.state.selected_scheme.words.length - 1}
-                    moveDown={this.moveDown}
-                    delete={this.deleteWordFromScheme} />
+                    moveDown={schemes_instance.moveDown}
+                    delete={schemes_instance.deleteWordFromScheme} />
             </div>
             ,this
         );
@@ -180,13 +170,29 @@ class Schemas extends React.Component{
 
                     <div className="add-word-to-scheme-btn-container">
                         <button type="button" className="btn btn-primary btn-lg col-xs-12 col-md-10"
-                                onClick={() => this.addNewWordToScheme()}>
+                            onClick={() => schemes_instance.addNewWordToScheme()}>
                             <i className="fa fa-plus btn-symbol"></i>
                         </button>
                     </div>
                 </div>
             </div>
         );
+    }
+
+    // Got called after render
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.schemas == schemes_instance.state.schemas) {
+            return;
+        }
+        schemes_instance.initSelect();
+        // select2 woodoo to remove duplicates on schema name change saved
+        var name = schemes_instance.state.selected_scheme.name;
+        $('#schemas-select').val(name).trigger("change");
+        schemes_instance.executeSelectSchemeByName(name);
+    }
+
+    componentDidMount() {
+        schemes_instance.initSelect();
     }
 
     initSelect() {

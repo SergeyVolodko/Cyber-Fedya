@@ -39,12 +39,11 @@ class Navigation extends React.Component {
                         isLoading: false,
                         isOffline: data.hasConnectionErrors
                     });
+                    navigation_instance.setState({
+                        // Can't it be implemented without setState here?
+                    });
                 }
         );
-
-        navigation_instance.setState({
-            // Can't it be implemented without setState here?
-        });
     }
 
     componentDidMount() {
@@ -65,7 +64,7 @@ class Navigation extends React.Component {
     render() {
         var offlineAlert = (
             <div className="alert alert-danger">
-                <p className="text-center">Работает без интернета</p>
+                <p className="text-center">Работает без интернета. Сохранения пока невозможны</p>
             </div>);
 
         return (
