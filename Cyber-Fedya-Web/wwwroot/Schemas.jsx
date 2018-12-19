@@ -138,8 +138,11 @@ class Schemas extends React.Component{
                     moveDown={schemes_instance.moveDown}
                     delete={schemes_instance.deleteWordFromScheme} />
             </div>
-            ,this
-        );
+            , schemes_instance);
+
+        var schemesOptions = schemes_instance.state.schemas.map((item) =>
+            <option key={item.id}>{item.name}</option>
+            , schemes_instance);
 
         return (
             <div>
@@ -147,9 +150,7 @@ class Schemas extends React.Component{
                 <div>
                     <div className="scheme-selector">
                         <select id="schemas-select">
-                            {schemes_instance.state.schemas.map((item) =>
-                                <option key={item.id}>{item.name}</option>
-                            , this)}
+                            {schemesOptions}
                         </select>
                     </div>
                     <div className="scheme-save-buttons-container">

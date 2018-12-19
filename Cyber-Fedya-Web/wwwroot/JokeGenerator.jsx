@@ -7,6 +7,7 @@
             vocabulary: props.vocabulary,
             schemas: props.schemas,
             selected_scheme_index: 0,
+            selected_scheme_id: null,
             previousJoke: "",
             joke: "",
             notifyRefresh: props.notifyRefresh,
@@ -19,11 +20,18 @@
 
     schemeSelected(e) {
         var selectedSchemeName = e.params.data.text;
-        var index = joke_generator_instance.state.schemas
-            .findIndex(s => { return s.name === selectedSchemeName; });
+        joke_generator_instance.executeSelectSchemeBy('name', selectedSchemeName);
+    }
 
-        joke_generator_instance.setState({
-            selected_scheme_index: index
+    executeSelectSchemeBy(propName, value) {
+        var index = joke_generator_instance.state.schemas
+            .findIndex(s => { return s[propName] === value; });
+
+        var newId = index === -1 ? null : joke_generator_instance.state.schemas[index].id;
+
+        joke_generator_instance.setState( {
+            selected_scheme_index: index,
+            selected_scheme_id: newId
         });
     }
 
@@ -36,6 +44,12 @@
             schemas: nextProps.schemas,
             vocabulary: nextProps.vocabulary
         });
+
+        if (!joke_generator_instance.state.selected_scheme_id) {
+            joke_generator_instance.setState({
+                selected_scheme_id: nextProps.schemas.length === 0 ? null : nextProps.schemas[0].id
+            });
+        }
 
         // Later handle the deletion of a selected scheme
     }
@@ -77,34 +91,38 @@
     }
 
     render() {
+        var schemesOptions = joke_generator_instance.state.schemas.map((item) => 
+            <option key={item.id}>{item.name}</option>,
+            joke_generator_instance);
+
         return (
             <div>
                 <p className="tab-title">Лэтc гоу - поехали!</p>
                 <div className="scheme-selector">
                     <select id="joke-generator-schemas-select">
-                        {this.state.schemas.map((item) => <option key={item.id}>{item.name}</option>, this)}
+                        {schemesOptions}
                     </select>
                 </div>
 
-                <p className="form-control generated-joke-text" id="joke">{this.state.joke}</p>
+                <p className="form-control generated-joke-text" id="joke">{joke_generator_instance.state.joke}</p>
                 <div>
                     <div className="col-xs-2 col-md-1 buttons-row-right">
                         <button type="button"
                             className="btn btn-primary btn-prev-joke generator-button"
                             disabled={!joke_generator_instance.state.previousJoke}
-                            onClick={() => this.returnPreviousJoke()}><i className="fa fa-backward btn-symbol"/></button>
+                            onClick={() => joke_generator_instance.returnPreviousJoke()}><i className="fa fa-backward btn-symbol"/></button>
                     </div>
                     <div className="col-xs-8 buttons-row">
                         <button type="button"
                             className="btn btn-primary btn-generate-joke generator-button"
-                            onClick={() => this.generateJoke()}>
+                            onClick={() => joke_generator_instance.generateJoke()}>
                             <h2>Ещё!</h2>
                         </button>
                     </div>
                     <div className="col-xs-2 col-md-1 buttons-row-left">
                         <button type="button" className="btn btn-success btn-save-joke generator-button"
-                            onClick={() => this.saveJoke()}
-                            disabled={!this.state.joke}>
+                            onClick={() => joke_generator_instance.saveJoke()}
+                            disabled={!joke_generator_instance.state.joke}>
                             <i className="fa fa-save btn-symbol"></i>
                         </button>
                     </div>
@@ -113,6 +131,7 @@
         );
     }
 
+    // Got called after render
     componentDidMount() {
         joke_generator_instance.initSelect();
     }
@@ -122,6 +141,10 @@
             return;
         }
         joke_generator_instance.initSelect();
+        var id = prevState.selected_scheme_id;
+        if (id) {
+            joke_generator_instance.executeSelectSchemeBy('id', id);
+        }
     }
 
     initSelect() {
