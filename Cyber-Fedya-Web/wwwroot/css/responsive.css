@@ -1,4 +1,91 @@
-﻿@media screen and (max-width:768px) {
+﻿/* Short screen */
+@media screen and (max-height:950px) {
+    .main-menu-tab-button {
+        font-size: 30px;
+        height: 60px;
+    }
+
+    .main-menu-tab-button-text {
+        height: 60px;
+    }
+
+    .alert {
+        font-size: 17px;
+    }
+    .toast-title {
+        font-size: 20px;
+    }
+    .toast-message {
+        font-size: 20px;
+    }
+    .tab-title { 
+        font-size: 35px; 
+    }
+
+    /* Joke generator */
+    .btn-prev-joke {
+        font-size: 20px;
+    }
+    .btn-save-joke {
+        font-size: 20px;
+    }
+    .btn-generate-joke {
+        font-size: 35px;
+    }
+
+    .generated-joke-text {
+        font-size: 40px !important;
+        min-height: 65vh;
+    }
+
+    /* Favorite jokes */
+    .stored-joke {
+        font-size: 20px;
+        padding: 15px 10px;
+    }
+
+    /* Schemes */
+    .btn-save-scheme { 
+        font-size: 20px;
+        min-height: 70px;
+    }
+
+    .scheme-items-container {
+        margin-top: 120px;
+    }
+    .word-in-scheme-arrow-button {
+        height: 50px;
+        width: 70px;
+    }
+    .word-in-scheme-remove-button {
+        height: 50px;
+        width: 50px;
+    }
+
+    .btn-symbol{
+        font-size: 30px;
+    }
+
+    /* Vocabulary */
+    .word-menu-tab-button {
+        font-size: 28px;
+        height: 65px;
+    }
+
+    .word-menu-tab-button-text {
+        height: 65px;
+    }
+
+    .vocabulary-page {
+        font-size: 23px;
+    }
+    input-word-text-search {
+        height: 38px;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width:768px) {
     /* Navigation */
     .main-menu-tab-button {
         width: 24%;

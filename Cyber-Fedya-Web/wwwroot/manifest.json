@@ -1,0 +1,21 @@
+//{
+//  "short_name": "Cyber Fedya",
+//  "name": "Cyber Fedya Online",
+//  "icons": [
+//    {
+//      "src": "Fedya.jpg",
+//      "type": "image/jpg",
+//      "sizes": "192x192"
+//    },
+//    {
+//      "src": "Fedya.jpg",
+//      "type": "image/jpg",
+//      "sizes": "512x512"
+//    }
+//  ],
+//  "start_url": "index.html",
+//  "background_color": "white",
+//  "display": "standalone",
+//  "scope": "",
+//  "theme_color": "white"
+//}

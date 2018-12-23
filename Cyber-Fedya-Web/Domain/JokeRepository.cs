@@ -28,6 +28,11 @@ namespace Cyber_Fedya_Web.Domain
 			lock (theLock)
 			{
 				var path = Path.Combine(dataFolder, "_stored_jokes.json");
+				if (!File.Exists(path))
+				{
+					return new List<string>();
+				}
+
 				var json = File.ReadAllText(path);
 				var jokes = JsonConvert.DeserializeObject<List<Joke>>(json);
 

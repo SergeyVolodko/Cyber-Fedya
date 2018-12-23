@@ -76,5 +76,12 @@ namespace Cyber_Fedya_Web
 			jokeRepository.Create(joke);
 			return new HttpResponseMessage(HttpStatusCode.Created);
 		}
+
+		[HttpGet]
+		[Route("version")]
+		public string GetVersion()
+		{
+			return "1.0.0.0";
+		}
 	}
 }
